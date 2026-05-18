@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import QmsHeroSection from "@/components/QmsHeroSection";
 import QmsFeaturesAccordion from "@/components/QmsFeaturesAccordion";
+import QmsModulesSection from "@/components/QmsModulesSection";
 import SectionContactFooter from "@/components/SectionContactFooter";
 
 const benefits = [
@@ -40,17 +41,6 @@ const features = [
   },
 ];
 
-const modules = [
-  "Document Management System",
-  "Audit Management System",
-  "Incident Investigation Management System",
-  "Permit & Contract Management System",
-  "Legal & Compliance Management System",
-  "Non-Conformance Report Management System",
-  "Collective Action against Corruption Management System",
-  "Environmental and Health Impact Assessment Management System",
-];
-
 export const metadata = {
   title: "Quality Management Platform | Aileen Solutions",
   description:
@@ -64,44 +54,8 @@ export default function QualityManagementPlatformPage() {
 
       <main className="overflow-hidden">
         <QmsHeroSection />
+        <QmsModulesSection />
 
-        {/* Modules */}
-        <section id="modules" className="relative z-10 -mt-12 px-6 md:px-10">
-          <div className="mx-auto max-w-6xl rounded-[32px] border border-slate-200/80 bg-white p-6 shadow-[0_24px_70px_rgba(15,23,42,0.08)] md:p-8">
-            <div className="max-w-2xl py-8 px-2">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-700">
-                Platform Modules
-              </p>
-              <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-                <span className="block">ครบทุกโมดูล</span>
-                <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
-                  สำหรับการบริหารคุณภาพ
-                </span>
-              </h2>
-              <p className="mt-3 text-base leading-8 text-slate-500">
-                รองรับทุกกระบวนการบริหารคุณภาพในองค์กร ตั้งแต่การจัดการเอกสาร
-                การตรวจสอบ ไปจนถึงการปฏิบัติตามกฎหมายและข้อกำหนด
-              </p>
-            </div>
-
-            <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4 pb-10">
-              {modules.map((module) => (
-                <div
-                  key={module}
-                  className="group relative overflow-hidden rounded-[28px] border border-slate-100 bg-[linear-gradient(180deg,#fbfeff_0%,#ffffff_52%,#f6fbff_100%)] p-6 shadow-[0_4px_12px_rgba(15,23,42,0.02)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_18px_rgba(15,23,42,0.035)]"
-                >
-                  <div className="absolute inset-x-0 top-0 h-1 bg-[linear-gradient(90deg,#0b639b,#62e5da)] opacity-90" />
-                  <div className="mt-6 h-px w-full bg-gradient-to-r from-cyan-200 via-slate-200 to-transparent" />
-                  <h3 className="mt-5 text-base font-semibold leading-7 tracking-tight text-slate-900">
-                    {module}
-                  </h3>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Benefits */}
         <section id="benefits" className="bg-[#f4f8fc] px-6 py-24 md:px-10">
           <div className="mx-auto max-w-6xl">
             <div className="mx-auto mb-12 max-w-2xl text-center">
@@ -135,7 +89,7 @@ export default function QualityManagementPlatformPage() {
                     </span>
                   </div>
                   <div>
-                    <p className="text-[10px]  uppercase tracking-[0.2em] text-cyan-600">
+                    <p className="text-[10px] uppercase tracking-[0.2em] text-cyan-600">
                       {benefit.eyebrow}
                     </p>
                     <h3 className="mt-1.5 text-sm font-medium leading-6 text-slate-900">
@@ -148,9 +102,7 @@ export default function QualityManagementPlatformPage() {
           </div>
         </section>
 
-        {/* Features accordion */}
         <QmsFeaturesAccordion features={features} />
-
       </main>
 
       <SectionContactFooter />
