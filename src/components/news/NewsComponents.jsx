@@ -1,60 +1,77 @@
 import Link from "next/link";
 
-export const CATEGORY_FILTERS = [
-  { id: "all", label: "ทั้งหมด" },
-  { id: "Event Highlight", label: "กิจกรรม" },
-  { id: "Conference", label: "งานประชุม" },
-  { id: "Seminar", label: "สัมมนา" },
-];
-
 const CATEGORY_THEME = {
   "Event Highlight": {
-    gradient: "from-emerald-500/30 via-teal-500/10 to-transparent",
-    glow: "bg-emerald-400/20",
-    badge: "border-emerald-300/25 bg-emerald-400/10 text-emerald-100",
-    ring: "group-hover:border-emerald-300/30",
-    link: "text-emerald-200",
+    badge: "border-emerald-200 bg-emerald-50 text-emerald-700",
+    accent: "bg-emerald-500",
+    surface: "from-emerald-50 via-white to-teal-50",
+    ring: "hover:border-emerald-200 hover:shadow-[0_20px_45px_rgba(16,185,129,0.10)]",
+    link: "text-emerald-700",
   },
   Conference: {
-    gradient: "from-cyan-500/30 via-sky-500/10 to-transparent",
-    glow: "bg-cyan-400/20",
-    badge: "border-cyan-300/25 bg-cyan-400/10 text-cyan-100",
-    ring: "group-hover:border-cyan-300/30",
-    link: "text-cyan-200",
+    badge: "border-sky-200 bg-sky-50 text-sky-700",
+    accent: "bg-sky-500",
+    surface: "from-sky-50 via-white to-cyan-50",
+    ring: "hover:border-sky-200 hover:shadow-[0_20px_45px_rgba(14,165,233,0.10)]",
+    link: "text-sky-700",
   },
   Seminar: {
-    gradient: "from-sky-500/30 via-blue-500/10 to-transparent",
-    glow: "bg-sky-400/20",
-    badge: "border-sky-300/25 bg-sky-400/10 text-sky-100",
-    ring: "group-hover:border-sky-300/30",
-    link: "text-sky-200",
+    badge: "border-amber-200 bg-amber-50 text-amber-700",
+    accent: "bg-amber-500",
+    surface: "from-amber-50 via-white to-orange-50",
+    ring: "hover:border-amber-200 hover:shadow-[0_20px_45px_rgba(245,158,11,0.10)]",
+    link: "text-amber-700",
   },
 };
 
 export function getCategoryTheme(category) {
   return (
     CATEGORY_THEME[category] ?? {
-      gradient: "from-white/10 via-white/5 to-transparent",
-      glow: "bg-white/10",
-      badge: "border-white/15 bg-white/10 text-slate-100",
-      ring: "group-hover:border-white/25",
-      link: "text-cyan-200",
+      badge: "border-slate-200 bg-slate-100 text-slate-700",
+      accent: "bg-slate-500",
+      surface: "from-slate-50 via-white to-slate-100",
+      ring: "hover:border-slate-200 hover:shadow-[0_20px_45px_rgba(15,23,42,0.08)]",
+      link: "text-slate-700",
     }
   );
 }
 
-export function SectionHeading({ eyebrow, title, description }) {
+export function SectionHeading({ eyebrow, title, description, compact = false }) {
   return (
-    <div className="mb-10 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+    <div
+      className={[
+        "flex flex-col gap-4 md:flex-row md:items-end md:justify-between",
+        compact ? "mb-6 md:mb-7" : "mb-8 md:mb-10",
+      ].join(" ")}
+    >
       <div className="max-w-2xl">
-        <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-200/80 backdrop-blur">
-          <span className="h-2 w-2 rounded-full bg-cyan-300 shadow-[0_0_16px_rgba(103,232,249,0.75)]" />
+        <span
+          className={[
+            "inline-flex items-center gap-2 rounded-full border border-sky-100 bg-white font-semibold uppercase text-sky-700 shadow-sm",
+            compact ? "px-3.5 py-1.5 text-[10px] tracking-[0.18em]" : "px-4 py-2 text-[11px] tracking-[0.22em]",
+          ].join(" ")}
+        >
+          <span className="h-2 w-2 rounded-full bg-sky-500" />
           {eyebrow}
         </span>
-        <h2 className="mt-4 text-3xl font-semibold tracking-[-0.03em] text-white md:text-4xl">{title}</h2>
+        <h2
+          className={[
+            "font-semibold tracking-[-0.03em] text-slate-900",
+            compact ? "mt-3 text-2xl md:text-[2rem]" : "mt-4 text-3xl md:text-4xl",
+          ].join(" ")}
+        >
+          {title}
+        </h2>
       </div>
       {description ? (
-        <p className="max-w-xl text-sm leading-7 text-slate-300">{description}</p>
+        <p
+          className={[
+            "text-slate-600",
+            compact ? "max-w-lg text-sm leading-6" : "max-w-xl text-sm leading-7 md:text-base",
+          ].join(" ")}
+        >
+          {description}
+        </p>
       ) : null}
     </div>
   );
@@ -62,7 +79,7 @@ export function SectionHeading({ eyebrow, title, description }) {
 
 function CalendarIcon() {
   return (
-    <svg className="h-4 w-4 shrink-0 text-cyan-300/70" viewBox="0 0 20 20" fill="none" aria-hidden>
+    <svg className="h-4 w-4 shrink-0 text-slate-400" viewBox="0 0 20 20" fill="none" aria-hidden>
       <rect x="3" y="4" width="14" height="13" rx="2" stroke="currentColor" strokeWidth="1.4" />
       <path d="M3 8h14M7 2v3M13 2v3" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
     </svg>
@@ -71,7 +88,7 @@ function CalendarIcon() {
 
 function PinIcon() {
   return (
-    <svg className="h-4 w-4 shrink-0 text-cyan-300/70" viewBox="0 0 20 20" fill="none" aria-hidden>
+    <svg className="h-4 w-4 shrink-0 text-slate-400" viewBox="0 0 20 20" fill="none" aria-hidden>
       <path
         d="M10 18s5-4.5 5-9a5 5 0 1 0-10 0c0 4.5 5 9 5 9Z"
         stroke="currentColor"
@@ -82,9 +99,27 @@ function PinIcon() {
   );
 }
 
-function MetaRow({ article }) {
+function ArrowRightIcon() {
   return (
-    <div className="mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-400">
+    <svg className="h-4 w-4" viewBox="0 0 16 16" fill="none" aria-hidden>
+      <path
+        d="M3.5 8h9m0 0-3.5-3.5M12.5 8 9 11.5"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function MetaRow({ article, className = "" }) {
+  return (
+    <div
+      className={
+        className || "mt-3 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm text-slate-500"
+      }
+    >
       <span className="inline-flex items-center gap-1.5">
         <CalendarIcon />
         {article.date}
@@ -97,15 +132,19 @@ function MetaRow({ article }) {
   );
 }
 
-export function ArticleCover({ article, tall = false, className = "" }) {
+export function ArticleCover({ article, tall = false, compact = false, className = "" }) {
   const theme = getCategoryTheme(article.category);
-  const height = tall ? "min-h-[220px] md:min-h-[300px]" : "min-h-[180px]";
+  const height = tall
+    ? "h-full min-h-[240px] md:min-h-[320px]"
+    : compact
+      ? "h-[220px]"
+      : "h-[260px]";
 
   if (article.media?.heroImage) {
     return (
       <div
         className={[
-          "relative overflow-hidden rounded-[24px] border border-white/10",
+          "relative overflow-hidden rounded-[24px] border border-slate-200 bg-slate-100",
           height,
           className,
         ].join(" ")}
@@ -115,7 +154,6 @@ export function ArticleCover({ article, tall = false, className = "" }) {
           alt={article.media.heroAlt || article.title}
           className="h-full w-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#06101d]/80 via-transparent to-transparent" />
       </div>
     );
   }
@@ -123,76 +161,84 @@ export function ArticleCover({ article, tall = false, className = "" }) {
   return (
     <div
       className={[
-        "relative overflow-hidden rounded-[24px] border border-white/10 bg-[#0a1628]",
+        "relative overflow-hidden rounded-[24px] border border-slate-200 bg-gradient-to-br",
+        theme.surface,
         height,
         className,
       ].join(" ")}
     >
-      <div className={`absolute -right-8 -top-8 h-40 w-40 rounded-full blur-3xl ${theme.glow}`} />
-      <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient}`} />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.14] [background-image:linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:48px_48px]" />
-      <div className="relative flex h-full flex-col justify-end p-5 md:p-6">
-        <span
-          className={[
-            "inline-flex w-fit rounded-full border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em]",
-            theme.badge,
-          ].join(" ")}
-        >
-          {article.category}
-        </span>
-        <p className="mt-3 line-clamp-2 text-sm font-medium leading-6 text-white/90">{article.location}</p>
+      <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.55),transparent_55%)]" />
+      <div className="pointer-events-none absolute inset-0 opacity-60 [background-image:linear-gradient(rgba(148,163,184,0.09)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.09)_1px,transparent_1px)] [background-size:42px_42px]" />
+      <div className="relative flex h-full items-end p-5 md:p-6">
+        <div>
+          <div className={`mb-4 h-1.5 w-16 rounded-full ${theme.accent}`} />
+          <p className="max-w-sm text-sm font-medium leading-6 text-slate-700">{article.location}</p>
+        </div>
       </div>
     </div>
   );
 }
 
-export function ArticleCard({ article, featured = false }) {
+export function ArticleCard({ article, featured = false, compact = false }) {
   const theme = getCategoryTheme(article.category);
+  const metaClassName = compact
+    ? "mt-0 flex flex-col items-start gap-1.5 text-[13px] leading-5 text-slate-500"
+    : undefined;
 
   return (
     <Link
       href={`/news/${article.slug}`}
       className={[
-        "group flex h-full flex-col overflow-hidden rounded-[28px] border border-white/10 bg-white/[0.04] backdrop-blur transition duration-300 hover:-translate-y-1 hover:bg-white/[0.06]",
+        "group flex h-full flex-col overflow-hidden rounded-[28px] border border-slate-200 bg-white transition duration-300 hover:-translate-y-1",
         theme.ring,
         featured ? "lg:col-span-2" : "",
       ].join(" ")}
     >
-      <ArticleCover article={article} tall={featured} className="rounded-none border-0 border-b border-white/10" />
+      <ArticleCover
+        article={article}
+        tall={featured}
+        compact={compact}
+        className="rounded-none border-0 border-b border-slate-200"
+      />
 
-      <div className="flex flex-1 flex-col p-5 md:p-6">
-        <div className="flex items-start justify-between gap-4">
-          <span
-            className={[
-              "rounded-full border px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em]",
-              theme.badge,
-            ].join(" ")}
-          >
-            {article.category}
-          </span>
-          {featured ? (
-            <span className="rounded-full border border-amber-300/20 bg-amber-400/10 px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.16em] text-amber-100">
-              ข่าวเด่น
-            </span>
-          ) : null}
-        </div>
-
-        <MetaRow article={article} />
+      <div className={["flex flex-1 flex-col", compact ? "p-4 md:p-5" : "p-5 md:p-6"].join(" ")}>
+        <MetaRow article={article} className={metaClassName} />
 
         <h3
           className={[
-            "mt-4 font-semibold leading-snug text-white",
-            featured ? "text-2xl md:text-3xl" : "text-xl",
+            "font-semibold text-slate-900",
+            featured
+              ? "mt-4 text-2xl leading-snug md:text-3xl"
+              : compact
+                ? "mt-3 min-h-[3.4rem] text-[1.08rem] leading-[1.55rem] line-clamp-2"
+                : "mt-4 text-xl leading-snug",
           ].join(" ")}
         >
           {article.title}
         </h3>
 
-        <p className="mt-3 flex-1 text-sm leading-7 text-slate-300 line-clamp-3">{article.summary}</p>
+        <p
+          className={[
+            "flex-1 text-sm text-slate-600",
+            compact
+              ? "mt-3 min-h-[4.6rem] leading-6 line-clamp-3"
+              : "mt-3 leading-7 line-clamp-3",
+          ].join(" ")}
+        >
+          {article.summary}
+        </p>
 
-        <span className={`mt-5 inline-flex items-center gap-2 text-sm font-semibold ${theme.link}`}>
+        <span
+          className={[
+            "inline-flex items-center gap-2 text-sm font-semibold",
+            theme.link,
+            compact ? "mt-5" : "mt-5",
+          ].join(" ")}
+        >
           อ่านต่อ
-          <span className="transition-transform duration-300 group-hover:translate-x-1">→</span>
+          <span className="transition-transform duration-300 group-hover:translate-x-1">
+            <ArrowRightIcon />
+          </span>
         </span>
       </div>
     </Link>
@@ -203,131 +249,123 @@ export function FeaturedArticle({ article }) {
   const theme = getCategoryTheme(article.category);
 
   return (
-    <article className="group overflow-hidden rounded-[32px] border border-white/10 bg-white/[0.04] shadow-[0_24px_80px_rgba(3,7,18,0.35)] backdrop-blur">
-      <div className="grid gap-0 lg:grid-cols-[minmax(0,1.1fr)_minmax(280px,0.9fr)]">
-        <div className="relative min-h-[320px] overflow-hidden lg:min-h-[480px]">
-          {article.media?.heroImage ? (
-            <img
-              src={article.media.heroImage}
-              alt={article.media.heroAlt || article.title}
-              className="absolute inset-0 h-full w-full object-cover"
-            />
-          ) : (
-            <>
-              <div className={`absolute -left-10 top-10 h-56 w-56 rounded-full blur-3xl ${theme.glow}`} />
-              <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient}`} />
-              <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:64px_64px]" />
-            </>
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#06101d] via-[#06101d]/40 to-transparent lg:bg-gradient-to-r lg:from-[#06101d] lg:via-[#06101d]/50 lg:to-transparent" />
+    <article className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+      <div className="grid gap-0 lg:grid-cols-[minmax(0,1.08fr)_minmax(300px,0.92fr)]">
+        <ArticleCover article={article} tall className="rounded-none border-0 border-b border-slate-200 lg:border-b-0 lg:border-r" />
 
-          <div className="relative flex h-full flex-col justify-end p-6 md:p-8 lg:p-10">
-            <span
-              className={[
-                "inline-flex w-fit rounded-full border px-3 py-1.5 text-[10px] font-semibold uppercase tracking-[0.2em]",
-                theme.badge,
-              ].join(" ")}
-            >
-              {article.category}
-            </span>
-
+        <div className="flex flex-col justify-between p-6 md:p-8">
+          <div>
             <MetaRow article={article} />
 
-            <h2 className="mt-5 max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.04em] text-white md:text-4xl lg:text-5xl">
+            <h3 className="mt-4 text-3xl font-semibold leading-tight tracking-[-0.04em] text-slate-900 md:text-4xl">
               {article.title}
-            </h2>
+            </h3>
 
-            <p className="mt-4 max-w-2xl text-sm leading-7 text-slate-200 md:text-base">{article.summary}</p>
+            <p className="mt-4 text-sm leading-7 text-slate-600 md:text-base">{article.summary}</p>
 
-            <div className="mt-5 flex flex-wrap gap-2">
+            <div className="mt-6 flex flex-wrap gap-2">
               {article.highlights.slice(0, 3).map((item) => (
                 <span
                   key={item}
-                  className="rounded-full border border-white/12 bg-white/10 px-3 py-1.5 text-xs text-slate-100"
+                  className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-600"
                 >
                   {item}
                 </span>
               ))}
             </div>
-
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <Link
-                href={`/news/${article.slug}`}
-                className="inline-flex items-center justify-center rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-cyan-100"
-              >
-                อ่านข่าวฉบับเต็ม
-              </Link>
-              <a
-                href="#all-news"
-                className="inline-flex items-center justify-center rounded-full border border-white/15 bg-white/5 px-5 py-3 text-sm font-semibold text-white transition hover:border-cyan-300/40 hover:bg-white/10"
-              >
-                ดูข่าวทั้งหมด
-              </a>
-            </div>
           </div>
-        </div>
 
-        <div className="hidden border-l border-white/10 bg-black/10 p-6 lg:block lg:p-8">
-          <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-200/70">ไฮไลต์</p>
-          <ul className="mt-5 space-y-4">
-            {article.highlights.map((item, index) => (
-              <li key={item} className="rounded-[20px] border border-white/8 bg-white/[0.03] p-4">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.18em] text-cyan-100/60">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <p className="mt-2 text-sm leading-7 text-slate-200">{item}</p>
-              </li>
-            ))}
-          </ul>
+          <div className="mt-8 flex flex-wrap items-center gap-3">
+            <Link
+              href={`/news/${article.slug}`}
+              className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
+            >
+              อ่านเพิ่มเติม
+            </Link>
+            <a
+              href="#all-news"
+              className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
+            >
+              ข่าวสารอื่น ๆ
+            </a>
+          </div>
         </div>
       </div>
     </article>
   );
 }
 
-export function GalleryTile({ title, ratio = "wide", category = "Conference" }) {
+export function GalleryTile({
+  title,
+  ratio = "wide",
+  category = "Conference",
+  image,
+  alt,
+  onOpen,
+}) {
   const theme = getCategoryTheme(category);
   const height =
-    ratio === "portrait" ? "min-h-[240px] md:min-h-[300px]" : "min-h-[220px] md:min-h-[280px]";
+    ratio === "portrait" ? "min-h-[240px] md:min-h-[300px]" : "min-h-[220px] md:min-h-[260px]";
+
+  if (image) {
+    const content = (
+      <>
+        <img
+          src={image}
+          alt={alt || title}
+          className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.02]"
+        />
+        <div className="absolute inset-0 bg-slate-950/0 transition duration-300 group-hover:bg-slate-950/10" />
+        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent p-5 md:p-6">
+          <p className="text-sm font-medium leading-6 text-white">{title}</p>
+        </div>
+      </>
+    );
+
+    if (onOpen) {
+      return (
+        <button
+          type="button"
+          onClick={onOpen}
+          className={[
+            "group relative block w-full overflow-hidden rounded-[24px] border border-slate-200 bg-slate-100 text-left",
+            height,
+          ].join(" ")}
+          aria-label={`ดูรูปภาพ: ${alt || title}`}
+        >
+          {content}
+        </button>
+      );
+    }
+
+    return (
+      <a
+        href={image}
+        target="_blank"
+        rel="noopener noreferrer"
+        className={["group relative block overflow-hidden rounded-[24px] border border-slate-200 bg-slate-100", height].join(" ")}
+        aria-label={`ดูรูปภาพ: ${alt || title}`}
+      >
+        {content}
+      </a>
+    );
+  }
 
   return (
     <div
       className={[
-        "relative overflow-hidden rounded-[24px] border border-white/10 bg-[#0a1628]",
+        "relative overflow-hidden rounded-[24px] border border-slate-200 bg-gradient-to-br",
+        theme.surface,
         height,
       ].join(" ")}
     >
-      <div className={`absolute -right-6 top-6 h-32 w-32 rounded-full blur-3xl ${theme.glow}`} />
-      <div className={`absolute inset-0 bg-gradient-to-br ${theme.gradient}`} />
-      <div className="pointer-events-none absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.07)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:40px_40px]" />
-      <div className="relative flex h-full items-end p-5">
-        <p className="text-sm font-medium leading-6 text-white/90">{title}</p>
+      <div className="pointer-events-none absolute inset-0 opacity-50 [background-image:linear-gradient(rgba(148,163,184,0.09)_1px,transparent_1px),linear-gradient(90deg,rgba(148,163,184,0.09)_1px,transparent_1px)] [background-size:36px_36px]" />
+      <div className="relative flex h-full items-end p-5 md:p-6">
+        <div>
+          <div className={`mb-3 h-1.5 w-12 rounded-full ${theme.accent}`} />
+          <p className="text-sm font-medium leading-6 text-slate-700">{title}</p>
+        </div>
       </div>
-    </div>
-  );
-}
-
-export function CategoryFilter({ active, onChange }) {
-  return (
-    <div className="flex flex-wrap gap-2">
-      {CATEGORY_FILTERS.map((filter) => {
-        const isActive = active === filter.id;
-        return (
-          <button
-            key={filter.id}
-            type="button"
-            onClick={() => onChange(filter.id)}
-            className={[
-              "rounded-full border px-4 py-2 text-sm font-medium transition duration-300",
-              isActive
-                ? "border-cyan-300/40 bg-cyan-400/15 text-white shadow-[0_0_24px_rgba(34,211,238,0.12)]"
-                : "border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/20 hover:bg-white/[0.06] hover:text-white",
-            ].join(" ")}
-          >
-            {filter.label}
-          </button>
-        );
-      })}
     </div>
   );
 }

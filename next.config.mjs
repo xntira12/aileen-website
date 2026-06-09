@@ -10,6 +10,14 @@ const nextConfig = {
       },
     ],
   },
+  webpack: (config, { dev }) => {
+    if (dev) {
+      // Avoid stale filesystem cache/chunk issues during local development on Windows.
+      config.cache = { type: "memory" };
+    }
+
+    return config;
+  },
 };
 
 export default nextConfig;
