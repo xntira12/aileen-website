@@ -13,7 +13,7 @@ export default function ContactButton({ href = "/contact", className = "" }) {
     >
       ติดต่อเรา{" "}
       <svg
-        className="w-3.5 text-gray-800 dark:text-white"
+        className="w-3.5 text-white dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

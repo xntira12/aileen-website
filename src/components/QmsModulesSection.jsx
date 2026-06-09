@@ -3,24 +3,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { QMS_PLATFORM_MODULES } from "@/content/qmsModules";
 
-const MODULE_ICONS = {
-  "01": "M6 4h8v12H6V4Zm2 2v2h4V6H8Zm0 4v4h4v-4H8Z",
-  "02": "M7 5h6v2H7V5Zm-1 4h8v1H6V9Zm1 2h6v1H7v-1Zm-1 2h8v1H6v-1Z",
-  "03": "M10 4 14 9H12v7H8V9H6L10 4Zm0 11a1.5 1.5 0 1 0 0 3 1.5 1.5 0 0 0 0-3Z",
-  "04": "M6 6h8v9H6V6Zm2 2v1h4V8H8Zm0 2v3h4v-3H8Zm6-2h1v7h-1V8Z",
-  "05": "M10 4 12 7h3l-2.5 2 1 3L10 10.5 7.5 12l1-3L6 7h3L10 4Z",
-  "06": "M7 5h6v10H7V5Zm1 2v1h4V7H8Zm0 2v4h4V9H8Zm-1 3h6v1H7v-1Z",
-  "07": "M10 5c2.5 0 4 1.8 4 4.2 0 2.8-3.2 6.3-4 7.3-.8-1-4-4.5-4-7.3C6 6.8 7.5 5 10 5Zm0 2.2a1.8 1.8 0 1 0 0 3.6 1.8 1.8 0 0 0 0-3.6Z",
-};
-
-function ModuleIcon({ id, className = "h-5 w-5" }) {
-  return (
-    <svg viewBox="0 0 20 20" className={className} aria-hidden>
-      <path d={MODULE_ICONS[id]} fill="currentColor" />
-    </svg>
-  );
-}
-
 function BulletList({ items, variant }) {
   const isPain = variant === "pain";
 
@@ -114,7 +96,7 @@ export default function QmsModulesSection() {
                 </span>
               </h2>
               <p className="mt-3 text-base leading-8 text-slate-500">
-                เลือกโมดูลเพื่อดู Painpoint และ Benefits — ออกแบบให้ทีมเข้าใจปัญหาและคุณค่าของแต่ละระบบได้ชัดเจน
+                เลือกโมดูลเพื่อดู Painpoint และ Benefits ออกแบบให้ทีมเข้าใจปัญหาและคุณค่าของแต่ละระบบได้ชัดเจน
               </p>
             </div>
 
@@ -140,7 +122,7 @@ export default function QmsModulesSection() {
           </div>
         </div>
 
-        {/* Mobile nav — sticky pills */}
+        {/* Mobile nav sticky pills */}
         <div className="sticky top-[72px] z-20 border-b border-slate-100 bg-white/95 px-4 py-3 backdrop-blur-md lg:hidden">
           <div className="flex gap-2 overflow-x-auto pb-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {QMS_PLATFORM_MODULES.map((mod, index) => {
@@ -193,7 +175,7 @@ export default function QmsModulesSection() {
                       onClick={() => selectModule(index)}
                       aria-current={isActive ? "true" : undefined}
                       className={[
-                        "group relative flex w-full items-start gap-3 rounded-2xl px-3 py-3.5 text-left transition duration-200",
+                        "group relative flex w-full items-start rounded-2xl px-3 py-3.5 text-left transition duration-200",
                         isActive
                           ? "bg-white shadow-[0_4px_20px_rgba(11,99,155,0.1)] ring-1 ring-cyan-200/60"
                           : "hover:bg-white/80",
@@ -202,16 +184,6 @@ export default function QmsModulesSection() {
                       {isActive ? (
                         <span className="absolute left-0 top-3 bottom-3 w-1 rounded-r-full bg-[linear-gradient(180deg,#0b639b,#62e5da)]" />
                       ) : null}
-                      <span
-                        className={[
-                          "flex h-10 w-10 shrink-0 items-center justify-center rounded-xl transition",
-                          isActive
-                            ? "bg-[linear-gradient(135deg,#0b639b,#62e5da)] text-white shadow-md"
-                            : "bg-white text-cyan-700 ring-1 ring-slate-200/80 group-hover:ring-cyan-200",
-                        ].join(" ")}
-                      >
-                        <ModuleIcon id={mod.id} />
-                      </span>
                       <span className="min-w-0 flex-1 pt-0.5">
                         <span className="flex items-center gap-2">
                           <span
@@ -237,9 +209,7 @@ export default function QmsModulesSection() {
                 );
               })}
             </ul>
-            <p className="mt-4 px-2 text-[11px] leading-5 text-slate-400">
-              ใช้ปุ่ม ← → บนคีย์บอร์ดเพื่อสลับโมดูล
-            </p>
+          
           </nav>
 
           {/* Detail panel */}
@@ -256,49 +226,22 @@ export default function QmsModulesSection() {
               ].join(" ")}
             >
               {/* Module hero */}
-              <div className="relative overflow-hidden border-b border-slate-100 px-6 py-7 md:px-8 md:py-8">
+              <div className="relative overflow-hidden border-b border-slate-100 px-6 py-5 md:px-8 md:py-6">
                 <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(98,229,218,0.12),transparent_50%),radial-gradient(ellipse_at_bottom_left,rgba(11,99,155,0.06),transparent_45%)]" />
-                <div className="relative flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
-                  <div className="flex gap-4">
-                    <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[linear-gradient(135deg,#0b639b,#62e5da)] text-white shadow-lg shadow-cyan-500/20">
-                      <ModuleIcon id={active.id} className="h-7 w-7" />
+                <div className="relative">
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="rounded-full bg-cyan-600/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-800">
+                      Module {active.id}
                     </span>
-                    <div>
-                      <div className="flex flex-wrap items-center gap-2">
-                        <span className="rounded-full bg-cyan-600/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-cyan-800">
-                          Module {active.id}
-                        </span>
-                        <span className="rounded-full border border-slate-200 bg-white/80 px-2.5 py-1 text-xs text-slate-500">
-                          {active.painpoints.length} Painpoints · {active.benefits.length} Benefits
-                        </span>
-                      </div>
-                      <h3 className="mt-2 text-xl font-bold leading-snug tracking-tight text-slate-900 md:text-2xl">
-                        {active.title}
-                      </h3>
-                    </div>
+                    <span className="rounded-full border border-slate-200 bg-white/80 px-2.5 py-1 text-xs text-slate-500">
+                      {active.painpoints.length} Painpoints · {active.benefits.length} Benefits
+                    </span>
                   </div>
-                  <div className="flex gap-2 sm:shrink-0">
-                    <button
-                      type="button"
-                      onClick={goPrev}
-                      disabled={activeIndex === 0}
-                      aria-label="โมดูลก่อนหน้า"
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 disabled:opacity-35"
-                    >
-                      <NavArrow direction="prev" />
-                    </button>
-                    <button
-                      type="button"
-                      onClick={goNext}
-                      disabled={activeIndex === total - 1}
-                      aria-label="โมดูลถัดไป"
-                      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 transition hover:border-slate-300 hover:bg-slate-50 disabled:opacity-35"
-                    >
-                      <NavArrow direction="next" />
-                    </button>
-                  </div>
+                  <h3 className="mt-5 text-xl font-bold leading-snug tracking-tight text-slate-900 md:mt-8 md:text-2xl">
+                    {active.title}
+                  </h3>
                 </div>
-                <p className="relative mt-5 max-w-3xl text-base leading-8 text-slate-600">
+                <p className="relative  max-w-3xl text-sm  text-slate-500 mt-2">
                   {active.description}
                 </p>
               </div>
@@ -338,13 +281,7 @@ export default function QmsModulesSection() {
                     detailTab !== "pain" ? "hidden lg:block" : "",
                   ].join(" ")}
                 >
-                  <div className="mb-6 flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-amber-100 to-orange-50 text-amber-700 ring-1 ring-amber-200/60">
-                      <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none" aria-hidden>
-                        <path d="M10 6v5M10 14h.01" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                        <circle cx="10" cy="10" r="7" stroke="currentColor" strokeWidth="1.5" />
-                      </svg>
-                    </span>
+                  <div className="mb-6">
                     <div>
                       <h4 className="text-sm font-bold text-amber-900">Painpoint</h4>
                       <p className="text-xs text-amber-700/70">ปัญหาที่พบบ่อยในการทำงาน</p>
@@ -361,18 +298,7 @@ export default function QmsModulesSection() {
                     detailTab !== "benefit" ? "hidden lg:block" : "",
                   ].join(" ")}
                 >
-                  <div className="mb-6 flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-100 to-teal-50 text-emerald-700 ring-1 ring-emerald-200/60">
-                      <svg viewBox="0 0 20 20" className="h-5 w-5" fill="none" aria-hidden>
-                        <path
-                          d="M5.5 10.2 8.2 12.9 14.5 6.6"
-                          stroke="currentColor"
-                          strokeWidth="1.8"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </span>
+                  <div className="mb-6">
                     <div>
                       <h4 className="text-sm font-bold text-emerald-900">Benefits</h4>
                       <p className="text-xs text-emerald-700/70">คุณค่าที่ได้จากระบบ</p>
@@ -385,46 +311,48 @@ export default function QmsModulesSection() {
               </div>
 
               {/* Footer stepper */}
-              <div className="flex flex-col gap-4 border-t border-slate-100 bg-slate-50/50 px-6 py-5 sm:flex-row sm:items-center sm:justify-between md:px-8">
-                <div className="flex items-center gap-1.5">
-                  {QMS_PLATFORM_MODULES.map((mod, i) => (
-                    <button
-                      key={mod.id}
-                      type="button"
-                      onClick={() => selectModule(i)}
-                      aria-label={`Module ${mod.id}: ${mod.shortTitle}`}
-                      className={[
-                        "h-2 rounded-full transition-all duration-300",
-                        i === activeIndex
-                          ? "w-8 bg-[linear-gradient(90deg,#0b639b,#62e5da)]"
-                          : "w-2 bg-slate-200 hover:bg-slate-300",
-                      ].join(" ")}
-                    />
-                  ))}
-                </div>
-                <div className="flex items-center justify-between gap-3 sm:justify-end">
-                  <span className="text-xs font-medium text-slate-500">
-                    {activeIndex + 1} / {total}
-                  </span>
-                  <div className="flex gap-2">
-                    <button
-                      type="button"
-                      onClick={goPrev}
-                      disabled={activeIndex === 0}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 disabled:opacity-40"
-                    >
-                      <NavArrow direction="prev" />
-                      ก่อนหน้า
-                    </button>
-                    <button
-                      type="button"
-                      onClick={goNext}
-                      disabled={activeIndex === total - 1}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 transition hover:border-slate-300 disabled:opacity-40"
-                    >
-                      ถัดไป
-                      <NavArrow direction="next" />
-                    </button>
+              <div className="border-t border-slate-100 bg-slate-50/50 px-6 py-5 md:px-8">
+                <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                  <div className="flex items-center justify-center gap-1.5 sm:justify-start">
+                    {QMS_PLATFORM_MODULES.map((mod, i) => (
+                      <button
+                        key={mod.id}
+                        type="button"
+                        onClick={() => selectModule(i)}
+                        aria-label={`Module ${mod.id}: ${mod.shortTitle}`}
+                        className={[
+                          "h-2 rounded-full transition-all duration-300",
+                          i === activeIndex
+                            ? "w-8 bg-[linear-gradient(90deg,#0b639b,#62e5da)]"
+                            : "w-2 bg-slate-200 hover:bg-slate-300",
+                        ].join(" ")}
+                      />
+                    ))}
+                  </div>
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-end">
+                    <span className="text-center text-xs font-medium text-slate-500 sm:text-left">
+                      {activeIndex + 1} / {total}
+                    </span>
+                    <div className="grid grid-cols-2 gap-2 sm:flex">
+                      <button
+                        type="button"
+                        onClick={goPrev}
+                        disabled={activeIndex === 0}
+                        className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 disabled:opacity-40"
+                      >
+                        <NavArrow direction="prev" />
+                        ก่อนหน้า
+                      </button>
+                      <button
+                        type="button"
+                        onClick={goNext}
+                        disabled={activeIndex === total - 1}
+                        className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 disabled:opacity-40"
+                      >
+                        ถัดไป
+                        <NavArrow direction="next" />
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>

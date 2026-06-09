@@ -260,7 +260,9 @@ export default function Navbar() {
     });
   };
 
-  const menu = MENU_TH;
+  const menu = MENU_TH.map((item) =>
+    item.href === "/news" ? { ...item, href: "/comingsoon" } : item,
+  );
 
   const menuText = scrolled ? "text-slate-700" : "text-slate-200";
   const menuHover = "hover:text-[#27b7a6]";
