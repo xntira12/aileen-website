@@ -112,6 +112,16 @@ export default function PmpHeroSection() {
 
           <div className="mt-9 flex flex-wrap gap-4">
             <a
+              href="/service/process-management-platform/Aileen_Process_Manager.pdf"
+              download="Aileen_Process_Manager.pdf"
+              className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-emerald-300/45 bg-emerald-400/10 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/20"
+            >
+              <span className="relative z-10">โหลด Aileen_Process_Manager.pdf</span>
+              <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
+                <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 1v7m0 0 3-3m-3 3L4 5M2 10.5h10" />
+              </svg>
+            </a>
+            <a
               href="/contact"
               className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15"
             >

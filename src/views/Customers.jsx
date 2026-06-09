@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import SectionContactFooter from "../components/SectionContactFooter";
-import { CUSTOMER_LOGOS } from "../content/customerLogos";
+import logoPttlng from "../assets/img/home/customers/logo-pttlng.png";
 
 function useInView(threshold = 0.14) {
   const ref = useRef(null);
@@ -29,6 +29,21 @@ function useInView(threshold = 0.14) {
 
   return [ref, inView];
 }
+
+const CUSTOMER_PAGE_LOGOS = [
+  { src: "/img/home/customers/egat.png", alt: "EGAT" },
+  { src: "/img/home/customers/GC.webp", alt: "GC" },
+  { src: "/img/home/customers/ptt.png", alt: "PTT" },
+  { src: "/img/home/customers/ggc.png", alt: "GGC" },
+  { src: "/img/home/customers/bangchak.svg", alt: "Bangchak" },
+  { src: logoPttlng.src, alt: "PTTLNG" },
+  { src: "/img/home/customers/HMC.png", alt: "HMC Polymers" },
+  { src: "/img/home/customers/AGC.png", alt: "AGC" },
+  { src: "/img/home/customers/ptt-digital.png", alt: "PTT Digital" },
+  { src: "/img/home/customers/Tex.png", alt: "Thai Ethoxylate (TEX)" },
+  { src: "/img/home/customers/npc.png", alt: "NPC" },
+  { src: "/img/home/customers/NOK.png", alt: "THAI NOK" },
+];
 
 export default function Customers() {
   const [heroRef, heroInView] = useInView(0.12);
@@ -114,17 +129,19 @@ export default function Customers() {
                   <div className="rounded-[30px] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.09),rgba(255,255,255,0.03))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_28px_60px_rgba(2,12,27,0.3)] md:p-5">
                     <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4 md:p-5">
                       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
-                        {CUSTOMER_LOGOS.map((customer) => (
+                        {CUSTOMER_PAGE_LOGOS.map((customer) => (
                           <article
                             key={customer.alt}
                             className="group relative flex min-h-[110px] items-center justify-center overflow-hidden rounded-[22px] border border-slate-200/80 bg-[linear-gradient(180deg,#f8fbff_0%,#eef5fb_100%)] px-5 py-4 shadow-[0_14px_28px_rgba(15,23,42,0.18)] transition hover:-translate-y-1 hover:shadow-[0_18px_32px_rgba(37,99,235,0.22)]"
                           >
                             <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-sky-300 to-transparent opacity-70" />
-                            <img
-                              src={customer.src}
-                              alt={customer.alt}
-                              className="relative z-10 max-h-12 w-auto object-contain transition duration-300 group-hover:scale-[1.03] md:max-h-14"
-                            />
+                            {customer.src ? (
+                              <img
+                                src={customer.src}
+                                alt={customer.alt}
+                                className="relative z-10 max-h-12 w-auto object-contain transition duration-300 group-hover:scale-[1.03] md:max-h-14"
+                              />
+                            ) : null}
                           </article>
                         ))}
                       </div>
