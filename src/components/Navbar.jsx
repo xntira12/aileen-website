@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import ContactButton from "./ContactButton";
 
 const logo = "/img/logo/aileen-logo.png";
@@ -167,6 +168,7 @@ function ServiceMenuItem({ item, onClick, mobile = false, open = true, delayMs =
 }
 
 export default function Navbar() {
+  const pathname = usePathname();
   const navRef = useRef(null);
   const closeTimerRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
@@ -260,14 +262,14 @@ export default function Navbar() {
     });
   };
 
-  const menu = MENU_TH.map((item) =>
-    item.href === "/news" ? { ...item, href: "/comingsoon" } : item,
-  );
+  const menu = MENU_TH;
 
-  const menuText = scrolled ? "text-slate-700" : "text-slate-200";
+  const forceSolidNav = pathname?.startsWith("/news");
+  const useSolidNav = scrolled || forceSolidNav;
+  const menuText = useSolidNav ? "text-slate-700" : "text-slate-200";
   const menuHover = "hover:text-[#27b7a6]";
-  const textColor = scrolled ? "text-slate-900" : "text-white";
-  const navBg = scrolled ? "bg-white/95 backdrop-blur shadow-sm" : "bg-transparent";
+  const textColor = useSolidNav ? "text-slate-900" : "text-white";
+  const navBg = useSolidNav ? "bg-white/95 backdrop-blur shadow-sm" : "bg-transparent";
 
   return (
     <header ref={navRef} className="fixed inset-x-0 top-0 z-50">
@@ -358,7 +360,7 @@ export default function Navbar() {
 
           <button
             className={`inline-flex h-10 w-10 items-center justify-center rounded-lg border md:hidden ${
-              scrolled ? "border-slate-200" : "border-white/30"
+              useSolidNav ? "border-slate-200" : "border-white/30"
             }`}
             onClick={() => setOpen((v) => !v)}
             aria-label="Toggle menu"

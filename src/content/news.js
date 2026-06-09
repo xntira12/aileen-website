@@ -1,4 +1,90 @@
+import egatHero from "../assets/img/News/egat-safety-together/IMG_9815.jpeg";
+import egatGalleryBooth from "../assets/img/News/egat-safety-together/20251015_082421.jpg";
+import egatGalleryTeam from "../assets/img/News/egat-safety-together/20251015_082456.jpg";
+import aiDrivenHero from "../assets/img/News/ai-driven/20250624_055131226_iOS.jpg";
+import aiDrivenGalleryBooth from "../assets/img/News/ai-driven/20250624_033758040_iOS.jpg";
+import sistamHero from "../assets/img/News/sistam/20250925_164810(2).jpg";
+import sistamGalleryBooth from "../assets/img/News/sistam/20250925_150840.jpg";
+import sistamGalleryVisitor from "../assets/img/News/sistam/20250926_141544.jpg";
+import sistamGalleryBackdrop from "../assets/img/News/sistam/20250925_163913.jpg";
+import tncheHero from "../assets/img/News/TNChE/720563591_122224379744509617_8918146535867206756_n (1).jpg";
+import tncheGalleryBooth from "../assets/img/News/TNChE/719161022_122224379762509617_4484651737298028412_n.jpg";
+import tncheGalleryDemo from "../assets/img/News/TNChE/720065152_122224379750509617_4797097085255949318_n.jpg";
+
 export const NEWS_ARTICLES = [
+  {
+    slug: "aileen-solutions-at-tnche-asia-2026",
+    title: "พบกับ Aileen Solutions ได้ในงาน TNChE Asia 2026",
+    category: "Conference",
+    date: "9-11 มิถุนายน 2026",
+    publishedAt: "2026-06-09",
+    location: "Dusit Thani Pattaya, Thailand • Booth A8",
+    summary:
+      "Aileen Solutions เข้าร่วมงาน TNChE Asia 2026 เพื่อนำเสนอแนวคิดด้าน AI, Automation, Safety และ Digital Solutions ภายใต้ธีม “INSPIRING Innovations and Digital Solutions for Asia Sustainability” ที่มุ่งขับเคลื่อนอุตสาหกรรมสู่อนาคตที่แข็งแกร่ง ยั่งยืน และมีคุณภาพมากขึ้น",
+    excerpt:
+      "พบกับทีม Aileen Solutions ระหว่างวันที่ 9-11 มิถุนายน 2026 ณ Dusit Thani Pattaya, Thailand บูธ A8 เพื่อร่วมแลกเปลี่ยนมุมมองด้านนวัตกรรม เทคโนโลยีดิจิทัล และโซลูชันที่ตอบโจทย์การพัฒนาอุตสาหกรรมอย่างยั่งยืนในระดับเอเชีย",
+    tags: [
+      "TNChE Asia 2026",
+      "ROPTC 2026",
+      "AI",
+      "Automation",
+      "Safety",
+      "Digital Transformation",
+      "Sustainability",
+    ],
+    highlights: [
+      "พบกับ Aileen Solutions ที่บูธ A8 ในงาน TNChE Asia 2026",
+      "นำเสนอแนวคิดด้าน AI, Automation และ Digital Solutions เพื่อความยั่งยืน",
+      "สะท้อนบทบาทของนวัตกรรมในการขับเคลื่อนอุตสาหกรรมเอเชียสู่อนาคต",
+    ],
+    sections: [
+      {
+        heading: "Aileen Solutions ในเวที TNChE Asia 2026",
+        paragraphs: [
+          "Aileen Solutions พร้อมเข้าร่วมงาน TNChE Asia 2026 ระหว่างวันที่ 9-11 มิถุนายน 2026 ณ Dusit Thani Pattaya, Thailand โดยเราจะอยู่ที่ Booth A8 เพื่อพบปะผู้เข้าร่วมงานจากภาคอุตสาหกรรม นักวิชาการ และผู้เชี่ยวชาญในสายวิศวกรรมเคมีและเคมีประยุกต์จากหลากหลายประเทศในเอเชีย",
+          "การเข้าร่วมงานครั้งนี้เป็นอีกก้าวสำคัญของ Aileen Solutions ในการนำเสนอแนวทางการประยุกต์ใช้เทคโนโลยีดิจิทัลและโซลูชันอัจฉริยะ เพื่อยกระดับประสิทธิภาพ ความปลอดภัย และความสามารถในการแข่งขันขององค์กรอุตสาหกรรมอย่างเป็นรูปธรรม",
+        ],
+      },
+      {
+        heading: "ธีมงานที่สะท้อนอนาคตของอุตสาหกรรม",
+        paragraphs: [
+          "ภายใต้ธีม “INSPIRING Innovations and Digital Solutions for Asia Sustainability” งาน TNChE Asia 2026 สะท้อนให้เห็นถึงบทบาทของนวัตกรรม เทคโนโลยีดิจิทัล และแนวคิดด้านความยั่งยืน ที่กำลังกลายเป็นหัวใจสำคัญของการพัฒนาอุตสาหกรรมในภูมิภาคเอเชีย",
+          "Aileen Solutions มองว่าแนวคิดเรื่อง Sustainability ไม่ได้จำกัดอยู่เพียงการลดผลกระทบต่อสิ่งแวดล้อมเท่านั้น แต่ยังรวมถึงการออกแบบกระบวนการทำงานที่โปร่งใส ตรวจสอบได้ ปลอดภัย และรองรับการเติบโตของธุรกิจในระยะยาว",
+        ],
+      },
+      {
+        heading: "สิ่งที่คุณจะได้พบที่บูธ A8",
+        paragraphs: [
+          "ภายในบูธของ Aileen Solutions ผู้เข้าร่วมงานจะได้พบกับมุมมองและตัวอย่างการใช้งานจริงในด้าน AI, Automation, Safety และ Digital Transformation ที่สามารถนำไปประยุกต์ใช้กับบริบทของโรงงานและองค์กรอุตสาหกรรมได้จริง",
+          "เราพร้อมแลกเปลี่ยนแนวคิดเกี่ยวกับการมองเห็นกระบวนการทำงานทั้งระบบ การเพิ่มประสิทธิภาพการดำเนินงาน การลดความเสี่ยง และการยกระดับการตัดสินใจด้วยข้อมูล เพื่อสร้างองค์กรที่แข็งแกร่ง มีคุณภาพ และพร้อมสำหรับอนาคต",
+        ],
+      },
+    ],
+    media: {
+      heroImage: tncheHero.src,
+      heroAlt: "ทีม Aileen Solutions ที่บูธในงาน TNChE Asia 2026",
+      gallery: [
+        {
+          title: "บรรยากาศการพูดคุยและแนะนำโซลูชันภายในบูธ",
+          ratio: "wide",
+          image: tncheGalleryBooth.src,
+          alt: "ทีม Aileen Solutions แนะนำโซลูชันให้ผู้เข้าร่วมงาน TNChE Asia 2026",
+        },
+        {
+          title: "การสาธิตการใช้งานและอธิบายกระบวนการทำงาน",
+          ratio: "wide",
+          image: tncheGalleryDemo.src,
+          alt: "การสาธิตระบบและอธิบายโซลูชันภายในงาน TNChE Asia 2026",
+        },
+        {
+          title: "ทีมงาน Aileen Solutions ณ Booth A8",
+          ratio: "wide",
+          image: tncheHero.src,
+          alt: "ทีม Aileen Solutions ถ่ายภาพร่วมกันที่บูธ A8 ในงาน TNChE Asia 2026",
+        },
+      ],
+    },
+  },
   {
     slug: "safety-together-sustainable-safety-culture",
     title: "Safety Together: สร้างวัฒนธรรมความปลอดภัยอย่างยั่งยืน",
@@ -33,12 +119,27 @@ export const NEWS_ARTICLES = [
       },
     ],
     media: {
-      heroImage: null,
-      heroAlt: "พื้นที่สำหรับภาพปกข่าว Safety Together",
+      heroImage: egatHero.src,
+      heroAlt: "ทีมงาน Aileen Solutions ภายในงาน EGAT Safety Together 2025",
       gallery: [
-        { title: "ภาพบรรยากาศภายในงาน", ratio: "wide" },
-        { title: "ภาพเวทีเสวนาหรือวิทยากร", ratio: "portrait" },
-        { title: "ภาพทีมงาน Aileen Solutions", ratio: "portrait" },
+        {
+          title: "บูธ Aileen Solutions ภายในงาน",
+          ratio: "portrait",
+          image: egatGalleryBooth.src,
+          alt: "บูธ Aileen Solutions ในงาน EGAT Safety Together 2025",
+        },
+        {
+          title: "ทีมงานร่วมต้อนรับผู้เข้าร่วมงาน",
+          ratio: "portrait",
+          image: egatGalleryTeam.src,
+          alt: "ทีมงาน Aileen Solutions หน้าบูธในงาน EGAT Safety Together 2025",
+        },
+        {
+          title: "ภาพรวมทีมงานและบรรยากาศงาน",
+          ratio: "wide",
+          image: egatHero.src,
+          alt: "ภาพรวมทีมงาน Aileen Solutions ในงาน EGAT Safety Together 2025",
+        },
       ],
     },
   },
@@ -76,12 +177,27 @@ export const NEWS_ARTICLES = [
       },
     ],
     media: {
-      heroImage: null,
-      heroAlt: "พื้นที่สำหรับภาพปกข่าว SISTAM 2025",
+      heroImage: sistamHero.src,
+      heroAlt: "ทีมงาน Aileen Solutions ภายในงาน SISTAM 2025",
       gallery: [
-        { title: "ภาพบูธหรือพื้นที่จัดแสดง", ratio: "wide" },
-        { title: "ภาพการนำเสนอ solution", ratio: "portrait" },
-        { title: "ภาพผู้เข้าร่วมงานและเครือข่ายอุตสาหกรรม", ratio: "portrait" },
+        {
+          title: "พื้นที่บูธและการจัดแสดงโซลูชัน",
+          ratio: "portrait",
+          image: sistamGalleryBooth.src,
+          alt: "พื้นที่บูธของ Aileen Solutions ภายในงาน SISTAM 2025",
+        },
+        {
+          title: "การพูดคุยกับผู้เข้าร่วมงาน",
+          ratio: "wide",
+          image: sistamGalleryVisitor.src,
+          alt: "การแนะนำโซลูชันแก่ผู้เข้าร่วมงาน SISTAM 2025",
+        },
+        {
+          title: "ทีมงานและภาพบรรยากาศหน้า backdrop",
+          ratio: "wide",
+          image: sistamGalleryBackdrop.src,
+          alt: "ทีมงาน Aileen Solutions ถ่ายภาพหน้า backdrop SISTAM 2025",
+        },
       ],
     },
   },
@@ -119,12 +235,21 @@ export const NEWS_ARTICLES = [
       },
     ],
     media: {
-      heroImage: null,
-      heroAlt: "พื้นที่สำหรับภาพปกข่าว AI-Driven Automation",
+      heroImage: aiDrivenHero.src,
+      heroAlt: "บรรยากาศการบรรยายในงานสัมมนา AI-Driven Automation",
       gallery: [
-        { title: "ภาพบรรยากาศงานสัมมนา", ratio: "wide" },
-        { title: "ภาพวิทยากรหรือ session presentation", ratio: "portrait" },
-        { title: "ภาพผู้เข้าร่วมและ networking", ratio: "portrait" },
+        {
+          title: "จุดลงทะเบียนและพื้นที่ประชาสัมพันธ์ภายในงาน",
+          ratio: "wide",
+          image: aiDrivenGalleryBooth.src,
+          alt: "จุดลงทะเบียนและบูธประชาสัมพันธ์ในงาน AI-Driven Automation",
+        },
+        {
+          title: "บรรยากาศ session presentation ภายในสัมมนา",
+          ratio: "wide",
+          image: aiDrivenHero.src,
+          alt: "วิทยากรกำลังนำเสนอภายในงานสัมมนา AI-Driven Automation",
+        },
       ],
     },
   },
