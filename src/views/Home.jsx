@@ -11,6 +11,7 @@ import SectionContactFooter from "../components/SectionContactFooter";
 // import CustomersMarquee from "../components/CustomersMarquee";
 import SectionLeaderVision from "../components/Sectionleadervision";
 import SectionTeam from "../components/SectionTeam";
+import NewsHighlightCarousel from "../components/NewsHighlightCarousel";
 
 /* ─── slides ─── */
 const slides = [
@@ -270,6 +271,7 @@ export default function Home() {
         @keyframes slideOutDown { from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(28px)} }
       `}</style>
 
+      <NewsHighlightCarousel />
       <main className="mx-auto max-w-6xl px-6"></main>
       {/* <section id="customers" className="py-0 bg-white"><CustomersMarquee /></section> */}
       <section className="py-0 "><SectionDataOrbit /></section>
