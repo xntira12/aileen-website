@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import AnimatedBg from "../components/AnimatedBg";
 const logo = "/img/logo/aileen-logo.png";
 const sloganImg = "/img/home/slogan.png";
+const memorialImage = "/img/home/memorial-royal.png";
 import SectionDataOrbit from "../components/SectionDataOrbit";
 // import SectionStrengths from "../components/SectionStrengths";
 import SectionServiceAndSolutions from "../components/SectionServices";
@@ -43,6 +44,8 @@ const slides = [
 export default function Home() {
   
   const [isLoaded, setIsLoaded]         = useState(false);
+  const [isMemorialOpen, setIsMemorialOpen] = useState(true);
+  const [isMemorialVisible, setIsMemorialVisible] = useState(false);
   const [isFading, setIsFading]         = useState(false);
   const [introPhase, setIntroPhase]     = useState("center");
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -51,6 +54,7 @@ export default function Home() {
   const [carouselHovered, setCarouselHovered] = useState(false);
   const [navVisible, setNavVisible]     = useState(false);
   const autoRef    = useRef(null);
+  const memorialTimeoutRef = useRef(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -83,6 +87,31 @@ export default function Home() {
     return () => { clearTimeout(f); clearTimeout(l); };
   }, []);
 
+  useEffect(() => {
+    if (!isLoaded || !isMemorialOpen) return undefined;
+
+    memorialTimeoutRef.current = setTimeout(() => setIsMemorialVisible(true), 40);
+
+    return () => {
+      clearTimeout(memorialTimeoutRef.current);
+    };
+  }, [isLoaded, isMemorialOpen]);
+
+  useEffect(() => {
+    if (!isLoaded || !isMemorialOpen) return undefined;
+
+    const { overflow } = document.body.style;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = overflow;
+    };
+  }, [isLoaded, isMemorialOpen]);
+
+  useEffect(() => {
+    return () => clearTimeout(memorialTimeoutRef.current);
+  }, []);
+
   function startAuto() {
     clearInterval(autoRef.current);
     autoRef.current = setInterval(() => triggerSlide("next"), 7500);
@@ -102,10 +131,45 @@ export default function Home() {
     }, 380);
   }
 
+  function closeMemorial() {
+    setIsMemorialVisible(false);
+    clearTimeout(memorialTimeoutRef.current);
+    memorialTimeoutRef.current = setTimeout(() => setIsMemorialOpen(false), 420);
+  }
+
   const isSplit = introPhase === "split";
 
   return (
     <div id="home">
+      {isLoaded && isMemorialOpen && (
+        <div
+          className={`fixed inset-0 z-[10000] flex items-center justify-center px-4 py-8 backdrop-blur-[2px] transition-all duration-500 ease-out ${
+            isMemorialVisible ? "bg-black/35 opacity-100" : "bg-black/0 opacity-0 pointer-events-none"
+          }`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Memorial image"
+        >
+          <div
+            className={`relative flex w-full max-w-3xl flex-col items-center gap-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+              isMemorialVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-95 opacity-0"
+            }`}
+          >
+            <img
+              src={memorialImage}
+              alt="น้อมส่งเสด็จสู่สวรรคาลัย"
+              className="max-h-[72vh] w-full rounded-2xl object-contain shadow-2xl"
+            />
+            <button
+              type="button"
+              onClick={closeMemorial}
+              className="inline-flex items-center justify-center rounded-full border border-white/40 bg-white/15 px-6 py-3 text-sm font-medium text-white backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:bg-white/25"
+            >
+              เข้าสู่เว็บไซต์
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* PRELOADER */}
       {!isLoaded && (
