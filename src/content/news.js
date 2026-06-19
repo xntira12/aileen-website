@@ -51,32 +51,57 @@ export const NEWS_ARTICLES = [
         paragraphs: [
           "Aileen Solutions ร่วมกับ Nintex Thailand ขอเรียนเชิญท่านเข้าร่วมงานสัมมนาสุด Exclusive ภายใต้หัวข้อ Enterprise Process Visibility เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน เพื่อร่วมเจาะลึกแนวคิดการปรับรื้อกระบวนการด้วย ECRS พัฒนาหน้างานด้วย Kaizen และรักษามาตรฐานเพื่อมุ่งสู่เป้าหมาย Net Zero อย่างเป็นรูปธรรม",
           "ภายในงาน ท่านจะได้เรียนรู้หัวข้อ Process Clarity to Sustainable Operations ซึ่งจะพาไปเจาะลึก 3 ขั้นตอนสู่ความยั่งยืน SEE > IMPROVE > SUSTAIN ด้วยเครื่องมือระดับโลก พร้อมรับฟังประสบการณ์จริงจากคุณพร้อมพร อิศรางกูร ณ อยุธยา Vice President - Operations จาก Global Green Chemicals Public Company Limited ถึงแนวทางการขับเคลื่อนกระบวนการในอุตสาหกรรมชั้นนำ",
-          "สำหรับสื่อประชาสัมพันธ์ของงาน มีวิดีโอแนะนำกิจกรรมให้รับชมเพิ่มเติม และสามารถเพิ่มลิงก์วิดีโอจริงในภายหลังได้ทันทีเมื่อพร้อมเผยแพร่",
+          "สำหรับสื่อประชาสัมพันธ์ของงาน มีวิดีโอแนะนำกิจกรรมให้รับชมเพิ่มเติมด้านล่าง",
         ],
       },
       {
         heading: "กำหนดการสัมมนา",
-        paragraphs: [
-          "วันที่ 9 July 2026 (Thursday) ณ Hotel Nikko Amata City, Chonburi ห้อง Trusu 2",
-          "10.30-11.00 น. Registration และเวลา 12.00 น. มีบริการอาหารกลางวัน",
-          "11.00-11.50 น. Digitizing the DNA of Sustainability: Process First, Automation Next, Sustainability Always โดย K. Pramote Trinaksit, Aileen Solutions",
-          "11.50-13.20 น. Ultimate Power + Ultimate Control: Redefining Operations in the Age of AI โดย K. Ake Ngarmcroh และ K. Puttapong Chiewvech, Nintex Thailand",
-          "13.20-13.40 น. Success Story: From Experience to Excellence โดย K. Phromphron Isarankura Na Ayutthaya, Global Green Chemicals",
-          "13.40-14.00 น. Games & Lucky Draw",
+        paragraphs: [],
+        venue: "9 กรกฎาคม 2026 (Thursday)  •  Hotel Nikko Amata City, Chonburi  •  ห้อง Trusu 2",
+        agenda: [
+          {
+            time: "10.30–11.00",
+            title: "Registration",
+            note: "เวลา 12.00 น. มีบริการอาหารกลางวัน",
+          },
+          {
+            time: "11.00–11.50",
+            title: "Digitizing the DNA of Sustainability: Process First, Automation Next, Sustainability Always",
+            speaker: "K. Pramote Trinaksit",
+            company: "Aileen Solutions",
+          },
+          {
+            time: "11.50–13.20",
+            title: "Ultimate Power + Ultimate Control: Redefining Operations in the Age of AI",
+            speaker: "K. Ake Ngarmcroh และ K. Puttapong Chiewvech",
+            company: "Nintex Thailand",
+          },
+          {
+            time: "13.20–13.40",
+            title: "Success Story: From Experience to Excellence",
+            speaker: "K. Phromphron Isarankura Na Ayutthaya",
+            company: "Global Green Chemicals",
+          },
+          {
+            time: "13.40–14.00",
+            title: "Games & Lucky Draw",
+          },
         ],
       },
       {
         heading: "รูปแบบการเข้าร่วมและการสำรองที่นั่ง",
         paragraphs: [
           "งานนี้เป็นรูปแบบ Exclusive Seat สำหรับกลุ่มผู้บริหาร และจำกัดจำนวนผู้เข้าร่วมบริษัทละ 2 ท่าน เพื่อให้เกิดการแลกเปลี่ยนวิสัยทัศน์ได้อย่างทั่วถึง",
-          "ท่านสามารถสำรองที่นั่งล่วงหน้าได้ฟรีโดยไม่มีค่าใช้จ่าย และสามารถเพิ่มลิงก์ปุ่ม สำรองที่นั่งของท่าน ในภายหลังได้เมื่อมี URL สำหรับใช้งานจริง",
+          "ท่านสามารถสำรองที่นั่งล่วงหน้าได้ฟรีโดยไม่มีค่าใช้จ่าย ผ่านแบบฟอร์มออนไลน์ด้านล่างนี้",
           "Aileen Solutions หวังเป็นอย่างยิ่งว่าจะได้รับเกียรติจากท่านเข้าร่วมงานในครั้งนี้ เพื่อร่วมยกระดับกระบวนการองค์กรสู่การเติบโตอย่างยั่งยืน",
         ],
       },
     ],
+    registrationUrl: "https://forms.monday.com/forms/46e2da988e2aec0a37a2f541aa927d31?r=apse2",
     media: {
       heroImage: epvPromoteHero.src,
       heroAlt: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
+      videoUrl: "https://www.youtube.com/embed/3qZQi-VTS44",
       gallery: [
         {
           title: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
