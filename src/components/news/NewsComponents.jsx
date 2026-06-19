@@ -5,21 +5,21 @@ const CATEGORY_THEME = {
     badge: "border-emerald-200 bg-emerald-50 text-emerald-700",
     accent: "bg-emerald-500",
     surface: "from-emerald-50 via-white to-teal-50",
-    ring: "hover:border-emerald-200 hover:shadow-[0_20px_45px_rgba(16,185,129,0.10)]",
+    ring: "hover:border-emerald-200",
     link: "text-emerald-700",
   },
   Conference: {
     badge: "border-sky-200 bg-sky-50 text-sky-700",
     accent: "bg-sky-500",
     surface: "from-sky-50 via-white to-cyan-50",
-    ring: "hover:border-sky-200 hover:shadow-[0_20px_45px_rgba(14,165,233,0.10)]",
+    ring: "hover:border-sky-200",
     link: "text-sky-700",
   },
   Seminar: {
     badge: "border-amber-200 bg-amber-50 text-amber-700",
     accent: "bg-amber-500",
     surface: "from-amber-50 via-white to-orange-50",
-    ring: "hover:border-amber-200 hover:shadow-[0_20px_45px_rgba(245,158,11,0.10)]",
+    ring: "hover:border-amber-200",
     link: "text-amber-700",
   },
 };
@@ -30,7 +30,7 @@ export function getCategoryTheme(category) {
       badge: "border-slate-200 bg-slate-100 text-slate-700",
       accent: "bg-slate-500",
       surface: "from-slate-50 via-white to-slate-100",
-      ring: "hover:border-slate-200 hover:shadow-[0_20px_45px_rgba(15,23,42,0.08)]",
+      ring: "hover:border-slate-200",
       link: "text-slate-700",
     }
   );
@@ -47,7 +47,7 @@ export function SectionHeading({ eyebrow, title, description, compact = false })
       <div className="max-w-2xl">
         <span
           className={[
-            "inline-flex items-center gap-2 rounded-full border border-sky-100 bg-white font-semibold uppercase text-sky-700 shadow-sm",
+            "inline-flex items-center gap-2 rounded-full border border-sky-100 bg-white font-semibold uppercase text-sky-700",
             compact ? "px-3.5 py-1.5 text-[10px] tracking-[0.18em]" : "px-4 py-2 text-[11px] tracking-[0.22em]",
           ].join(" ")}
         >
@@ -246,10 +246,8 @@ export function ArticleCard({ article, featured = false, compact = false }) {
 }
 
 export function FeaturedArticle({ article }) {
-  const theme = getCategoryTheme(article.category);
-
   return (
-    <article className="overflow-hidden rounded-[32px] border border-slate-200 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
+    <article className="overflow-hidden rounded-[32px] border border-slate-200 bg-white">
       <div className="grid gap-0 lg:grid-cols-[minmax(0,1.08fr)_minmax(300px,0.92fr)]">
         <ArticleCover article={article} tall className="rounded-none border-0 border-b border-slate-200 lg:border-b-0 lg:border-r" />
 

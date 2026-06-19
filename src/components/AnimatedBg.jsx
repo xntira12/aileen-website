@@ -33,7 +33,8 @@ export default function AnimatedBg() {
 
     function resize() {
       const vw = window.innerWidth;
-      const vh = window.innerHeight;
+      const container = canvas.parentElement;
+      const vh = container ? container.offsetHeight : window.innerHeight;
 
       isMobile = vw <= 768;
 

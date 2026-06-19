@@ -246,6 +246,13 @@ export default function SectionServiceAndSolutions() {
 
   return (
     <section className="relative isolate overflow-hidden strength-dark" style={{ contain:"paint" }} onMouseMove={onMouseMove}>
+      {/* top curve */}
+      <div className="pointer-events-none absolute left-0 right-0 top-0 z-[60]">
+        <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="block w-full" style={{ height: "80px" }}>
+          <path d="M0,80 Q720,0 1440,80 L1440,0 L0,0 Z" fill="white" />
+        </svg>
+      </div>
+
       <img src={stBg} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover opacity-60" />
       <div ref={bgRef} className="strength-dark__bg pointer-events-none absolute inset-0 -z-20" />
 
@@ -500,6 +507,13 @@ export default function SectionServiceAndSolutions() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* bottom curve */}
+      <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-[60]">
+        <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="block w-full" style={{ height: "80px" }}>
+          <path d="M0,0 Q720,80 1440,0 L1440,80 L0,80 Z" fill="white" />
+        </svg>
       </div>
     </section>
   );

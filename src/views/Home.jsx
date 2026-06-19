@@ -198,7 +198,7 @@ export default function Home() {
       </div>
 
       {/* HERO */}
-      <section className="relative w-full min-h-screen overflow-hidden bg-black">
+      <section className="relative w-full min-h-[120vh] overflow-hidden bg-black">
 
         {/* ── Local video background ── */}
         <div className="absolute inset-0 z-0 overflow-hidden">
@@ -207,13 +207,13 @@ export default function Home() {
 
         <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/30 via-black/20 to-black/25" />
 
-        <div className="relative z-10 flex min-h-screen flex-col items-center px-6 "
+        <div className="relative z-10 flex min-h-[120vh] flex-col items-center px-6 "
           style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.8s ease 0.1s" }}>
           <div className="absolute inset-0 z-[1] bg-black/5" />
 
-          <div className="relative z-10 flex min-h-screen flex-col items-center px-6  pb-10"
+          <div className="relative z-10 flex min-h-[120vh] flex-col items-center px-6  pb-10"
             style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.8s ease 0.1s" }}>
-            <div className="flex flex-1 flex-col items-center w-full lg:justify-center lg:gap-8">
+            <div className="flex flex-1 flex-col items-center w-full lg:justify-center lg:gap-8 lg:pb-[22vh]">
 
               {/* Logo + brand – desktop only */}
               <div className="hidden lg:flex items-center justify-center gap-3">
@@ -325,6 +325,13 @@ export default function Home() {
             </div>
           </div>
         </div>
+
+        {/* curved bottom edge — z-10 so the card (z-30 wrapper) renders on top */}
+        <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none">
+          <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="block w-full" style={{ height: "100px" }}>
+            <path d="M0,0 Q720,100 1440,0 L1440,100 L0,100 Z" fill="white" />
+          </svg>
+        </div>
       </section>
 
       <style>{`
@@ -335,7 +342,9 @@ export default function Home() {
         @keyframes slideOutDown { from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(28px)} }
       `}</style>
 
-      <NewsHighlightCarousel />
+      <div className="relative z-30 -mt-44">
+        <NewsHighlightCarousel />
+      </div>
       <main className="mx-auto max-w-6xl px-6"></main>
       {/* <section id="customers" className="py-0 bg-white"><CustomersMarquee /></section> */}
       <section className="py-0 "><SectionDataOrbit /></section>
