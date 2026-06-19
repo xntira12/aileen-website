@@ -10,8 +10,83 @@ import sistamGalleryBackdrop from "../assets/img/News/sistam/20250925_163913.jpg
 import tncheHero from "../assets/img/News/TNChE/720563591_122224379744509617_8918146535867206756_n (1).jpg";
 import tncheGalleryBooth from "../assets/img/News/TNChE/719161022_122224379762509617_4484651737298028412_n.jpg";
 import tncheGalleryDemo from "../assets/img/News/TNChE/720065152_122224379750509617_4797097085255949318_n.jpg";
+import epvPromoteHero from "../assets/img/News/enterprise-process-visibility/epv-promote.png";
 
 export const NEWS_ARTICLES = [
+  {
+    slug: "enterprise-process-visibility-sustainable-operations-2026",
+    title: "Enterprise Process Visibility: เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน",
+    category: "Seminar",
+    date: "9 กรกฎาคม 2026",
+    publishedAt: "2026-06-17",
+    location: "Hotel Nikko Amata City, Chonburi • ห้อง Trusu 2",
+    summary:
+      "Aileen Solutions ร่วมกับ Nintex Thailand ขอเชิญผู้บริหารเข้าร่วมงานสัมมนา Exclusive เพื่อเจาะลึกแนวทางมองเห็นกระบวนการทั้งองค์กร ปรับปรุงด้วย ECRS และ Kaizen และต่อยอดสู่ Automation, AI และ Net Zero อย่างเป็นรูปธรรม",
+    excerpt:
+      "ในยุคที่ AI และ Automation กำลังเปลี่ยนรูปแบบการดำเนินธุรกิจอย่างรวดเร็ว ความสำเร็จของ Digital Transformation ไม่ได้เริ่มต้นจากเทคโนโลยีเพียงอย่างเดียว แต่เริ่มต้นจากการมองเห็นและเข้าใจกระบวนการทำงานขององค์กรอย่างชัดเจน",
+    tags: [
+      "Enterprise Process Visibility",
+      "Nintex Thailand",
+      "Digital Transformation",
+      "AI",
+      "Automation",
+      "Kaizen",
+      "Net Zero",
+    ],
+    highlights: [
+      "เจาะลึก 3 ขั้นตอนสู่ความยั่งยืน SEE > IMPROVE > SUSTAIN ด้วยเครื่องมือระดับโลก",
+      "เรียนรู้แนวคิดการปรับรื้อกระบวนการด้วย ECRS และพัฒนาหน้างานด้วย Kaizen",
+      "รับฟังกรณีศึกษาจริงจาก Global Green Chemicals Public Company Limited",
+    ],
+    sections: [
+      {
+        heading: "ทำไม Process Visibility จึงสำคัญกว่าที่เคย",
+        paragraphs: [
+          "ในยุคที่ AI และ Automation กำลังเข้ามาเปลี่ยนรูปแบบการดำเนินธุรกิจอย่างรวดเร็ว องค์กรจำนวนมากเร่งลงทุนในเทคโนโลยีเพื่อเพิ่มประสิทธิภาพ ลดต้นทุน และรักษาความสามารถในการแข่งขัน",
+          "อย่างไรก็ตาม ความสำเร็จของ Digital Transformation ไม่ได้เริ่มต้นจากเทคโนโลยีเพียงอย่างเดียว แต่เริ่มต้นจากการมองเห็นและเข้าใจกระบวนการทำงานขององค์กรอย่างชัดเจน หากกระบวนการยังมีความซ้ำซ้อนหรือขาดมาตรฐาน การลงทุนด้าน Automation และ AI อาจไม่สามารถสร้างผลลัพธ์ได้อย่างเต็มศักยภาพ",
+        ],
+      },
+      {
+        heading: "สิ่งที่จะได้จากงานสัมมนา",
+        paragraphs: [
+          "Aileen Solutions ร่วมกับ Nintex Thailand ขอเรียนเชิญท่านเข้าร่วมงานสัมมนาสุด Exclusive ภายใต้หัวข้อ Enterprise Process Visibility เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน เพื่อร่วมเจาะลึกแนวคิดการปรับรื้อกระบวนการด้วย ECRS พัฒนาหน้างานด้วย Kaizen และรักษามาตรฐานเพื่อมุ่งสู่เป้าหมาย Net Zero อย่างเป็นรูปธรรม",
+          "ภายในงาน ท่านจะได้เรียนรู้หัวข้อ Process Clarity to Sustainable Operations ซึ่งจะพาไปเจาะลึก 3 ขั้นตอนสู่ความยั่งยืน SEE > IMPROVE > SUSTAIN ด้วยเครื่องมือระดับโลก พร้อมรับฟังประสบการณ์จริงจากคุณพร้อมพร อิศรางกูร ณ อยุธยา Vice President - Operations จาก Global Green Chemicals Public Company Limited ถึงแนวทางการขับเคลื่อนกระบวนการในอุตสาหกรรมชั้นนำ",
+          "สำหรับสื่อประชาสัมพันธ์ของงาน มีวิดีโอแนะนำกิจกรรมให้รับชมเพิ่มเติม และสามารถเพิ่มลิงก์วิดีโอจริงในภายหลังได้ทันทีเมื่อพร้อมเผยแพร่",
+        ],
+      },
+      {
+        heading: "กำหนดการสัมมนา",
+        paragraphs: [
+          "วันที่ 9 July 2026 (Thursday) ณ Hotel Nikko Amata City, Chonburi ห้อง Trusu 2",
+          "10.30-11.00 น. Registration และเวลา 12.00 น. มีบริการอาหารกลางวัน",
+          "11.00-11.50 น. Digitizing the DNA of Sustainability: Process First, Automation Next, Sustainability Always โดย K. Pramote Trinaksit, Aileen Solutions",
+          "11.50-13.20 น. Ultimate Power + Ultimate Control: Redefining Operations in the Age of AI โดย K. Ake Ngarmcroh และ K. Puttapong Chiewvech, Nintex Thailand",
+          "13.20-13.40 น. Success Story: From Experience to Excellence โดย K. Phromphron Isarankura Na Ayutthaya, Global Green Chemicals",
+          "13.40-14.00 น. Games & Lucky Draw",
+        ],
+      },
+      {
+        heading: "รูปแบบการเข้าร่วมและการสำรองที่นั่ง",
+        paragraphs: [
+          "งานนี้เป็นรูปแบบ Exclusive Seat สำหรับกลุ่มผู้บริหาร และจำกัดจำนวนผู้เข้าร่วมบริษัทละ 2 ท่าน เพื่อให้เกิดการแลกเปลี่ยนวิสัยทัศน์ได้อย่างทั่วถึง",
+          "ท่านสามารถสำรองที่นั่งล่วงหน้าได้ฟรีโดยไม่มีค่าใช้จ่าย และสามารถเพิ่มลิงก์ปุ่ม สำรองที่นั่งของท่าน ในภายหลังได้เมื่อมี URL สำหรับใช้งานจริง",
+          "Aileen Solutions หวังเป็นอย่างยิ่งว่าจะได้รับเกียรติจากท่านเข้าร่วมงานในครั้งนี้ เพื่อร่วมยกระดับกระบวนการองค์กรสู่การเติบโตอย่างยั่งยืน",
+        ],
+      },
+    ],
+    media: {
+      heroImage: epvPromoteHero.src,
+      heroAlt: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
+      gallery: [
+        {
+          title: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
+          ratio: "wide",
+          image: epvPromoteHero.src,
+          alt: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
+        },
+      ],
+    },
+  },
   {
     slug: "aileen-solutions-at-tnche-asia-2026",
     title: "พบกับ Aileen Solutions ได้ในงาน TNChE Asia 2026",

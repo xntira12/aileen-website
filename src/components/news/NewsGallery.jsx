@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { GalleryTile } from "./NewsComponents";
 
-export default function NewsGallery({ items, category }) {
+export default function NewsGallery({ items, category, layout = "grid" }) {
   const [activeItem, setActiveItem] = useState(null);
 
   useEffect(() => {
@@ -21,19 +21,38 @@ export default function NewsGallery({ items, category }) {
 
   return (
     <>
-      <div className="grid gap-5 md:grid-cols-3">
-        {items.map((item) => (
-          <GalleryTile
-            key={item.title}
-            title={item.title}
-            ratio={item.ratio}
-            category={category}
-            image={item.image}
-            alt={item.alt}
-            onOpen={item.image ? () => setActiveItem(item) : undefined}
-          />
-        ))}
-      </div>
+      {layout === "full" ? (
+        <div className="space-y-6">
+          {items.map((item) => (
+            <button
+              key={item.title}
+              type="button"
+              onClick={item.image ? () => setActiveItem(item) : undefined}
+              className="group block w-full overflow-hidden rounded-[28px] border border-slate-200 bg-slate-100 text-left shadow-[0_12px_32px_rgba(15,23,42,0.08)]"
+            >
+              <img
+                src={item.image}
+                alt={item.alt || item.title}
+                className="h-auto w-full transition duration-300 group-hover:scale-[1.01]"
+              />
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="grid gap-5 md:grid-cols-3">
+          {items.map((item) => (
+            <GalleryTile
+              key={item.title}
+              title={item.title}
+              ratio={item.ratio}
+              category={category}
+              image={item.image}
+              alt={item.alt}
+              onOpen={item.image ? () => setActiveItem(item) : undefined}
+            />
+          ))}
+        </div>
+      )}
 
       {activeItem ? (
         <div

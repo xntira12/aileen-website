@@ -73,6 +73,16 @@ export default function NewsArticle({ slug }) {
                     </div>
                   </div>
                 ))}
+
+                {article.media.gallery?.length > 0 ? (
+                  <div className="mt-9">
+                    <NewsGallery
+                      items={article.media.gallery}
+                      category={article.category}
+                      layout="full"
+                    />
+                  </div>
+                ) : null}
               </div>
             </article>
 
@@ -111,18 +121,6 @@ export default function NewsArticle({ slug }) {
             </aside>
           </div>
         </section>
-
-        {article.media.gallery?.length > 0 ? (
-          <section className="mx-auto max-w-7xl px-6 py-2 md:px-8 md:py-4">
-            <SectionHeading
-              eyebrow="Gallery"
-              title="ภาพกิจกรรม"
-              description="พื้นที่สำหรับภาพบรรยากาศและภาพประกอบของงาน สามารถอัปเดตรูปจริงได้ภายหลัง"
-            />
-
-            <NewsGallery items={article.media.gallery} category={article.category} />
-          </section>
-        ) : null}
 
         <section className="mx-auto max-w-7xl px-6 pb-16 pt-14 md:px-8 md:pb-20">
           <div className="rounded-[32px] border border-slate-200 bg-[linear-gradient(180deg,#f8fafc_0%,#ffffff_100%)] px-5 py-6 shadow-[0_16px_40px_rgba(15,23,42,0.04)] md:px-7 md:py-7">
