@@ -101,7 +101,7 @@ export const NEWS_ARTICLES = [
     media: {
       heroImage: epvPromoteHero.src,
       heroAlt: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
-      videoUrl: "https://www.youtube.com/embed/3qZQi-VTS44",
+      videoUrl: "https://www.youtube.com/embed/qXYR-0eztjE?cc_load_policy=1&cc_lang_pref=en",
       gallery: [
         {
           title: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
