@@ -11,8 +11,130 @@ import tncheHero from "../assets/img/News/TNChE/720563591_122224379744509617_891
 import tncheGalleryBooth from "../assets/img/News/TNChE/719161022_122224379762509617_4484651737298028412_n.jpg";
 import tncheGalleryDemo from "../assets/img/News/TNChE/720065152_122224379750509617_4797097085255949318_n.jpg";
 import epvPromoteHero from "../assets/img/News/enterprise-process-visibility/epv-promote.png";
+import epvLineAlbum from "../assets/img/News/enterprise-process-visibility/LINE_ALBUM_Event aileen nintex 2026_260710_13.jpg";
+import epvPhoto035640 from "../assets/img/News/enterprise-process-visibility/20260709_035640280_iOS.jpg";
+import epvPhoto142344 from "../assets/img/News/enterprise-process-visibility/20260709_142344.jpg";
+import epvPhoto055901 from "../assets/img/News/enterprise-process-visibility/20260709_055901723_iOS.jpg";
+import epvPhoto120808 from "../assets/img/News/enterprise-process-visibility/20260709_120808.jpg";
+import epvPhoto050828 from "../assets/img/News/enterprise-process-visibility/20260709_050828107_iOS.jpg";
 
 export const NEWS_ARTICLES = [
+  {
+    slug: "aileen-nintex-enterprise-process-visibility-seminar-2026",
+    title:
+      "Aileen Solutions และ Nintex Thailand จัดงานสัมมนา Enterprise Process Visibility: ยกระดับกระบวนการสู่การเติบโตอย่างยั่งยืน",
+    category: "Seminar",
+    date: "9 กรกฎาคม 2026",
+    publishedAt: "2026-07-15",
+    location: "Hotel Nikko Amata City, Chonburi • ห้อง Trusu 2",
+    summary:
+      "Aileen Solutions ร่วมกับ Nintex Thailand จัดงานสัมมนา Enterprise Process Visibility เพื่อแลกเปลี่ยนมุมมองการพัฒนากระบวนการทำงานในยุค AI และ Automation พร้อมแนวคิด SEE > IMPROVE > SUSTAIN สู่การดำเนินงานอย่างยั่งยืน",
+    excerpt:
+      "งานสัมมนาครั้งนี้จัดขึ้นเพื่อแลกเปลี่ยนมุมมองเกี่ยวกับการพัฒนากระบวนการทำงานขององค์กรในยุคที่ AI และ Automation กำลังเข้ามามีบทบาทสำคัญต่อการดำเนินธุรกิจ",
+    tags: [
+      "Enterprise Process Visibility",
+      "Nintex Thailand",
+      "Digital Transformation",
+      "Process Visibility",
+      "AI",
+      "Automation",
+      "Sustainability",
+    ],
+    highlights: [
+      "แลกเปลี่ยนแนวคิด Process Clarity to Sustainable Operations ผ่านกรอบ SEE > IMPROVE > SUSTAIN",
+      "รับฟังวิทยากรจาก Aileen Solutions, Nintex Thailand และ Global Green Chemicals",
+      "เปิดพื้นที่แลกเปลี่ยนประสบการณ์การบริหารกระบวนการระหว่างผู้บริหารหลายอุตสาหกรรม",
+    ],
+    sections: [
+      {
+        heading: "ภาพรวมของงาน",
+        paragraphs: [
+          "เมื่อวันที่ 9 กรกฎาคม 2026 Aileen Solutions ร่วมกับ Nintex Thailand จัดงานสัมมนา Enterprise Process Visibility: เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน ณ ห้อง Trusu 2 โรงแรม Hotel Nikko Amata City จังหวัดชลบุรี",
+          "งานสัมมนาครั้งนี้จัดขึ้นเพื่อแลกเปลี่ยนมุมมองเกี่ยวกับการพัฒนากระบวนการทำงานขององค์กรในยุคที่ AI และ Automation กำลังเข้ามามีบทบาทสำคัญต่อการดำเนินธุรกิจ โดยมีผู้บริหารและตัวแทนจากองค์กรในภาคอุตสาหกรรมเข้าร่วมรับฟังแนวคิด ประสบการณ์ และแนวทางการนำเทคโนโลยีไปใช้กับกระบวนการทำงานอย่างเป็นรูปธรรม",
+        ],
+      },
+      {
+        heading: "Digital Transformation ต้องเริ่มต้นจากความเข้าใจกระบวนการ",
+        paragraphs: [
+          "หนึ่งในประเด็นสำคัญของงานคือ ความสำเร็จของ Digital Transformation ไม่ได้เริ่มต้นจากการเลือกใช้เทคโนโลยีเพียงอย่างเดียว แต่เริ่มจากการที่องค์กรมองเห็นและเข้าใจกระบวนการทำงานของตนเองอย่างชัดเจน",
+          "หากกระบวนการยังมีขั้นตอนที่ซ้ำซ้อน ขาดมาตรฐาน หรือไม่มีผู้รับผิดชอบที่ชัดเจน การนำ AI และ Automation เข้ามาใช้อาจเป็นเพียงการทำให้กระบวนการเดิมทำงานได้เร็วขึ้น โดยยังไม่ได้แก้ไขปัญหาที่แท้จริงขององค์กร",
+          "Process Visibility จึงเป็นพื้นฐานสำคัญที่ช่วยให้องค์กรสามารถมองเห็นภาพรวมของการทำงาน วิเคราะห์จุดที่ควรปรับปรุง และตัดสินใจเลือกใช้เทคโนโลยีได้อย่างเหมาะสม",
+        ],
+      },
+      {
+        heading: "จาก Process Visibility สู่ Sustainable Operations",
+        paragraphs: [
+          "ภายในงานมีการนำเสนอแนวคิด Process Clarity to Sustainable Operations ผ่านกรอบการดำเนินงาน 3 ขั้นตอน ได้แก่",
+          "SEE — มองเห็นกระบวนการ\nทำความเข้าใจกระบวนการทำงานตั้งแต่ต้นจนจบ รวมถึงผู้เกี่ยวข้อง ขั้นตอนการทำงาน จุดเชื่อมต่อระหว่างหน่วยงาน และปัญหาที่เกิดขึ้นจริงภายในองค์กร",
+          "IMPROVE — ปรับปรุงกระบวนการ\nนำข้อมูลจากกระบวนการมาวิเคราะห์และปรับปรุงด้วยแนวคิด ECRS และ Kaizen เพื่อลดขั้นตอนที่ไม่จำเป็น ลดความซ้ำซ้อน และเพิ่มประสิทธิภาพในการทำงาน",
+          "SUSTAIN — รักษาและพัฒนามาตรฐาน\nติดตามผลการดำเนินงาน รักษามาตรฐานของกระบวนการ และสร้างวัฒนธรรมการปรับปรุงอย่างต่อเนื่อง เพื่อสนับสนุนเป้าหมายด้านประสิทธิภาพ ความยั่งยืน และ Net Zero ขององค์กร",
+          "แนวคิดดังกล่าวช่วยให้องค์กรสามารถเชื่อมโยงการบริหารกระบวนการเข้ากับการใช้ Automation และ AI ได้อย่างมีทิศทาง โดยเทคโนโลยีจะเข้ามาสนับสนุนกระบวนการที่ได้รับการออกแบบและปรับปรุงอย่างเหมาะสมแล้ว",
+        ],
+      },
+      {
+        heading: "สาระสำคัญจากวิทยากรภายในงาน",
+        paragraphs: [
+          "งานสัมมนาเริ่มต้นด้วยหัวข้อ Digitizing the DNA of Sustainability: Process First, Automation Next, Sustainability Always โดยคุณปราโมทย์ ตรีนาคสิทธิ์ จาก Aileen Solutions ซึ่งนำเสนอความสำคัญของการวางกระบวนการให้เป็นรากฐานก่อนเริ่มต้นโครงการ Automation และ Digital Transformation",
+          "ต่อด้วยหัวข้อ Ultimate Power + Ultimate Control: Redefining Operations in the Age of AI โดยคุณเอก งามเกราะ และคุณพุทธพงศ์ เชี่ยวเวช จาก Nintex Thailand ที่ร่วมแบ่งปันแนวทางการใช้แพลตฟอร์มบริหารกระบวนการ Workflow Automation และเทคโนโลยี AI เพื่อช่วยให้องค์กรสามารถควบคุมและพัฒนาการดำเนินงานได้อย่างมีประสิทธิภาพมากขึ้น",
+          "อีกหนึ่งช่วงสำคัญของงานคือ Success Story: From Experience to Excellence โดยคุณพร้อมพร อิศรางกูร ณ อยุธยา Vice President – Operations จาก Global Green Chemicals Public Company Limited ซึ่งได้ร่วมแบ่งปันประสบการณ์และมุมมองจากการขับเคลื่อนกระบวนการภายในองค์กรอุตสาหกรรมชั้นนำ",
+          "ประสบการณ์จากการดำเนินงานจริงช่วยให้ผู้เข้าร่วมมองเห็นว่า การพัฒนากระบวนการไม่ได้เป็นเพียงโครงการด้านเทคโนโลยี แต่ต้องอาศัยความร่วมมือของบุคลากร การบริหารการเปลี่ยนแปลง และการสนับสนุนอย่างต่อเนื่องจากผู้บริหาร",
+        ],
+      },
+      {
+        heading: "พื้นที่แลกเปลี่ยนมุมมองระหว่างองค์กร",
+        paragraphs: [
+          "นอกเหนือจากการบรรยาย งานสัมมนาครั้งนี้ยังเปิดโอกาสให้ผู้เข้าร่วมได้พูดคุย แลกเปลี่ยนประสบการณ์ และหารือถึงความท้าทายในการบริหารกระบวนการภายในองค์กร ไม่ว่าจะเป็นการทำงานข้ามหน่วยงาน การจัดทำมาตรฐาน การลดขั้นตอนที่ซ้ำซ้อน และการเตรียมความพร้อมก่อนนำ Automation หรือ AI เข้ามาใช้งาน",
+          "การแลกเปลี่ยนความคิดเห็นระหว่างผู้บริหารและผู้เชี่ยวชาญจากหลายอุตสาหกรรมช่วยสะท้อนให้เห็นว่า แม้แต่ละองค์กรจะมีบริบทที่แตกต่างกัน แต่หัวใจสำคัญของการเปลี่ยนแปลงยังคงเริ่มต้นจากการเข้าใจกระบวนการและผู้ที่เกี่ยวข้องกับกระบวนการนั้นอย่างแท้จริง",
+        ],
+      },
+      {
+        heading: "ขอบคุณทุกท่านที่ร่วมเป็นส่วนหนึ่งของงาน",
+        paragraphs: [
+          "Aileen Solutions และ Nintex Thailand ขอขอบพระคุณวิทยากร แขกผู้มีเกียรติ และผู้เข้าร่วมงานทุกท่านที่ให้เกียรติมาร่วมแลกเปลี่ยนความรู้และประสบการณ์ภายในงาน Enterprise Process Visibility",
+          "เราหวังว่าสาระและแนวคิดจากงานครั้งนี้จะช่วยให้องค์กรสามารถนำกลับไปประยุกต์ใช้ เพื่อมองเห็นกระบวนการได้ชัดเจนขึ้น ปรับปรุงการทำงานอย่างเป็นระบบ และวางรากฐานที่พร้อมสำหรับการนำ Automation และ AI เข้ามาสนับสนุนการดำเนินธุรกิจอย่างยั่งยืน",
+          "สำหรับองค์กรที่สนใจศึกษาหรือเริ่มต้นพัฒนาระบบบริหารกระบวนการภายในองค์กร สามารถติดต่อทีมงาน Aileen Solutions เพื่อพูดคุยเกี่ยวกับแนวทางการจัดทำ Process Visibility การบริหารกระบวนการ และการประยุกต์ใช้ Nintex ให้เหมาะสมกับบริบทขององค์กร",
+        ],
+      },
+    ],
+    media: {
+      heroImage: epvPhoto035640.src,
+      heroAlt: "บรรยากาศงานสัมมนา Enterprise Process Visibility ณ Hotel Nikko Amata City",
+      heroObjectPosition: "50% 24%",
+      heroImageScale: 1.3,
+      gallery: [
+        {
+          title: "ภาพรวมบรรยากาศงานสัมมนา Enterprise Process Visibility",
+          ratio: "wide",
+          image: epvLineAlbum.src,
+          alt: "ภาพรวมบรรยากาศงานสัมมนา Enterprise Process Visibility ร่วมกับ Nintex Thailand",
+        },
+        {
+          title: "การนำเสนอและแลกเปลี่ยนความรู้ภายในงาน",
+          ratio: "wide",
+          image: epvPhoto142344.src,
+          alt: "วิทยากรนำเสนอภายในงานสัมมนา Enterprise Process Visibility",
+        },
+        {
+          title: "ผู้เข้าร่วมงานแลกเปลี่ยนมุมมองการบริหารกระบวนการ",
+          ratio: "wide",
+          image: epvPhoto055901.src,
+          alt: "ผู้เข้าร่วมงานแลกเปลี่ยนประสบการณ์ในงาน Enterprise Process Visibility",
+        },
+        {
+          title: "บรรยากาศการบรรยายและการเรียนรู้ภายในงาน",
+          ratio: "wide",
+          image: epvPhoto120808.src,
+          alt: "บรรยากาศการบรรยายภายในงานสัมมนา Enterprise Process Visibility",
+        },
+        {
+          title: "พื้นที่แลกเปลี่ยนและเครือข่ายระหว่างผู้เข้าร่วมงาน",
+          ratio: "wide",
+          image: epvPhoto050828.src,
+          alt: "พื้นที่แลกเปลี่ยนมุมมองระหว่างผู้เข้าร่วมงาน Enterprise Process Visibility",
+        },
+      ],
+    },
+  },
   {
     slug: "enterprise-process-visibility-sustainable-operations-2026",
     title: "Enterprise Process Visibility: เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน",

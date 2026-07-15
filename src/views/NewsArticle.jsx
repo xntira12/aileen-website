@@ -6,6 +6,7 @@ import NewsGallery from "../components/news/NewsGallery";
 import { getNewsArticle, NEWS_ARTICLES } from "../content/news";
 import {
   ArticleCard,
+  ArticleCover,
   SectionHeading,
 } from "../components/news/NewsComponents";
 
@@ -42,20 +43,20 @@ export default function NewsArticle({ slug }) {
 
                 {article.title.includes(": ") ? (
                   <>
-                    <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight tracking-[-0.01em] text-slate-900 md:text-4xl lg:text-[2.7rem]">
+                    <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-[1.25] tracking-[-0.01em] text-slate-900 md:text-4xl md:leading-[1.22] lg:text-[2.7rem]">
                       {article.title.split(": ")[0]}
                     </h1>
-                    <p className="mt-2 text-xl font-semibold text-slate-600 md:text-2xl">
+                    <p className="mt-1.5 max-w-4xl text-xl font-semibold leading-[1.3] text-slate-600 md:mt-2 md:text-2xl">
                       {article.title.split(": ").slice(1).join(": ")}
                     </p>
                   </>
                 ) : (
-                  <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-tight tracking-[-0.01em] text-slate-900 md:text-4xl lg:text-[2.7rem]">
+                  <h1 className="mt-4 max-w-4xl text-3xl font-semibold leading-[1.3] tracking-[-0.01em] text-slate-900 md:text-4xl md:leading-[1.28] lg:text-[2.7rem]">
                     {article.title}
                   </h1>
                 )}
 
-                <p className="mt-4 max-w-3xl text-[15px] leading-7 text-slate-600 md:text-base">
+                <p className="mt-5 max-w-3xl text-[15px] leading-7 text-slate-600 md:mt-6 md:text-base">
                   {article.excerpt}
                 </p>
 
@@ -71,15 +72,27 @@ export default function NewsArticle({ slug }) {
                 </div>
               </div>
 
-              <div className="border-t border-slate-200 px-6 py-6 md:px-8 md:py-8">
-                {article.sections.map((section) => (
-                  <div key={section.heading} className="mb-9 last:mb-0">
-                    <h2 className="text-xl font-semibold tracking-[-0.02em] text-slate-900 md:text-2xl">
+              {article.media?.heroImage ? (
+                <div className="border-t border-slate-200 px-6 py-6 md:px-8 md:py-7">
+                  <ArticleCover article={article} className="rounded-[24px]" />
+                </div>
+              ) : null}
+
+              <div className="border-t border-slate-200 px-6 py-8 md:px-8 md:py-10">
+                {article.sections.map((section, index) => (
+                  <div
+                    key={section.heading}
+                    className={[
+                      "border-slate-100",
+                      index > 0 ? "mt-10 border-t pt-10 md:mt-12 md:pt-12" : "",
+                    ].join(" ")}
+                  >
+                    <h2 className="text-xl font-semibold leading-[1.35] tracking-[-0.02em] text-slate-900 md:text-2xl md:leading-[1.3]">
                       {section.heading}
                     </h2>
 
                     {section.agenda ? (
-                      <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200">
+                      <div className="mt-5 overflow-hidden rounded-2xl border border-slate-200 md:mt-6">
                         {section.venue && (
                           <div className="flex items-center gap-2.5 border-b border-slate-200 bg-slate-50 px-5 py-3">
                             <svg className="h-4 w-4 shrink-0 text-slate-400" viewBox="0 0 20 20" fill="none">
@@ -116,9 +129,11 @@ export default function NewsArticle({ slug }) {
                         </div>
                       </div>
                     ) : (
-                      <div className="mt-4 space-y-4 text-[15px] leading-7 text-slate-600 md:text-base">
+                      <div className="mt-5 space-y-5 text-[15px] leading-7 text-slate-600 md:mt-6 md:space-y-6 md:text-base">
                         {section.paragraphs.map((paragraph) => (
-                          <p key={paragraph}>{paragraph}</p>
+                          <p key={paragraph} className="whitespace-pre-line">
+                            {paragraph}
+                          </p>
                         ))}
                       </div>
                     )}
