@@ -280,6 +280,7 @@ export default function SectionContactDark() {
             <div className="ct5-solCol">
               <div className="ct5-colTitle">Solutions</div>
               <a href="/service" className="ct5-link">Quality Management Platform</a>
+              <a href="/service/gavalon" className="ct5-link">GAVALON</a>
               <a href="/service" className="ct5-link">Low-Code Business Orchestrator</a>
               <a href="/service" className="ct5-link">Process Management Platform</a>
               <a href="/service" className="ct5-link">Robotic Process Automation</a>

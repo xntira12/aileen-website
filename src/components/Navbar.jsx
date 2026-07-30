@@ -9,6 +9,7 @@ const RPA = "/img/home/productsSolutions/RPA.svg";
 const AI = "/img/home/productsSolutions/AI.svg";
 const LPM = "/img/home/productsSolutions/LPM.svg";
 const QMS = "/img/home/productsSolutions/QMS.svg";
+const GVL = "/img/home/productsSolutions/GVL.svg";
 
 const MENU_TH = [
   { label: "หน้าแรก", href: "/" },
@@ -53,6 +54,13 @@ const SERVICE_ITEMS = [
     title: "Quality Management Platform",
     icon: QMS,
     summary: "Strengthen compliance, document control, and quality operations.",
+  },
+  {
+    id: "gvl",
+    href: "/service/gavalon",
+    title: "GAVALON",
+    icon: GVL,
+    summary: "Enterprise legal and regulatory management for organizational compliance.",
   },
 ];
 

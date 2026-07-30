@@ -1,11 +1,13 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import { useRouter } from "next/navigation";
 const stBg = "/img/home/st-bg.jpg";
 const PMT = "/img/home/productsSolutions/PMT.svg";
 const RPA = "/img/home/productsSolutions/RPA.svg";
 const AI = "/img/home/productsSolutions/AI.svg";
 const LPM = "/img/home/productsSolutions/LPM.svg";
 const QMS = "/img/home/productsSolutions/QMS.svg";
+const GVL = "/img/home/productsSolutions/GVL.svg";
 const SPC = "/img/home/productsSolutions/SPC.svg";
 const ERP = "/img/home/productsSolutions/ERP.svg";
 const cubeImg       = "/img/home/cube.png";
@@ -55,6 +57,10 @@ const SVC = [
     summary:"แพลตฟอร์มที่ช่วยองค์กรบริหารจัดการคุณภาพ ควบคุม และยกระดับมาตรฐานการทำงานแบบครบวงจร",
     detail:"เพื่อให้มั่นใจว่าทุกกระบวนการสอดคล้องกับมาตรฐานสากล (เช่น ISO) และข้อกำหนดทางกฎหมายอย่างถูกต้อง โดยเปลี่ยนการทำงานที่กระจัดกระจายให้เป็นระบบอัตโนมัติที่สามารถตรวจสอบได้จริง",
     features:["Version Control & History Tracking: ระบบสามารถจัดการเวอร์ชันเอกสารให้อัตโนมัติและเก็บประวัติว่าใครแก้ แก้เมื่อไหร่ เพื่อป้องกันความสับสนจากการใช้เอกสารผิดเวอร์ชั่น ","ช่่วยให้ตรวจสอบได้ว่าเอกสารหรือข้อมูลต่าง ๆ ใครเป็นผู้แก้ไขและแก้ไขเมื่อใด เพื่อป้องกันความสับสนและตรวจสอบความถูกต้องของข้อมูลได้ตลอดเวลา","Executive Dashboard & Analytics: หน้าจอสรุปผลแบบกราฟิกเรียลไทม์ เพื่อให้ผู้บริหารเห็นภาพรวมของการดำเนินงานได้ทันทีโดยไม่ต้องรอรายงานสรุปแบบเดิม ","Email & In-App Notifications: ระบบแจ้งเตือนที่รวดเร็ว เพื่อลดปัญหาคอขวดในการรอคอยงาน","Enterprise Security & SSO (Single Sign-On): รองรับการล็อกอินด้วยบัญชีเดิมของบริษัท (เช่น Microsoft 365 หรือ Active Directory) และมีการกำหนดสิทธิ์การเข้าถึงข้อมูล (Role-Based Access Control) อย่างรัดกุม "] },
+  { id:"gvl", n:"", t:"GAVALON", st:"Enterprise Legal & Regulatory Management Platform", ic:GVL, tags:["Legal","Compliance"], group:"ops", href:"/service/gavalon",
+    summary:"เปลี่ยนเรื่องกฎหมายที่ซับซ้อน ให้เป็นข้อมูลที่ค้นหา เข้าใจ และนำไปปฏิบัติได้อย่างเป็นระบบ",
+    detail:"GAVALON แพลตฟอร์มบริหารจัดการกฎหมายและข้อกำหนดสำหรับองค์กร ช่วยรวบรวมข้อมูลกฎหมาย ติดตามข้อกำหนดที่เกี่ยวข้อง และสนับสนุนการปฏิบัติตามกฎหมายผ่านระบบดิจิทัล เพื่อให้องค์กรเข้าถึงข้อมูลที่ถูกต้อง ลดความซ้ำซ้อนในการทำงาน และบริหารความเสี่ยงด้านการปฏิบัติตามกฎหมายได้อย่างมีประสิทธิภาพ พัฒนาร่วมกับ NPC S&E",
+    features:["ศูนย์กลางข้อมูลกฎหมายและข้อกำหนดขององค์กร","การค้นหาและจัดหมวดหมู่ข้อมูลกฎหมาย","การประเมินความเกี่ยวข้องของกฎหมายต่อองค์กร","การกำหนดหน่วยงานและผู้รับผิดชอบ","การติดตามสถานะการปฏิบัติตามข้อกำหนด","การแจ้งเตือนข้อมูลหรือรายการที่ต้องดำเนินการ","Dashboard และรายงานภาพรวม","การกำหนดสิทธิ์การเข้าถึงตามบทบาท"] },
   { id:"scr", n:"", t:"Supply Chain Resilience", ic:SPC, tags:["Supply Chain","Digital"], group:"ops",
     summary:"แนวทางในการออกแบบและบริหาร ห่วงโซ่อุปทานให้สามารถรับมือกับความไม่แน่นอนและความเสี่ยงได้อย่างมีประสิทธิภาพ",
     detail:"ช่วยให้องค์กรสามารถติดตามสถานะของวัตถุดิบ สินค้า และกระบวนการจัดซื้อจัดจ้างได้แบบ Real-Time",
@@ -107,6 +113,9 @@ function GCard({ item, idx, onClick, on, interactive = true }) {
       <span className="svs-n">{item.n}</span>
       <div className="svs-ic"><Ico src={item.ic} size={30} /><div className="svs-ir" /></div>
       <h3 style={{ marginTop:14, fontSize:"1.08rem", fontWeight:800, color:"#ffffff", lineHeight:1.35, paddingRight:28 }}>{item.t}</h3>
+      {item.st ? (
+        <p style={{ marginTop:6, fontSize:".78rem", lineHeight:1.5, color:"rgba(255,255,255,.55)", fontWeight:500 }}>{item.st}</p>
+      ) : null}
       <div style={{ display:"flex", gap:5, marginTop:10, flexWrap:"wrap" }}>
         {item.tags.map(t => <span key={t} className="svs-tg">{t}</span>)}
       </div>
@@ -190,11 +199,19 @@ function MobileKeysList({ items, inV = false }) {
    MAIN EXPORT
 ══════════════════════════════════════════ */
 export default function SectionServiceAndSolutions() {
+  const router = useRouter();
 
   /* ── service state ── */
   const [view, setView]   = useState("grid");
   const [vk,   setVk]     = useState(0);
   const go = useCallback(v => { setView(v); setVk(k => k+1); }, []);
+  const openService = useCallback((item) => {
+    if (item.href) {
+      router.push(item.href);
+      return;
+    }
+    if (!DETAIL_HIDDEN_SERVICE_IDS.has(item.id)) go(item.id);
+  }, [go, router]);
   const ai = DETAIL_SVC.find(s => s.id === view);
 
   /* ── strengths state ── */
@@ -280,15 +297,13 @@ export default function SectionServiceAndSolutions() {
               <div className="svs-divider-line" /><div className="svs-divider-dot" /><div className="svs-divider-line" />
             </div>
             <GrpHead label="ENTERPRISE OPERATIONS & PLATFORMS" on={svcOn} delay={350} />
-            <div className="svs-grid3">
+            <div className="svs-grid4">
               {OPS_GROUP.map((it, i) => (
                 <GCard
                   key={it.id}
                   item={it}
                   idx={i+4}
-                  onClick={() => {
-                    if (!DETAIL_HIDDEN_SERVICE_IDS.has(it.id)) go(it.id);
-                  }}
+                  onClick={() => openService(it)}
                   on={svcOn}
                   interactive={!DETAIL_HIDDEN_SERVICE_IDS.has(it.id)}
                 />
@@ -339,6 +354,15 @@ export default function SectionServiceAndSolutions() {
                       </div>
                     ))}
                   </div>
+                  {ai.href ? (
+                    <a
+                      href={ai.href}
+                      className="btn-fancy group relative mt-6 inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-6 py-2.5 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5"
+                    >
+                      <span className="relative z-10">ดูหน้า Product</span>
+                      <span style={{ color:"#38e0d0" }}>›</span>
+                    </a>
+                  ) : null}
                 </div>
               </div>
             </div>
