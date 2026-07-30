@@ -372,7 +372,7 @@ export default function SectionServiceAndSolutions() {
         {/* Stats */}
         {view === "grid" && (
           <div ref={statRef} className="svs-stats-row" style={{ display:"flex", justifyContent:"center", alignItems:"center", gap:0, marginTop:68, flexWrap:"wrap" }}>
-            {[{ v:String(SVC.length), l:"Solutions" }, { v:"10+", l:"Enterprise Clients" }, { v:"50+", l:"Enterprise Projects" }].map((st, i) => (
+            {[{ v:"10+", l:"Solutions" }, { v:"10+", l:"Enterprise Clients" }, { v:"50+", l:"Enterprise Projects" }].map((st, i) => (
               <React.Fragment key={st.l}>
                 {i > 0 && <div className="svs-stat-sep" />}
                 <div className={`svs-st ${statOn ? "on" : ""}`} style={{ textAlign:"center", padding:"0 48px", animationDelay:`${0.8+i*0.12}s` }}>
