@@ -2,6 +2,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import SectionContactFooter from "../components/SectionContactFooter";
+import SectionTeam from "../components/SectionTeam";
 const aboutImg = "/img/about/aileen-about.jpg";
 
 function useInView(t = 0.06) {
@@ -269,6 +270,8 @@ export default function AboutUs() {
             </div>
           </div>
         </div>
+
+        <section className="py-0 bg-slate-50"><SectionTeam /></section>
 
       </main>
       <SectionContactFooter/>

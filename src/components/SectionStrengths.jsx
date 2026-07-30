@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
 const cubeImg = "/img/home/cube.png";
-const stBg = "/img/home/st-bg.png";
+const stBg = "/img/home/st-bg.jpg";
 const consultIco    = "/img/home/icon/consult.svg";
 const experienceIco = "/img/home/icon/experience.svg";
 const heartIco      = "/img/home/icon/heart.svg";

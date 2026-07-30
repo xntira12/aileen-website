@@ -66,34 +66,6 @@ export default function SectionDataOrbit() {
 
   const ORBIT_DUR_S = (STEP_MS * 6) / 1000;
 
-  /* cursor-gradient parallax */
-  const layerRef = useRef(null);
-  const target   = useRef({ x: 50, y: 50 });
-  const current  = useRef({ x: 50, y: 50 });
-
-  const handleMove = (e) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    const strength = 0.32;
-    target.current.x = 50 + (((e.clientX - r.left) / r.width)  * 100 - 50) * strength;
-    target.current.y = 50 + (((e.clientY - r.top)  / r.height) * 100 - 50) * strength;
-  };
-
-  useEffect(() => {
-    const el = layerRef.current;
-    if (!el) return;
-    let raf = 0;
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const tick = () => {
-      current.current.x = lerp(current.current.x, target.current.x, 0.08);
-      current.current.y = lerp(current.current.y, target.current.y, 0.08);
-      el.style.setProperty("--mx", `${current.current.x}%`);
-      el.style.setProperty("--my", `${current.current.y}%`);
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
   /* marquee */
   const logos = useMemo(() => CUSTOMER_LOGOS, []);
 
@@ -111,19 +83,25 @@ export default function SectionDataOrbit() {
   };
 
   useEffect(() => {
-    const tick = () => {
+    if (!inView) return;
+    const FRAME_MS = 1000 / 30;
+    let lastFrameTs = 0;
+    const tick = (ts) => {
+      rafMarquee.current = requestAnimationFrame(tick);
+      if (ts - lastFrameTs < FRAME_MS) return;
+      lastFrameTs = ts;
+
       const track = trackRef.current;
       if (!track) return;
       const halfWidth = track.scrollWidth / 2;
-      if (!halfWidth) { rafMarquee.current = requestAnimationFrame(tick); return; }
+      if (!halfWidth) return;
       if (!paused && !draggingRef.current) posRef.current -= 0.7;
       posRef.current = normalizePos(posRef.current, halfWidth);
       track.style.transform = `translateX(${posRef.current}px)`;
-      rafMarquee.current = requestAnimationFrame(tick);
     };
     rafMarquee.current = requestAnimationFrame(tick);
     return () => rafMarquee.current && cancelAnimationFrame(rafMarquee.current);
-  }, [paused]);
+  }, [paused, inView]);
 
   const onPointerDown = (e) => { draggingRef.current = true; setIsDragging(true); lastXRef.current = e.clientX; e.currentTarget.setPointerCapture?.(e.pointerId); };
   const onPointerMove = (e) => {
@@ -153,13 +131,33 @@ export default function SectionDataOrbit() {
     <section
       ref={secRef}
       className="relative overflow-hidden bg-white cursor-gradient isolate"
-      onMouseMove={handleMove}
     >
-      <div ref={layerRef} className="cursor-gradient__layer pointer-events-none absolute inset-0 -z-20" />
+      <div className="cursor-gradient__layer pointer-events-none absolute inset-0 -z-20" />
 
     {/* ── CUSTOMERS MARQUEE ── */}
-      <div className="pb-[60px] pt-20">
-        <div className="mx-auto max-w-7xl px-6">
+      <div className="pb-[60px] pt-6">
+        {/* marquee — full width, directly after hero blur */}
+        <div className={`cm-wrap-rv ${inView ? "on" : ""} w-full`}>
+          <div
+            className="relative w-full select-none overflow-hidden"
+            onMouseEnter={() => setPaused(true)}
+            onMouseLeave={() => setPaused(false)}
+            onPointerDown={onPointerDown}
+            onPointerMove={onPointerMove}
+            onPointerUp={onPointerUp}
+            onPointerCancel={onPointerUp}
+            style={{ cursor: isDragging ? "grabbing" : "grab" }}
+          >
+            <div ref={trackRef} className="flex items-center gap-12 will-change-transform px-6 sm:gap-16 md:px-10">
+              {logos.map((l, idx) => <LogoItem key={`a-${idx}`} {...l} />)}
+              {logos.map((l, idx) => <LogoItem key={`b-${idx}`} {...l} />)}
+            </div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent sm:w-24 md:w-32" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent sm:w-24 md:w-32" />
+          </div>
+        </div>
+
+        <div className="mx-auto max-w-7xl px-6 mt-10">
           {/* pill */}
           <div className="flex justify-center pb-4">
             <span className={`cm-rv ${inView ? "on" : ""} inline-flex items-center gap-2 rounded-full text-slate-600 border border-slate-400 bg-white/5 px-4 py-2 text-xs tracking-widest backdrop-blur`} style={{ animationDelay: "200ms" }}>
@@ -176,27 +174,6 @@ export default function SectionDataOrbit() {
           <p className={`cm-rv ${inView ? "on" : ""} mt-3 text-center text-sm font-light text-slate-500`} style={{ animationDelay: "360ms" }}>
             บริษัทชั้นนำในอุตสาหกรรมพลังงานและปิโตรเคมีที่ไว้วางใจ Aileen Solutions
           </p>
-        </div>
-
-        {/* marquee track */}
-        <div className={`cm-wrap-rv ${inView ? "on" : ""} mt-10 mx-auto max-w-6xl px-6`}>
-          <div
-            className="relative select-none overflow-hidden rounded-2xl backdrop-blur-sm"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={onPointerUp}
-            style={{ cursor: isDragging ? "grabbing" : "grab" }}
-          >
-            <div ref={trackRef} className="flex items-center gap-16 will-change-transform px-10 md:px-14">
-              {logos.map((l, idx) => <LogoItem key={`a-${idx}`} {...l} />)}
-              {logos.map((l, idx) => <LogoItem key={`b-${idx}`} {...l} />)}
-            </div>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-20 md:w-28 bg-gradient-to-r from-white/60 to-transparent" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-20 md:w-28 bg-gradient-to-l from-white/60 to-transparent" />
-          </div>
         </div>
       </div>
       {/* ── ORBIT SECTION ── */}

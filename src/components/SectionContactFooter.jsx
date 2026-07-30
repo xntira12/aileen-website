@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-const stBg = "/img/home/st-bg.png";
+const stBg = "/img/home/st-bg.jpg";
 const logo = "/img/logo/aileen-logo.png";
 
 const GMAP_URL =
@@ -10,10 +10,7 @@ const GMAP_EMBED =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5233680716533!2d100.5046713!3d13.6730122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2a213551fedc5%3A0x5be1f077764e696f!2z4Liq4LiE4Liy4Lij4Li14Lii4Liy4Lih4LiB4Lix4LiZIOC5gOC4o-C4suC4o-C5jA!5e0!3m2!1sth!2sth!4v1730000000000";
 
 export default function SectionContactDark() {
-  const bgRef = useRef(null);
   const secRef = useRef(null);
-  const target = useRef({ x: 50, y: 50 });
-  const current = useRef({ x: 50, y: 50 });
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
@@ -29,29 +26,6 @@ export default function SectionContactDark() {
     return () => obs.disconnect();
   }, []);
 
-  const handleMouseMove = (e) => {
-    const r = e.currentTarget.getBoundingClientRect();
-    const s = 0.35;
-    target.current.x = 50 + (((e.clientX - r.left) / r.width) * 100 - 50) * s;
-    target.current.y = 50 + (((e.clientY - r.top) / r.height) * 100 - 50) * s;
-  };
-
-  useEffect(() => {
-    const el = bgRef.current;
-    if (!el) return;
-    let raf;
-    const lerp = (a, b, t) => a + (b - a) * t;
-    const tick = () => {
-      current.current.x = lerp(current.current.x, target.current.x, 0.08);
-      current.current.y = lerp(current.current.y, target.current.y, 0.08);
-      el.style.setProperty("--mx", current.current.x + "%");
-      el.style.setProperty("--my", current.current.y + "%");
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
   const rv = (delay) => ({
     className: `ct5-rv ${inView ? "on" : ""}`,
     style: { animationDelay: `${delay}ms` },
@@ -62,7 +36,6 @@ export default function SectionContactDark() {
       ref={secRef}
       className="relative isolate overflow-hidden strength-dark"
       style={{ padding: "100px 24px 0" }}
-      onMouseMove={handleMouseMove}
     >
       <img
         src={stBg}
@@ -71,7 +44,6 @@ export default function SectionContactDark() {
         className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover opacity-60"
       />
       <div
-        ref={bgRef}
         className="strength-dark__bg pointer-events-none absolute inset-0 -z-20"
       />
 

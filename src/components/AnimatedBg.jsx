@@ -1,45 +1,57 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useAnimationActive } from "../hooks/useAnimationActive";
 
 /* ─────────────────────────────────────────────
    AnimatedBg — canvas hero background
 ───────────────────────────────────────────── */
 export default function AnimatedBg() {
+  const containerRef = useRef(null);
+  const active = useAnimationActive(containerRef, { rootMargin: "160px", initialVisible: true });
+  const activeRef = useRef(true);
   const canvasRef = useRef(null);
   const rafRef = useRef(null);
-  const mouseRef = useRef({ x: 0.5, y: 0.5, sx: 0.5, sy: 0.5, active: false });
+  const loopRef = useRef(null);
+
+  useEffect(() => {
+    activeRef.current = active;
+    if (active && loopRef.current) {
+      rafRef.current = requestAnimationFrame(loopRef.current);
+    } else {
+      cancelAnimationFrame(rafRef.current);
+    }
+  }, [active]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    const ct = canvas.getContext("2d");
-    const DPR = window.devicePixelRatio || 1;
+    const ct = canvas.getContext("2d", { alpha: false, desynchronized: true });
+    const TARGET_FPS = 30;
+    const FRAME_MS = 1000 / TARGET_FPS;
     let W, H;
+    let DPR = 1.5;
     let isMobile = false;
-    const M = mouseRef.current;
 
-    function onMouseMove(e) {
-      M.x = e.clientX / window.innerWidth;
-      M.y = e.clientY / window.innerHeight;
-      M.active = true;
+    function isMobileCheck() {
+      return window.innerWidth <= 768;
     }
 
-    function onMouseLeave() {
-      M.active = false;
+    function updateScale() {
+      isMobile = isMobileCheck();
+      DPR = Math.min(window.devicePixelRatio || 1, isMobile ? 1.25 : 1.5);
     }
 
-    window.addEventListener("mousemove", onMouseMove);
-    window.addEventListener("mouseleave", onMouseLeave);
+    updateScale();
 
     function resize() {
       const vw = window.innerWidth;
       const container = canvas.parentElement;
       const vh = container ? container.offsetHeight : window.innerHeight;
 
-      isMobile = vw <= 768;
+      updateScale();
 
-      W = canvas.width = vw * DPR;
-      H = canvas.height = vh * DPR;
+      W = canvas.width = Math.round(vw * DPR);
+      H = canvas.height = Math.round(vh * DPR);
       canvas.style.width = vw + "px";
       canvas.style.height = vh + "px";
     }
@@ -67,8 +79,8 @@ export default function AnimatedBg() {
   ct.fillStyle = sweep;
   ct.fillRect(0, 0, W, H);
 
-  const mx = M.active ? M.sx : 0.5 + 0.04 * Math.sin(t * 0.09);
-  const my = M.active ? M.sy : 0.5 + 0.03 * Math.sin(t * 0.11);
+  const mx = 0.5 + 0.04 * Math.sin(t * 0.09);
+  const my = 0.5 + 0.03 * Math.sin(t * 0.11);
 
   const pulseA = isMobile
     ? 0.50 + 0.05 * Math.sin(t * 0.22)
@@ -150,17 +162,6 @@ export default function AnimatedBg() {
   tr.addColorStop(1, "rgba(0,0,0,0)");
   ct.fillStyle = tr;
   ct.fillRect(0, 0, W, H);
-
-  if (M.active) {
-    const sx = M.sx * W;
-    const sy = M.sy * H;
-    const sp = ct.createRadialGradient(sx, sy, 0, sx, sy, W * (isMobile ? 0.24 : 0.32));
-    sp.addColorStop(0, isMobile ? "rgba(28,178,208,0.08)" : "rgba(28,178,208,0.15)");
-    sp.addColorStop(0.5, isMobile ? "rgba(14,135,170,0.03)" : "rgba(14,135,170,0.06)");
-    sp.addColorStop(1, "rgba(0,0,0,0)");
-    ct.fillStyle = sp;
-    ct.fillRect(0, 0, W, H);
-  }
 }
 
     function drawGlassWaves(t) {
@@ -202,11 +203,6 @@ export default function AnimatedBg() {
         const f3 = Math.sin(t * b.spd * 0.58 + b.ph - 0.8) * 0.20;
         const twist = f1 + f2 + f3;
 
-        // mouse glow: band near cursor Y brightens
-        const mouseGlow = M.active
-          ? Math.exp(-Math.pow(M.sy - b.baseY, 2) * 14) * 0.04
-          : 0;
-
         const yt = H * b.baseY;
         const yb = yt + H * b.thick;
 
@@ -225,7 +221,7 @@ export default function AnimatedBg() {
         );
         ct.closePath();
 
-        const fillAlpha = (isMobile ? 0.022 : 0.028) + mouseGlow;
+        const fillAlpha = isMobile ? 0.022 : 0.028;
         const g = ct.createLinearGradient(0, yt, 0, yb);
         g.addColorStop(0,   "rgba(178,224,255,0)");
         g.addColorStop(0.4, `rgba(200,235,255,${fillAlpha})`);
@@ -272,14 +268,9 @@ export default function AnimatedBg() {
 
         const y = H * l.y;
 
-        // mouse glow: line near cursor Y brightens
-        const mouseGlow = M.active
-          ? Math.exp(-Math.pow(M.sy - l.y, 2) * 28) * 0.03
-          : 0;
-
         const a = isMobile
-          ? 0.026 + 0.012 * Math.abs(twist) + mouseGlow
-          : 0.038 + 0.02 * Math.abs(twist) + mouseGlow;
+          ? 0.026 + 0.012 * Math.abs(twist)
+          : 0.038 + 0.02 * Math.abs(twist);
 
         ct.beginPath();
         ct.moveTo(0, y);
@@ -296,7 +287,7 @@ export default function AnimatedBg() {
       ct.restore();
     }
 
-    const particles = Array.from({ length: isMobile ? 32 : 55 }, () => ({
+    const particles = Array.from({ length: isMobile ? 18 : 28 }, () => ({
       x: Math.random(),
       y: Math.random(),
       r: (0.4 + Math.random() * (isMobile ? 1.1 : 1.5)) * DPR,
@@ -332,11 +323,12 @@ export default function AnimatedBg() {
     }
 
     function drawWave(t) {
-      const N = isMobile ? 28 : 50;
+      const N = isMobile ? 22 : 38;
       const LINE_GAP = (isMobile ? 1.45 : 1.92) * DPR;
       const PHASE_SPREAD = Math.PI * (isMobile ? 0.62 : 0.95);
+      const xStep = (isMobile ? 10 : 8) * DPR;
 
-      const nPts = Math.ceil(W / 2) + 1;
+      const nPts = Math.ceil(W / xStep) + 1;
       const baseY = H * (isMobile ? 0.71 : 0.67);
 
       ct.save();
@@ -367,7 +359,7 @@ export default function AnimatedBg() {
         ct.beginPath();
 
         for (let pi = 0; pi < nPts; pi++) {
-          const x = pi * 2;
+          const x = pi * xStep;
           const nx = x / W;
 
           // envelope pins both endpoints (0 at edges, 1 at center)
@@ -410,40 +402,22 @@ export default function AnimatedBg() {
       ct.restore();
     }
 
-    function drawCursorEffect(t) {
-      if (!M.active) return;
-      ct.save();
-      const cx = M.sx * W;
-      const cy = M.sy * H;
-
-      // pulsing outer glow
-      const pulse = 0.5 + 0.5 * Math.sin(t * 2.8);
-      const r = (isMobile ? 60 : 90) + 14 * pulse;
-      const glow = ct.createRadialGradient(cx, cy, r * 0.15, cx, cy, r);
-      glow.addColorStop(0,   `rgba(56,224,210,${0.10 + 0.05 * pulse})`);
-      glow.addColorStop(0.4, `rgba(28,190,175,${0.05 + 0.02 * pulse})`);
-      glow.addColorStop(1,   "rgba(0,0,0,0)");
-      ct.fillStyle = glow;
-      ct.fillRect(0, 0, W, H);
-
-      // sharp inner ring
-      ct.beginPath();
-      ct.arc(cx, cy, 10 + 3 * pulse, 0, Math.PI * 2);
-      ct.strokeStyle = `rgba(80,240,220,${0.25 + 0.15 * pulse})`;
-      ct.lineWidth = DPR * 0.7;
-      ct.stroke();
-
-      ct.restore();
-    }
-
     let t = 0;
     let lastTs = 0;
+    let lastFrameTs = 0;
     let dtFiltered = 1 / 60;
 
     function loop(ts) {
+      if (!activeRef.current) return;
+
+      rafRef.current = requestAnimationFrame(loop);
+
+      if (!lastFrameTs) lastFrameTs = ts;
+      if (ts - lastFrameTs < FRAME_MS) return;
+      lastFrameTs = ts;
+
       if (!lastTs) {
         lastTs = ts;
-        rafRef.current = requestAnimationFrame(loop);
         return;
       }
 
@@ -454,40 +428,38 @@ export default function AnimatedBg() {
       dtFiltered += (dt - dtFiltered) * 0.12;
       t += dtFiltered;
 
-      M.sx += (M.x - M.sx) * 0.035;
-      M.sy += (M.y - M.sy) * 0.035;
-
       drawBg(t);
       drawGlassWaves(t);
       drawAccents(t);
       drawParticles(t);
       drawWave(t);
-      drawCursorEffect(t);
-
-      rafRef.current = requestAnimationFrame(loop);
     }
 
-    rafRef.current = requestAnimationFrame(loop);
+    loopRef.current = loop;
+
+    if (activeRef.current) {
+      rafRef.current = requestAnimationFrame(loop);
+    }
 
     return () => {
       cancelAnimationFrame(rafRef.current);
       window.removeEventListener("resize", resize);
-      window.removeEventListener("mousemove", onMouseMove);
-      window.removeEventListener("mouseleave", onMouseLeave);
     };
   }, []);
 
   return (
-    <canvas
-      ref={canvasRef}
-      style={{
-        position: "absolute",
-        inset: 0,
-        width: "100%",
-        height: "100%",
-        display: "block",
-        pointerEvents: "none",
-      }}
-    />
+    <div ref={containerRef} className="absolute inset-0">
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "absolute",
+          inset: 0,
+          width: "100%",
+          height: "100%",
+          display: "block",
+          pointerEvents: "none",
+        }}
+      />
+    </div>
   );
 }

@@ -1,18 +1,16 @@
 "use client";
 import { useState, useRef, useEffect } from "react";
+import dynamic from "next/dynamic";
 import Navbar from "../components/Navbar";
 import AnimatedBg from "../components/AnimatedBg";
+
+const SectionDataOrbit = dynamic(() => import("../components/SectionDataOrbit"));
+const SectionServiceAndSolutions = dynamic(() => import("../components/SectionServices"));
+const SectionLeaderVision = dynamic(() => import("../components/Sectionleadervision"));
+const SectionContactFooter = dynamic(() => import("../components/SectionContactFooter"));
+
 const logo = "/img/logo/aileen-logo.png";
 const sloganImg = "/img/home/slogan.png";
-const memorialImage = "/img/home/memorial-royal.png";
-import SectionDataOrbit from "../components/SectionDataOrbit";
-// import SectionStrengths from "../components/SectionStrengths";
-import SectionServiceAndSolutions from "../components/SectionServices";
-import SectionContactFooter from "../components/SectionContactFooter";
-// import CustomersMarquee from "../components/CustomersMarquee";
-import SectionLeaderVision from "../components/Sectionleadervision";
-import SectionTeam from "../components/SectionTeam";
-import NewsHighlightCarousel from "../components/NewsHighlightCarousel";
 
 /* ─── slides ─── */
 const slides = [
@@ -43,10 +41,7 @@ const slides = [
 ];
 
 export default function Home() {
-  
   const [isLoaded, setIsLoaded]         = useState(false);
-  const [isMemorialOpen, setIsMemorialOpen] = useState(true);
-  const [isMemorialVisible, setIsMemorialVisible] = useState(false);
   const [isFading, setIsFading]         = useState(false);
   const [introPhase, setIntroPhase]     = useState("center");
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -55,7 +50,6 @@ export default function Home() {
   const [carouselHovered, setCarouselHovered] = useState(false);
   const [navVisible, setNavVisible]     = useState(false);
   const autoRef    = useRef(null);
-  const memorialTimeoutRef = useRef(null);
   const lastScrollY = useRef(0);
 
   useEffect(() => {
@@ -83,34 +77,26 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const f = setTimeout(() => setIsFading(true), 1000);
-    const l = setTimeout(() => setIsLoaded(true), 1600);
+    const f = setTimeout(() => setIsFading(true), 300);
+    const l = setTimeout(() => setIsLoaded(true), 550);
     return () => { clearTimeout(f); clearTimeout(l); };
   }, []);
 
   useEffect(() => {
-    if (!isLoaded || !isMemorialOpen) return undefined;
-
-    memorialTimeoutRef.current = setTimeout(() => setIsMemorialVisible(true), 40);
-
-    return () => {
-      clearTimeout(memorialTimeoutRef.current);
+    const prefetch = () => {
+      void import("../components/SectionDataOrbit");
+      void import("../components/SectionServices");
+      void import("../components/Sectionleadervision");
+      void import("../components/SectionContactFooter");
     };
-  }, [isLoaded, isMemorialOpen]);
 
-  useEffect(() => {
-    if (!isLoaded || !isMemorialOpen) return undefined;
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(prefetch, { timeout: 2000 });
+      return () => window.cancelIdleCallback(id);
+    }
 
-    const { overflow } = document.body.style;
-    document.body.style.overflow = "hidden";
-
-    return () => {
-      document.body.style.overflow = overflow;
-    };
-  }, [isLoaded, isMemorialOpen]);
-
-  useEffect(() => {
-    return () => clearTimeout(memorialTimeoutRef.current);
+    const t = setTimeout(prefetch, 800);
+    return () => clearTimeout(t);
   }, []);
 
   function startAuto() {
@@ -132,46 +118,10 @@ export default function Home() {
     }, 380);
   }
 
-  function closeMemorial() {
-    setIsMemorialVisible(false);
-    clearTimeout(memorialTimeoutRef.current);
-    memorialTimeoutRef.current = setTimeout(() => setIsMemorialOpen(false), 420);
-  }
-
   const isSplit = introPhase === "split";
 
   return (
     <div id="home">
-      {isLoaded && isMemorialOpen && (
-        <div
-          className={`fixed inset-0 z-[10000] flex items-center justify-center px-4 py-8 backdrop-blur-[2px] transition-all duration-500 ease-out ${
-            isMemorialVisible ? "bg-black/35 opacity-100" : "bg-black/0 opacity-0 pointer-events-none"
-          }`}
-          role="dialog"
-          aria-modal="true"
-          aria-label="Memorial image"
-        >
-          <div
-            className={`relative flex w-full max-w-3xl flex-col items-center gap-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-              isMemorialVisible ? "translate-y-0 scale-100 opacity-100" : "translate-y-4 scale-95 opacity-0"
-            }`}
-          >
-            <img
-              src={memorialImage}
-              alt="น้อมส่งเสด็จสู่สวรรคาลัย"
-              className="max-h-[72vh] w-full rounded-2xl object-contain shadow-2xl"
-            />
-            <button
-              type="button"
-              onClick={closeMemorial}
-              className="inline-flex items-center justify-center rounded-full border border-white/40 bg-white/15 px-6 py-3 text-sm font-medium text-white backdrop-blur-md transition duration-300 hover:-translate-y-0.5 hover:bg-white/25"
-            >
-              เข้าสู่เว็บไซต์
-            </button>
-          </div>
-        </div>
-      )}
-
       {/* PRELOADER */}
       {!isLoaded && (
         <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#050d1a]"
@@ -191,29 +141,28 @@ export default function Home() {
       )}
 
       {/* Navbar */}
-      <div className="navbar-wrapper fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out"
-        style={{ transform: navVisible ? "translateY(0)" : "translateY(-100%)" }}>
+      <div
+        className="navbar-wrapper fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out"
+        style={{ transform: navVisible ? "translateY(0)" : "translateY(-100%)" }}
+      >
         <style>{`@media (min-width: 1024px) { .navbar-wrapper { transform: translateY(0) !important; } }`}</style>
         <Navbar />
       </div>
 
       {/* HERO */}
-      <section className="relative w-full min-h-[120vh] overflow-hidden bg-black">
+      <section className="relative w-full min-h-[100vh] overflow-visible bg-white">
 
-        {/* ── Local video background ── */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
+        {/* ── Full background: canvas + gradient curtain reveal ── */}
+        <div className={`hero-bg-stack absolute inset-0 z-0 overflow-hidden ${isLoaded ? "is-open" : ""}`}>
           <AnimatedBg />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/25" />
         </div>
 
-        <div className="absolute inset-0 z-[1] bg-gradient-to-b from-black/30 via-black/20 to-black/25" />
-
-        <div className="relative z-10 flex min-h-[120vh] flex-col items-center px-6 "
-          style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.8s ease 0.1s" }}>
-          <div className="absolute inset-0 z-[1] bg-black/5" />
-
-          <div className="relative z-10 flex min-h-[120vh] flex-col items-center px-6  pb-10"
-            style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.8s ease 0.1s" }}>
-            <div className="flex flex-1 flex-col items-center w-full lg:justify-center lg:gap-8 lg:pb-[22vh]">
+        <div
+          className="relative z-10 flex min-h-[100vh] flex-col items-center justify-center px-6 pb-24 pt-20 lg:pb-28 lg:pt-24"
+          style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.7s ease 0.35s" }}
+        >
+          <div className="flex w-full max-w-6xl flex-col items-center gap-6 lg:gap-8">
 
               {/* Logo + brand – desktop only */}
               <div className="hidden lg:flex items-center justify-center gap-3">
@@ -221,23 +170,41 @@ export default function Home() {
                 <span className="text-sm font-semibold tracking-widest text-white/90">AILEEN SOLUTIONS</span>
               </div>
 
-              {/* Center group: slogan + carousel (flex-1 on mobile to fill center space) */}
-              <div className="flex-1 lg:flex-none flex flex-col items-center justify-center w-full max-w-6xl mx-auto gap-6 lg:flex-row lg:items-center lg:gap-0">
+              {/* Center group: slogan + carousel */}
+              <div className="flex w-full flex-col items-center justify-center gap-6 lg:flex-row lg:items-center lg:gap-0">
 
                 {/* Slogan */}
-                <div className="flex w-full justify-center lg:w-[65%] lg:pr-10"
-                  style={{ transform: isSplit ? "translateX(0)" : "translateX(27%)", transition: isSplit ? "transform 0.75s cubic-bezier(0.4,0,0.2,1)" : "none" }}>
-                  <img src={sloganImg} alt="Simplify Work Amplify Value" className="w-full"
-                    style={{ opacity: isLoaded ? 1 : 0, animation: isLoaded && !isSplit ? "sloganIn 0.6s ease forwards" : "none", transition: "none" }} />
+                <div
+                  className="flex w-full justify-center lg:w-[65%] lg:pr-10"
+                  style={{
+                    transform: isSplit ? "translateX(0)" : "translateX(27%)",
+                    transition: isSplit ? "transform 0.75s cubic-bezier(0.4,0,0.2,1)" : "none",
+                  }}
+                >
+                  <img src={sloganImg} alt="Simplify Work Amplify Value" className="w-full" />
                 </div>
 
                 {/* Divider – desktop only */}
-                <div className="hidden lg:block lg:h-64 lg:w-px lg:flex-shrink-0"
-                  style={{ background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.28) 20%, rgba(255,255,255,0.28) 80%, transparent)", opacity: isSplit ? 1 : 0, transform: isSplit ? "scaleY(1)" : "scaleY(0.1)", transformOrigin: "center", transition: "opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s" }} />
+                <div
+                  className="hidden lg:block lg:h-64 lg:w-px lg:flex-shrink-0"
+                  style={{
+                    background: "linear-gradient(to bottom, transparent, rgba(255,255,255,0.28) 20%, rgba(255,255,255,0.28) 80%, transparent)",
+                    opacity: isSplit ? 1 : 0,
+                    transform: isSplit ? "scaleY(1)" : "scaleY(0.1)",
+                    transformOrigin: "center",
+                    transition: "opacity 0.35s ease 0.1s, transform 0.35s ease 0.1s",
+                  }}
+                />
 
                 {/* Carousel – desktop only */}
-                <div className="hidden lg:flex w-full flex-col items-center lg:w-[35%] lg:items-start lg:pl-10"
-                  style={{ opacity: isSplit ? 1 : 0, transform: isSplit ? "translateX(0)" : "translateX(-36px)", transition: "opacity 0.45s ease 0.1s, transform 0.45s cubic-bezier(0.2,0,0.2,1) 0.1s", pointerEvents: isSplit ? "auto" : "none" }}
+                <div
+                  className="hidden lg:flex w-full flex-col items-center lg:w-[35%] lg:items-start lg:pl-10"
+                  style={{
+                    opacity: isSplit ? 1 : 0,
+                    transform: isSplit ? "translateX(0)" : "translateX(-36px)",
+                    transition: "opacity 0.45s ease 0.1s, transform 0.45s cubic-bezier(0.2,0,0.2,1) 0.1s",
+                    pointerEvents: isSplit ? "auto" : "none",
+                  }}
                   onMouseEnter={() => setCarouselHovered(true)}
                   onMouseLeave={() => setCarouselHovered(false)}>
                   <div className="relative h-[180px] w-full overflow-hidden"
@@ -268,8 +235,10 @@ export default function Home() {
                 </div>
 
                 {/* Carousel + divider + description – mobile only */}
-                <div className="flex lg:hidden flex-col w-full gap-4"
-                  style={{ opacity: isSplit ? 1 : 0, transition: "opacity 0.45s ease 0.2s" }}>
+                <div
+                  className="flex lg:hidden flex-col w-full gap-4"
+                  style={{ opacity: isSplit ? 1 : 0, transition: "opacity 0.45s ease 0.2s" }}
+                >
                   <div className="relative h-[120px] w-full overflow-hidden">
                     <div key={currentSlide}
                       style={{ animation: isAnimating ? `slideOut${slideDir === "up" ? "Up" : "Down"} 0.38s ease forwards` : `slideIn${slideDir === "up" ? "Up" : "Down"} 0.38s ease forwards`, position: "absolute", inset: 0 }}>
@@ -285,7 +254,7 @@ export default function Home() {
               </div>
 
               {/* Description + Buttons */}
-              <div className="mt-auto lg:mt-0 flex flex-col items-center text-center w-full gap-3 lg:gap-4">
+              <div className="flex flex-col items-center text-center w-full gap-3 lg:gap-4">
                 {/* Description – desktop only */}
                 <p className="hidden lg:block mx-auto max-w-3xl text-sm leading-relaxed text-white/85 md:text-base">
                   We deliver reliable software solutions, trusted services, and experienced consulting from process and quality to Automation and AI — Empowering business efficiency and growth.
@@ -322,7 +291,6 @@ export default function Home() {
                 </div>
               </div>
 
-            </div>
           </div>
         </div>
 
@@ -335,23 +303,38 @@ export default function Home() {
       </section>
 
       <style>{`
-        @keyframes sloganIn     { from{opacity:0;transform:scale(0.94)} to{opacity:1;transform:scale(1)} }
+        .hero-bg-stack {
+          transform-origin: top center;
+          transform: scaleY(0);
+          will-change: transform;
+        }
+        .hero-bg-stack.is-open {
+          animation: heroCurtainDown 1.2s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+        }
+        @keyframes heroCurtainDown {
+          from { transform: scaleY(0); }
+          to { transform: scaleY(1); }
+        }
+
         @keyframes slideInUp    { from{opacity:0;transform:translateY(28px)} to{opacity:1;transform:translateY(0)} }
         @keyframes slideOutUp   { from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(-28px)} }
         @keyframes slideInDown  { from{opacity:0;transform:translateY(-28px)} to{opacity:1;transform:translateY(0)} }
         @keyframes slideOutDown { from{opacity:1;transform:translateY(0)} to{opacity:0;transform:translateY(28px)} }
+
+        @media (prefers-reduced-motion: reduce) {
+          .hero-bg-stack {
+            transform: scaleY(1);
+            animation: none !important;
+          }
+        }
       `}</style>
 
-      <div className="relative z-30 -mt-44">
-        <NewsHighlightCarousel />
-      </div>
-      <main className="mx-auto max-w-6xl px-6"></main>
-      {/* <section id="customers" className="py-0 bg-white"><CustomersMarquee /></section> */}
-      <section className="py-0 "><SectionDataOrbit /></section>
+      <section className="py-0">
+        <SectionDataOrbit />
+      </section>
       <section id="service" className="py-0 bg-slate-50"><SectionServiceAndSolutions /></section>
       <section id="leaderVision" className="py-0 bg-white"><SectionLeaderVision /></section>
       {/* <section id="strengths" className="py-0"><SectionStrengths /></section> */}
-      <section className="py-0 bg-slate-50"><SectionTeam /></section>
       <section id="contact" className=""><SectionContactFooter /></section>
     </div>
   );

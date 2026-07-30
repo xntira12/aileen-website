@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useMemo, useRef, useState, useCallback } from "react";
-const stBg = "/img/home/st-bg.png";
+const stBg = "/img/home/st-bg.jpg";
 const PMT = "/img/home/productsSolutions/PMT.svg";
 const RPA = "/img/home/productsSolutions/RPA.svg";
 const AI = "/img/home/productsSolutions/AI.svg";
@@ -220,32 +220,8 @@ export default function SectionServiceAndSolutions() {
   const [stRef,   stOn]   = useScrollReveal(0.1);
   const [statRef, statOn] = useScrollReveal(0.3);
 
-  /* ── parallax bg ── */
-  const bgRef = useRef(null);
-  const tgt = useRef({ x:50, y:50 });
-  const cur = useRef({ x:50, y:50 });
-  useEffect(() => {
-    const el = bgRef.current; if (!el) return;
-    let raf = 0;
-    const lr = (a,b,t) => a+(b-a)*t;
-    const tk = () => {
-      cur.current.x = lr(cur.current.x, tgt.current.x, 0.08);
-      cur.current.y = lr(cur.current.y, tgt.current.y, 0.08);
-      el.style.setProperty("--mx", `${cur.current.x}%`);
-      el.style.setProperty("--my", `${cur.current.y}%`);
-      raf = requestAnimationFrame(tk);
-    };
-    raf = requestAnimationFrame(tk);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-  const onMouseMove = useCallback(e => {
-    const r = e.currentTarget.getBoundingClientRect(), s = 0.35;
-    tgt.current.x = 50+(((e.clientX-r.left)/r.width)*100-50)*s;
-    tgt.current.y = 50+(((e.clientY-r.top)/r.height)*100-50)*s;
-  }, []);
-
   return (
-    <section className="relative isolate overflow-hidden strength-dark" style={{ contain:"paint" }} onMouseMove={onMouseMove}>
+    <section className="relative isolate overflow-hidden strength-dark" style={{ contain:"paint" }}>
       {/* top curve */}
       <div className="pointer-events-none absolute left-0 right-0 top-0 z-[60]">
         <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="block w-full" style={{ height: "80px" }}>
@@ -254,7 +230,7 @@ export default function SectionServiceAndSolutions() {
       </div>
 
       <img src={stBg} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover opacity-60" />
-      <div ref={bgRef} className="strength-dark__bg pointer-events-none absolute inset-0 -z-20" />
+      <div className="strength-dark__bg pointer-events-none absolute inset-0 -z-20" />
 
       {/* ════════════ SERVICES ════════════ */}
       <div ref={svcRef} style={{ position:"relative", zIndex:1, maxWidth:1180, margin:"0 auto", padding:"80px 24px 60px" }}>
