@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import SectionContactFooter from "../components/SectionContactFooter";
+import CustomerLogoItem from "../components/CustomerLogoItem";
 import logoPttlng from "../assets/img/home/customers/logo-pttlng.png";
 
 function useInView(threshold = 0.14) {
@@ -47,6 +48,7 @@ const CUSTOMER_PAGE_LOGOS = [
 
 export default function Customers() {
   const [heroRef, heroInView] = useInView(0.12);
+  const [gridRef, gridInView] = useInView(0.1);
 
   return (
     <div className="min-h-screen bg-[#07101c] text-white">
@@ -121,6 +123,7 @@ export default function Customers() {
                 </div>
 
                 <div
+                  ref={gridRef}
                   className={`relative z-10 transition-all duration-700 ${
                     heroInView ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
                   }`}
@@ -129,20 +132,20 @@ export default function Customers() {
                   <div className="rounded-[30px] border border-white/12 bg-[linear-gradient(180deg,rgba(255,255,255,0.09),rgba(255,255,255,0.03))] p-4 shadow-[inset_0_1px_0_rgba(255,255,255,0.18),0_28px_60px_rgba(2,12,27,0.3)] md:p-5">
                     <div className="rounded-[24px] border border-white/10 bg-white/[0.03] p-4 md:p-5">
                       <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
-                        {CUSTOMER_PAGE_LOGOS.map((customer) => (
-                          <article
+                        {CUSTOMER_PAGE_LOGOS.map((customer, idx) => (
+                          <CustomerLogoItem
                             key={customer.alt}
-                            className="group relative flex min-h-[110px] items-center justify-center overflow-hidden rounded-[22px] border border-slate-200/80 bg-[linear-gradient(180deg,#f8fbff_0%,#eef5fb_100%)] px-5 py-4 shadow-[0_14px_28px_rgba(15,23,42,0.18)] transition hover:-translate-y-1 hover:shadow-[0_18px_32px_rgba(37,99,235,0.22)]"
-                          >
-                            <div className="pointer-events-none absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-sky-300 to-transparent opacity-70" />
-                            {customer.src ? (
-                              <img
-                                src={customer.src}
-                                alt={customer.alt}
-                                className="relative z-10 max-h-12 w-auto object-contain transition duration-300 group-hover:scale-[1.03] md:max-h-14"
-                              />
-                            ) : null}
-                          </article>
+                            src={customer.src}
+                            alt={customer.alt}
+                            idx={idx}
+                            total={CUSTOMER_PAGE_LOGOS.length}
+                            revealed={gridInView}
+                            mode="grid"
+                            cols={4}
+                            showTooltip={false}
+                            wrapperClassName="group relative flex min-h-[110px] w-full shrink-0 items-center justify-center overflow-hidden rounded-[22px] border border-slate-200/80 bg-[linear-gradient(180deg,#f8fbff_0%,#eef5fb_100%)] px-5 py-4 shadow-[0_14px_28px_rgba(15,23,42,0.18)] transition hover:-translate-y-1 hover:shadow-[0_18px_32px_rgba(37,99,235,0.22)]"
+                            imgClassName="relative z-10 max-h-12 w-auto object-contain transition duration-300 group-hover:scale-[1.03] md:max-h-14"
+                          />
                         ))}
                       </div>
                     </div>

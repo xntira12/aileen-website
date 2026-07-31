@@ -3,14 +3,26 @@ import { useState, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import Navbar from "../components/Navbar";
 import AnimatedBg from "../components/AnimatedBg";
+import CustomerLogosHeader from "../components/CustomerLogosHeader";
+import CustomerLogosMarquee from "../components/CustomerLogosMarquee";
+import SectionDataOrbit from "../components/SectionDataOrbit";
 
-const SectionDataOrbit = dynamic(() => import("../components/SectionDataOrbit"));
-const SectionServiceAndSolutions = dynamic(() => import("../components/SectionServices"));
-const SectionLeaderVision = dynamic(() => import("../components/Sectionleadervision"));
-const SectionContactFooter = dynamic(() => import("../components/SectionContactFooter"));
+const importWithRetry = (loader) =>
+  loader().catch((err) => {
+    if (typeof window !== "undefined" && /ChunkLoadError|Loading chunk/i.test(String(err))) {
+      window.location.reload();
+    }
+    throw err;
+  });
+
+const SectionServiceAndSolutions = dynamic(() => importWithRetry(() => import("../components/SectionServices")));
+const SectionStrengths = dynamic(() => importWithRetry(() => import("../components/SectionStrengths")));
+const SectionLeaderVision = dynamic(() => importWithRetry(() => import("../components/Sectionleadervision")));
+const SectionContactFooter = dynamic(() => importWithRetry(() => import("../components/SectionContactFooter")));
 
 const logo = "/img/logo/aileen-logo.png";
 const sloganImg = "/img/home/slogan.png";
+const stBg = "/img/home/st-bg.jpg";
 
 /* ─── slides ─── */
 const slides = [
@@ -86,6 +98,7 @@ export default function Home() {
     const prefetch = () => {
       void import("../components/SectionDataOrbit");
       void import("../components/SectionServices");
+      void import("../components/SectionStrengths");
       void import("../components/Sectionleadervision");
       void import("../components/SectionContactFooter");
     };
@@ -149,19 +162,20 @@ export default function Home() {
         <Navbar />
       </div>
 
-      {/* HERO */}
-      <section className="relative w-full min-h-[100vh] overflow-visible bg-white">
+      {/* HERO + customers */}
+      <section className="hero-home relative w-full bg-white">
 
-        {/* ── Full background: canvas + gradient curtain reveal ── */}
-        <div className={`hero-bg-stack absolute inset-0 z-0 overflow-hidden ${isLoaded ? "is-open" : ""}`}>
-          <AnimatedBg />
-          <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/25" />
-        </div>
+        <div className="hero-dark relative min-h-[110vh]">
+          {/* ── Full background: canvas + gradient curtain reveal ── */}
+          <div className={`hero-bg-stack absolute inset-0 z-0 overflow-hidden ${isLoaded ? "is-open" : ""}`}>
+            <AnimatedBg />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/30 via-black/20 to-black/25" />
+          </div>
 
-        <div
-          className="relative z-10 flex min-h-[100vh] flex-col items-center justify-center px-6 pb-24 pt-20 lg:pb-28 lg:pt-24"
-          style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.7s ease 0.35s" }}
-        >
+          <div
+            className="relative z-10 flex min-h-[110vh] flex-col items-center justify-center px-6 pb-36 pt-20 lg:pb-40 lg:pt-24"
+            style={{ opacity: isLoaded ? 1 : 0, transition: "opacity 0.7s ease 0.35s" }}
+          >
           <div className="flex w-full max-w-6xl flex-col items-center gap-6 lg:gap-8">
 
               {/* Logo + brand – desktop only */}
@@ -261,28 +275,28 @@ export default function Home() {
                 </p>
                 {/* Desktop buttons */}
                 <div className="hidden lg:flex justify-center gap-4">
-                  <a href="/about" className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
+                  <a href="/about" className="btn-fancy group relative inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-white/35 bg-white/5 px-8 py-3 text-sm font-bold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
                     <span className="relative z-10">Get To Know Us</span>
-                    <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <svg className="w-3.5 shrink-0 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                     </svg>
                   </a>
-                  <a href="/contact" className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
+                  <a href="/contact" className="btn-fancy group relative inline-flex shrink-0 items-center gap-2 whitespace-nowrap rounded-full border border-white/35 bg-white/5 px-8 py-3 text-sm font-bold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
                     <span className="relative z-10">Contact Us</span>
-                    <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+                    <svg className="w-3.5 shrink-0 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                     </svg>
                   </a>
                 </div>
                 {/* Mobile buttons – stacked, full width */}
                 <div className="flex lg:hidden flex-col w-full gap-3 pb-2">
-                  <a href="/about" className="btn-fancy group relative inline-flex items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-4 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
+                  <a href="/about" className="btn-fancy group relative inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/35 bg-white/5 px-4 py-3 text-sm font-bold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
                     <span className="relative z-10">Get To Know Us</span>
                     <svg className="w-3.5 text-white shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                     </svg>
                   </a>
-                  <a href="/contact" className="btn-fancy group relative inline-flex items-center justify-center gap-2 rounded-full border border-white/35 bg-white/5 px-4 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
+                  <a href="/contact" className="btn-fancy group relative inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/35 bg-white/5 px-4 py-3 text-sm font-bold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15">
                     <span className="relative z-10">Contact Us</span>
                     <svg className="w-3.5 text-white shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                       <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
@@ -292,14 +306,26 @@ export default function Home() {
               </div>
 
           </div>
+          </div>
+
+          {/* curved bottom — overlays dark bg, no gap */}
+          <div className="hero-curve-edge pointer-events-none absolute bottom-0 left-0 right-0 z-[15] leading-[0]">
+            <svg viewBox="0 0 1440 160" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="hero-curve-svg block w-full" aria-hidden="true">
+              <path d="M0,0 Q720,150 1440,0 L1440,160 L0,160 Z" fill="white" />
+            </svg>
+          </div>
         </div>
 
-        {/* curved bottom edge — z-10 so the card (z-30 wrapper) renders on top */}
-        <div className="absolute bottom-0 left-0 right-0 z-10 pointer-events-none">
-          <svg viewBox="0 0 1440 100" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="block w-full" style={{ height: "100px" }}>
-            <path d="M0,0 Q720,100 1440,0 L1440,100 L0,100 Z" fill="white" />
-          </svg>
-        </div>
+        {isLoaded ? (
+          <div className="hero-customers-wrap relative z-20 bg-white pb-8 pt-6 sm:pt-8">
+            <div className="mx-auto max-w-7xl px-6">
+              <CustomerLogosHeader revealed />
+            </div>
+            <div className="hero-logos-band mt-0">
+              <CustomerLogosMarquee revealed active variant="hero" />
+            </div>
+          </div>
+        ) : null}
       </section>
 
       <style>{`
@@ -332,9 +358,25 @@ export default function Home() {
       <section className="py-0">
         <SectionDataOrbit />
       </section>
-      <section id="service" className="py-0 bg-slate-50"><SectionServiceAndSolutions /></section>
+      <section id="service" className="relative isolate overflow-hidden strength-dark py-0">
+        <img src={stBg} alt="" aria-hidden="true" className="pointer-events-none absolute inset-0 -z-30 h-full w-full object-cover opacity-60" />
+        <div className="strength-dark__bg pointer-events-none absolute inset-0 -z-20" />
+        <SectionServiceAndSolutions />
+        <div className="relative z-10 flex w-full justify-center px-6 py-10 md:py-14">
+          <div className="svs-sec-div w-full max-w-6xl !m-0" aria-hidden="true">
+            <div className="svs-sec-div-line" />
+            <div className="svs-sec-div-icon" />
+            <div className="svs-sec-div-line" />
+          </div>
+        </div>
+        <SectionStrengths />
+        <div className="pointer-events-none absolute bottom-0 left-0 right-0 z-[60]">
+          <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" className="block w-full" style={{ height: "80px" }}>
+            <path d="M0,0 Q720,80 1440,0 L1440,80 L0,80 Z" fill="white" />
+          </svg>
+        </div>
+      </section>
       <section id="leaderVision" className="py-0 bg-white"><SectionLeaderVision /></section>
-      {/* <section id="strengths" className="py-0"><SectionStrengths /></section> */}
       <section id="contact" className=""><SectionContactFooter /></section>
     </div>
   );

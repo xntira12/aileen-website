@@ -12,5 +12,5 @@ export const CUSTOMER_LOGOS = [
   { src: "/img/home/customers/ptt-digital.png", alt: "PTT Digital" },
   { src: "/img/home/customers/Tex.png", alt: "Thai Ethoxylate (TEX)" },
   { src: "/img/home/customers/npc.png", alt: "NPC" },
-  { src: "/img/home/customers/NOK.png", alt: "THAI NOK" },
+  { src: "/img/home/customers/NOK.png", alt: "THAI NOK", imgClass: "!max-h-7 sm:!max-h-8" },
 ];

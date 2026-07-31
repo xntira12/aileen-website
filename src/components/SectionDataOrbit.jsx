@@ -1,7 +1,5 @@
 "use client";
-import { useEffect, useMemo, useRef, useState } from "react";
-import { CUSTOMER_LOGOS } from "../content/customerLogos";
-
+import { useEffect, useRef, useState } from "react";
 
 /* ── OrbitChip ── */
 const OrbitChip = ({ style, title, tooltip, tone = "blue", isActive = false, inView = false, revealDelay = 0 }) => {
@@ -26,21 +24,6 @@ const OrbitChip = ({ style, title, tooltip, tone = "blue", isActive = false, inV
   );
 };
 
-/* ── LogoItem ── */
-function LogoItem({ src, alt }) {
-  return (
-    <div className="group relative flex h-20 w-40 shrink-0 items-center justify-center overflow-visible">
-      <img src={src} alt={alt} draggable={false} className="cm-logo-item max-h-16 w-auto opacity-70 group-hover:opacity-100" />
-      <div className="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 whitespace-nowrap rounded-full bg-white/80 px-5 py-1.5 text-sm border border-slate-200 text-slate-800 shadow-sm backdrop-blur-md opacity-0 transition duration-200 group-hover:opacity-100 z-20">
-        {alt}
-      </div>
-    </div>
-  );
-}
-
-/* ════════════════════════════════════════════
-   SectionDataOrbit  (+ CustomersMarquee inside)
-════════════════════════════════════════════ */
 export default function SectionDataOrbit() {
   const sequence = [1, 2, 3, 4, 5, 0];
   const [seqIndex, setSeqIndex] = useState(0);
@@ -66,58 +49,6 @@ export default function SectionDataOrbit() {
 
   const ORBIT_DUR_S = (STEP_MS * 6) / 1000;
 
-  /* marquee */
-  const logos = useMemo(() => CUSTOMER_LOGOS, []);
-
-  const trackRef    = useRef(null);
-  const rafMarquee  = useRef(null);
-  const posRef      = useRef(0);
-  const draggingRef = useRef(false);
-  const lastXRef    = useRef(0);
-  const [paused,     setPaused]     = useState(false);
-  const [isDragging, setIsDragging] = useState(false);
-
-  const normalizePos = (pos, halfWidth) => {
-    if (!halfWidth) return 0;
-    return -(( (-pos % halfWidth) + halfWidth) % halfWidth);
-  };
-
-  useEffect(() => {
-    if (!inView) return;
-    const FRAME_MS = 1000 / 30;
-    let lastFrameTs = 0;
-    const tick = (ts) => {
-      rafMarquee.current = requestAnimationFrame(tick);
-      if (ts - lastFrameTs < FRAME_MS) return;
-      lastFrameTs = ts;
-
-      const track = trackRef.current;
-      if (!track) return;
-      const halfWidth = track.scrollWidth / 2;
-      if (!halfWidth) return;
-      if (!paused && !draggingRef.current) posRef.current -= 0.7;
-      posRef.current = normalizePos(posRef.current, halfWidth);
-      track.style.transform = `translateX(${posRef.current}px)`;
-    };
-    rafMarquee.current = requestAnimationFrame(tick);
-    return () => rafMarquee.current && cancelAnimationFrame(rafMarquee.current);
-  }, [paused, inView]);
-
-  const onPointerDown = (e) => { draggingRef.current = true; setIsDragging(true); lastXRef.current = e.clientX; e.currentTarget.setPointerCapture?.(e.pointerId); };
-  const onPointerMove = (e) => {
-    if (!draggingRef.current) return;
-    const track = trackRef.current;
-    if (!track) return;
-    const halfWidth = track.scrollWidth / 2;
-    if (!halfWidth) return;
-    const dx = e.clientX - lastXRef.current;
-    lastXRef.current = e.clientX;
-    posRef.current += dx;
-    posRef.current = normalizePos(posRef.current, halfWidth);
-    track.style.transform = `translateX(${posRef.current}px)`;
-  };
-  const onPointerUp = () => { draggingRef.current = false; setIsDragging(false); };
-
   const mobileItems = [
     { tone: "text-blue-700 bg-blue-50 ring-blue-200",       title: "Software Development" },
     { tone: "text-emerald-700 bg-emerald-50 ring-emerald-200", title: "AI & Intelligent Automation" },
@@ -130,52 +61,10 @@ export default function SectionDataOrbit() {
   return (
     <section
       ref={secRef}
-      className="relative overflow-hidden bg-white cursor-gradient isolate"
+      className="relative overflow-x-hidden overflow-y-visible bg-white cursor-gradient isolate"
     >
       <div className="cursor-gradient__layer pointer-events-none absolute inset-0 -z-20" />
 
-    {/* ── CUSTOMERS MARQUEE ── */}
-      <div className="pb-[60px] pt-6">
-        {/* marquee — full width, directly after hero blur */}
-        <div className={`cm-wrap-rv ${inView ? "on" : ""} w-full`}>
-          <div
-            className="relative w-full select-none overflow-hidden"
-            onMouseEnter={() => setPaused(true)}
-            onMouseLeave={() => setPaused(false)}
-            onPointerDown={onPointerDown}
-            onPointerMove={onPointerMove}
-            onPointerUp={onPointerUp}
-            onPointerCancel={onPointerUp}
-            style={{ cursor: isDragging ? "grabbing" : "grab" }}
-          >
-            <div ref={trackRef} className="flex items-center gap-12 will-change-transform px-6 sm:gap-16 md:px-10">
-              {logos.map((l, idx) => <LogoItem key={`a-${idx}`} {...l} />)}
-              {logos.map((l, idx) => <LogoItem key={`b-${idx}`} {...l} />)}
-            </div>
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-white to-transparent sm:w-24 md:w-32" />
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-white to-transparent sm:w-24 md:w-32" />
-          </div>
-        </div>
-
-        <div className="mx-auto max-w-7xl px-6 mt-10">
-          {/* pill */}
-          <div className="flex justify-center pb-4">
-            <span className={`cm-rv ${inView ? "on" : ""} inline-flex items-center gap-2 rounded-full text-slate-600 border border-slate-400 bg-white/5 px-4 py-2 text-xs tracking-widest backdrop-blur`} style={{ animationDelay: "200ms" }}>
-              <span className="h-2 w-2 rounded-full bg-cyan-500 shadow-[0_0_6px_rgba(6,182,212,.6)]" />
-              OUR CUSTOMERS
-            </span>
-          </div>
-          {/* heading */}
-          <h2 className={`cm-rv ${inView ? "on" : ""} text-center text-3xl font-extrabold tracking-tight`}
-            style={{ animationDelay: "280ms", background: "linear-gradient(90deg,#0f172a 60%,#10b981)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent", backgroundClip: "text" }}>
-            ได้รับความไว้วางใจจากองค์กรชั้นนำ
-          </h2>
-          <span className={`cm-line ${inView ? "on" : ""}`} style={{ animationDelay: "300ms" }} />
-          <p className={`cm-rv ${inView ? "on" : ""} mt-3 text-center text-sm font-light text-slate-500`} style={{ animationDelay: "360ms" }}>
-            บริษัทชั้นนำในอุตสาหกรรมพลังงานและปิโตรเคมีที่ไว้วางใจ Aileen Solutions
-          </p>
-        </div>
-      </div>
       {/* ── ORBIT SECTION ── */}
       <div className="py-[60px]">
         <div className="mx-auto z-10 grid max-w-6xl items-center gap-10 px-6 md:grid-cols-2">
