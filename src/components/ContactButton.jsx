@@ -1,4 +1,10 @@
+"use client";
+
+import { useLocale } from "@/i18n/LocaleProvider";
+
 export default function ContactButton({ href = "/contact", className = "" }) {
+  const { t } = useLocale();
+
   return (
     <a
       href={href}
@@ -11,7 +17,7 @@ export default function ContactButton({ href = "/contact", className = "" }) {
         className,
       ].join(" ")}
     >
-      ติดต่อเรา{" "}
+      {t("common.nav.contact")}{" "}
       <svg
         className="w-3.5 text-white dark:text-white"
         aria-hidden="true"

@@ -2,11 +2,17 @@
 
 import { useRouter } from "next/navigation";
 import Navbar from "../components/Navbar";
+import { useLocale } from "../i18n/LocaleProvider";
 
 const homeVideo = "/video/main-bg.mp4";
 
-export default function ServicePlaceholder({ title, summary }) {
+export default function ServicePlaceholder({ serviceKey }) {
   const router = useRouter();
+  const { messages } = useLocale();
+  const copy = messages.servicePlaceholder ?? {};
+  const serviceItem = messages.home?.services?.items?.find((item) => item.id === serviceKey);
+  const title = serviceItem?.title ?? "";
+  const summary = serviceItem ? `${serviceItem.summary} ${serviceItem.detail ?? ""}`.trim() : "";
 
   return (
     <div className="relative min-h-screen overflow-hidden bg-slate-950 text-white">
@@ -35,22 +41,15 @@ export default function ServicePlaceholder({ title, summary }) {
         <div className="w-full rounded-[32px] border border-white/10 bg-white/8 p-8 shadow-[0_30px_120px_rgba(2,6,23,0.45)] backdrop-blur-xl md:p-12">
           <span className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-xs font-semibold uppercase tracking-[0.2em] text-cyan-100">
             <span className="h-2 w-2 rounded-full bg-emerald-300" />
-            Service Page
+            {copy.badge}
           </span>
 
-          <h1 className="mt-6 max-w-3xl text-4xl font-extrabold tracking-tight text-white md:text-5xl">
-            {title}
-          </h1>
+          <h1 className="mt-6 max-w-3xl text-4xl font-extrabold tracking-tight text-white md:text-5xl">{title}</h1>
 
-          <p className="mt-5 max-w-3xl text-base leading-8 text-slate-200/80 md:text-lg">
-            {summary}
-          </p>
+          <p className="mt-5 max-w-3xl text-base leading-8 text-slate-200/80 md:text-lg">{summary}</p>
 
           <div className="mt-8 rounded-3xl border border-white/10 bg-slate-950/30 p-6">
-            <p className="text-sm leading-7 text-slate-300">
-              This page has been prepared as a standalone service route and is ready for detailed content, visuals,
-              case studies, and CTA sections in the next step.
-            </p>
+            <p className="text-sm leading-7 text-slate-300">{copy.bodyNote}</p>
           </div>
 
           <div className="mt-8 flex flex-wrap gap-4">
@@ -59,14 +58,14 @@ export default function ServicePlaceholder({ title, summary }) {
               onClick={() => router.push("/service")}
               className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/15"
             >
-              Back to Services
+              {copy.backToServices}
             </button>
             <button
               type="button"
               onClick={() => router.push("/contact")}
               className="inline-flex items-center gap-2 rounded-full bg-gradient-to-r from-cyan-500 to-emerald-500 px-5 py-3 text-sm font-semibold text-white transition hover:opacity-95"
             >
-              Contact Us
+              {copy.contactUs}
             </button>
           </div>
         </div>

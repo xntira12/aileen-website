@@ -2,6 +2,9 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import ContactButton from "./ContactButton";
+import { LangToggle } from "./LangToggle";
+import { useLocale } from "@/i18n/LocaleProvider";
+import gvlLogo from "@/assets/img/gavalon/GVL-logo.png";
 
 const logo = "/img/logo/aileen-logo.png";
 const PMT = "/img/home/productsSolutions/PMT.svg";
@@ -9,58 +12,9 @@ const RPA = "/img/home/productsSolutions/RPA.svg";
 const AI = "/img/home/productsSolutions/AI.svg";
 const LPM = "/img/home/productsSolutions/LPM.svg";
 const QMS = "/img/home/productsSolutions/QMS.svg";
+const GVL = gvlLogo.src;
 
-const MENU_TH = [
-  { label: "หน้าแรก", href: "/" },
-  { label: "เกี่ยวกับเรา", href: "/about" },
-  { label: "บริการของเรา", href: "/service" },
-  { label: "ลูกค้าของเรา", href: "/customers" },
-  { label: "ข่าวสารและกิจกรรม", href: "/news" },
-];
-
-const SERVICE_ITEMS = [
-  {
-    id: "pmp",
-    href: "/service/process-management-platform",
-    title: "Process Management Platform",
-    icon: PMT,
-    summary: "Map and improve enterprise workflows from one central process system.",
-  },
-  {
-    id: "rpa",
-    href: "/service/robotic-process-automation",
-    title: "Robotic Process Automation",
-    icon: RPA,
-    summary: "Use digital workers to automate repetitive tasks across business systems.",
-  },
-  {
-    id: "dsai",
-    href: "/service/domain-specific-generative-ai",
-    title: "Domain-Specific Generative AI",
-    icon: AI,
-    summary: "Create AI assistants grounded in your internal knowledge and documents.",
-  },
-  {
-    id: "lcbo",
-    href: "/service/low-code-business-orchestrator",
-    title: "Low-Code Business Orchestrator",
-    icon: LPM,
-    summary: "Build internal apps and workflow orchestration faster with visual tools.",
-  },
-  {
-    id: "qmp",
-    href: "/service/quality-management-platform",
-    title: "Quality Management Platform",
-    icon: QMS,
-    summary: "Strengthen compliance, document control, and quality operations.",
-  },
-];
-
-const DESKTOP_SERVICE_SPLIT_INDEX = Math.ceil(SERVICE_ITEMS.length / 2);
-const DESKTOP_SERVICE_COLUMNS = [
-  SERVICE_ITEMS.slice(0, DESKTOP_SERVICE_SPLIT_INDEX),
-  SERVICE_ITEMS.slice(DESKTOP_SERVICE_SPLIT_INDEX),
-];
+const SERVICE_ICONS = { pmp: PMT, rpa: RPA, dsai: AI, lcbo: LPM, qmp: QMS, gvl: GVL };
 
 function ThemeToggle({ dark, onToggle, scrolled }) {
   let trackBg;
@@ -85,34 +39,6 @@ function ThemeToggle({ dark, onToggle, scrolled }) {
         }`}
       >
         {dark ? "☀️" : "🌙"}
-      </span>
-    </button>
-  );
-}
-
-function LangToggle({ lang, onToggle, scrolled }) {
-  const trackBgInactive = scrolled ? "bg-slate-300" : "bg-white/30";
-  const trackBg = lang === "en" ? "bg-[#27b7a6]" : trackBgInactive;
-  const labelColorInactive = scrolled ? "text-slate-500" : "text-white/80";
-  const labelColor = lang === "en" ? "text-white/80" : labelColorInactive;
-
-  return (
-    <button
-      onClick={onToggle}
-      aria-label="Toggle language"
-      className={`relative h-7 w-[52px] shrink-0 rounded-full transition-colors duration-300 focus:outline-none ${trackBg}`}
-    >
-      <span
-        className={`absolute left-[3px] top-[3px] h-[22px] w-[22px] rounded-full bg-white shadow-md transition-transform duration-300 ${
-          lang === "en" ? "translate-x-[24px]" : "translate-x-0"
-        }`}
-      />
-      <span
-        className={`absolute top-1/2 -translate-y-1/2 text-[10px] font-bold leading-none transition-all duration-300 ${labelColor} ${
-          lang === "en" ? "left-[9px]" : "right-[9px]"
-        }`}
-      >
-        {lang === "th" ? "EN" : "TH"}
       </span>
     </button>
   );
@@ -169,12 +95,12 @@ function ServiceMenuItem({ item, onClick, mobile = false, open = true, delayMs =
 
 export default function Navbar() {
   const pathname = usePathname();
+  const { messages, t } = useLocale();
   const navRef = useRef(null);
   const closeTimerRef = useRef(null);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
   const [dark, setDark] = useState(false);
-  const [lang, setLang] = useState("th");
   const [desktopServicesOpen, setDesktopServicesOpen] = useState(false);
   const [mobileServicesOpen, setMobileServicesOpen] = useState(false);
 
@@ -184,8 +110,6 @@ export default function Navbar() {
       setDark(true);
       document.documentElement.classList.add("dark");
     }
-    const savedLang = localStorage.getItem("lang");
-    if (savedLang) setLang(savedLang);
   }, []);
 
   useEffect(() => {
@@ -254,15 +178,23 @@ export default function Navbar() {
     });
   };
 
-  const toggleLang = () => {
-    setLang((prev) => {
-      const next = prev === "th" ? "en" : "th";
-      localStorage.setItem("lang", next);
-      return next;
-    });
-  };
+  const menu = [
+    { label: t("common.nav.home"), href: "/" },
+    { label: t("common.nav.about"), href: "/about" },
+    { label: t("common.nav.services"), href: "/service" },
+    { label: t("common.nav.customers"), href: "/customers" },
+    { label: t("common.nav.news"), href: "/news" },
+  ];
 
-  const menu = MENU_TH;
+  const serviceItems = (messages.common?.serviceItems ?? []).map((item) => ({
+    ...item,
+    icon: SERVICE_ICONS[item.id] ?? PMT,
+  }));
+  const splitIndex = Math.ceil(serviceItems.length / 2);
+  const desktopServiceColumns = [
+    serviceItems.slice(0, splitIndex),
+    serviceItems.slice(splitIndex),
+  ];
 
   const forceSolidNav = pathname?.startsWith("/news");
   const useSolidNav = scrolled || forceSolidNav;
@@ -323,10 +255,10 @@ export default function Navbar() {
                     >
                       <div className="overflow-hidden rounded-[24px] border border-slate-200 bg-white p-4 shadow-[0_24px_70px_rgba(15,23,42,0.18)]">
                         <div className="mb-3 px-2">
-                          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">Services</p>
+                          <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">{t("common.nav.servicesDropdown")}</p>
                         </div>
                         <div className="grid grid-cols-2 gap-3">
-                          {DESKTOP_SERVICE_COLUMNS.map((column, columnIndex) => (
+                          {desktopServiceColumns.map((column, columnIndex) => (
                             <div
                               key={`col-${columnIndex}`}
                               className="flex flex-col gap-1 rounded-2xl bg-slate-50/70 p-2"
@@ -355,6 +287,7 @@ export default function Navbar() {
           </ul>
 
           <div className="hidden items-center gap-3 md:flex">
+            <LangToggle scrolled={useSolidNav} />
             <ContactButton href="/contact" />
           </div>
 
@@ -387,7 +320,7 @@ export default function Navbar() {
 
                     {mobileServicesOpen && (
                       <div className="space-y-1 border-t border-slate-200 px-3 py-3">
-                        {SERVICE_ITEMS.map((service) => (
+                        {serviceItems.map((service) => (
                           <ServiceMenuItem
                             key={service.id}
                             item={service}
@@ -410,8 +343,9 @@ export default function Navbar() {
                 ),
               )}
 
-              <div className="pt-1">
-                <ContactButton href="/contact" className="w-full justify-center" />
+              <div className="flex items-center gap-3 pt-1">
+                <LangToggle scrolled />
+                <ContactButton href="/contact" className="flex-1 justify-center" />
               </div>
             </div>
           </div>

@@ -7,10 +7,5 @@ export const metadata = {
 };
 
 export default function SupplyChainResiliencePage() {
-  return (
-    <ServicePlaceholder
-      title="Supply Chain Resilience"
-      summary="Improve visibility and resilience across planning, monitoring, and response."
-    />
-  );
+  return <ServicePlaceholder serviceKey="scr" />;
 }

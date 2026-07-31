@@ -22,7 +22,7 @@ function ChevronIcon({ open }) {
   );
 }
 
-export default function DsaiFeaturesAccordion({ features }) {
+export default function DsaiFeaturesAccordion({ features = [], accordion = {} }) {
   const [openIndex, setOpenIndex] = useState(0);
 
   const toggle = (index) => {
@@ -37,17 +37,16 @@ export default function DsaiFeaturesAccordion({ features }) {
           <div>
             <span className="lv8-pill">
               <span className="lv8-hdot" />
-              Key Features
+              {accordion.eyebrow}
             </span>
             <h2 className="mt-5 text-3xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-5xl">
-              ความสามารถสำคัญ
+              {accordion.title}
               <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
-                ของระบบ AI องค์กร
+                {accordion.titleHighlight}
               </span>
             </h2>
             <p className="mt-4 text-base leading-8 text-slate-500">
-              ออกแบบให้ AI เข้าใจข้อมูล เอกสาร และกระบวนการเฉพาะขององค์กร
-              ไม่ใช่ AI ทั่วไปที่ตอบได้ทุกเรื่องแต่ไม่รู้จักธุรกิจของคุณ
+              {accordion.description}
             </p>
           </div>
 

@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import AnimatedBg from "./AnimatedBgFlux";
+import { useLocale } from "../i18n/LocaleProvider";
+import { getServiceContent } from "../i18n/messages";
 
 export default function DsaiHeroSection() {
+  const { locale } = useLocale();
+  const hero = getServiceContent(locale, "dsai").hero ?? {};
   const sectionRef = useRef(null);
   const targetRef = useRef({ x: 50, y: 50 });
   const currentRef = useRef({ x: 50, y: 50 });
@@ -89,26 +93,22 @@ export default function DsaiHeroSection() {
         <div className="dsai-hero__copy max-w-3xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-100">
             <span className="h-2 w-2 rounded-full bg-emerald-300" />
-            AI & Knowledge Platform
+            {hero.badge}
           </span>
 
           <h1 className="mt-6 text-4xl font-black leading-[0.96] tracking-tight md:text-6xl">
-            Domain-Specific
+            {hero.titleLine1}
             <span className="mt-2 block bg-gradient-to-r from-sky-300 via-cyan-200 to-emerald-300 bg-clip-text text-transparent">
-              Generative AI
+              {hero.titleLine2}
             </span>
           </h1>
 
           <p className="mt-6 max-w-3xl text-base leading-8 text-slate-100/80 md:text-base">
-            AI ที่ถูกออกแบบให้เข้าใจบริบทเฉพาะขององค์กร โดยทำงานบนฐานข้อมูลและโครงสร้างความรู้ภายใน
-            ช่วยให้องค์กรสามารถใช้ Generative AI เพื่อวิเคราะห์ข้อมูล สรุปความรู้ และสนับสนุนการตัดสินใจ
-            ได้อย่างมีประสิทธิภาพและสอดคล้องกับกระบวนการทำงานจริง
+            {hero.description}
           </p>
 
           <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300/70">
-            AI จึงไม่ได้เป็นเพียงเครื่องมือสร้างข้อความ แต่เป็น{" "}
-            <span className="font-semibold text-emerald-300/90">ระบบสนับสนุนความรู้ (Knowledge Intelligence Platform)</span>
-            {" "}ที่ทำงานร่วมกับข้อมูล โครงสร้างเอกสาร และกระบวนการขององค์กร
+            {hero.subDescription}
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4">
@@ -116,7 +116,7 @@ export default function DsaiHeroSection() {
               href="/contact"
               className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15"
             >
-              <span className="relative z-10">Contact Us</span>
+              <span className="relative z-10">{hero.contactUs}</span>
               <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
               </svg>

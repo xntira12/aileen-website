@@ -1,30 +1,34 @@
-import Link from "next/link";
+"use client";
 
-const CATEGORY_THEME = {
-  "Event Highlight": {
-    badge: "border-emerald-200 bg-emerald-50 text-emerald-700",
-    accent: "bg-emerald-500",
-    surface: "from-emerald-50 via-white to-teal-50",
-    ring: "hover:border-emerald-200",
-    link: "text-emerald-700",
-  },
-  Conference: {
-    badge: "border-sky-200 bg-sky-50 text-sky-700",
-    accent: "bg-sky-500",
-    surface: "from-sky-50 via-white to-cyan-50",
-    ring: "hover:border-sky-200",
-    link: "text-sky-700",
-  },
-  Seminar: {
-    badge: "border-amber-200 bg-amber-50 text-amber-700",
-    accent: "bg-amber-500",
-    surface: "from-amber-50 via-white to-orange-50",
-    ring: "hover:border-amber-200",
-    link: "text-amber-700",
-  },
-};
+import Link from "next/link";
+import { useLocale } from "../../i18n/LocaleProvider";
+import { getNewsArticles } from "../../i18n/messages";
 
 export function getCategoryTheme(category) {
+  const CATEGORY_THEME = {
+    "Event Highlight": {
+      badge: "border-emerald-200 bg-emerald-50 text-emerald-700",
+      accent: "bg-emerald-500",
+      surface: "from-emerald-50 via-white to-teal-50",
+      ring: "hover:border-emerald-200",
+      link: "text-emerald-700",
+    },
+    Conference: {
+      badge: "border-sky-200 bg-sky-50 text-sky-700",
+      accent: "bg-sky-500",
+      surface: "from-sky-50 via-white to-cyan-50",
+      ring: "hover:border-sky-200",
+      link: "text-sky-700",
+    },
+    Seminar: {
+      badge: "border-amber-200 bg-amber-50 text-amber-700",
+      accent: "bg-amber-500",
+      surface: "from-amber-50 via-white to-orange-50",
+      ring: "hover:border-amber-200",
+      link: "text-amber-700",
+    },
+  };
+
   return (
     CATEGORY_THEME[category] ?? {
       badge: "border-slate-200 bg-slate-100 text-slate-700",
@@ -180,6 +184,8 @@ export function ArticleCover({ article, tall = false, compact = false, className
 }
 
 export function ArticleCard({ article, featured = false, compact = false }) {
+  const { locale, messages } = useLocale();
+  const componentsCopy = messages.news?.components ?? {};
   const theme = getCategoryTheme(article.category);
   const metaClassName = compact
     ? "mt-0 flex flex-col items-start gap-1.5 text-[13px] leading-5 text-slate-500"
@@ -220,9 +226,7 @@ export function ArticleCard({ article, featured = false, compact = false }) {
         <p
           className={[
             "flex-1 text-sm text-slate-600",
-            compact
-              ? "mt-3 min-h-[4.6rem] leading-6 line-clamp-3"
-              : "mt-3 leading-7 line-clamp-3",
+            compact ? "mt-3 min-h-[4.6rem] leading-6 line-clamp-3" : "mt-3 leading-7 line-clamp-3",
           ].join(" ")}
         >
           {article.summary}
@@ -235,7 +239,7 @@ export function ArticleCard({ article, featured = false, compact = false }) {
             compact ? "mt-5" : "mt-5",
           ].join(" ")}
         >
-          อ่านต่อ
+          {componentsCopy.readMore}
           <span className="transition-transform duration-300 group-hover:translate-x-1">
             <ArrowRightIcon />
           </span>
@@ -246,23 +250,30 @@ export function ArticleCard({ article, featured = false, compact = false }) {
 }
 
 export function FeaturedArticle({ article }) {
+  const { messages } = useLocale();
+  const componentsCopy = messages.news?.components ?? {};
+
   return (
     <article className="overflow-hidden rounded-[32px] border border-slate-200 bg-white">
       <div className="grid gap-0 lg:grid-cols-[minmax(0,1.08fr)_minmax(300px,0.92fr)]">
-        <ArticleCover article={article} tall className="rounded-none border-0 border-b border-slate-200 lg:border-b-0 lg:border-r" />
+        <ArticleCover
+          article={article}
+          tall
+          className="rounded-none border-0 border-b border-slate-200 lg:border-b-0 lg:border-r"
+        />
 
         <div className="flex flex-col justify-between p-6 md:p-8">
           <div>
             <MetaRow article={article} />
 
-            <h3 className="mt-4 text-3xl font-semibold leading-tight tracking-[-0.04em] text-slate-900 md:text-4xl">
+            <h3 className="mt-4 text-3xl font-semibold leading-[1.28] tracking-[-0.04em] text-slate-900 md:text-4xl md:leading-[1.25]">
               {article.title}
             </h3>
 
             <p className="mt-4 text-sm leading-7 text-slate-600 md:text-base">{article.summary}</p>
 
             <div className="mt-6 flex flex-wrap gap-2">
-              {article.highlights.slice(0, 3).map((item) => (
+              {article.highlights?.slice(0, 3).map((item) => (
                 <span
                   key={item}
                   className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-600"
@@ -278,13 +289,13 @@ export function FeaturedArticle({ article }) {
               href={`/news/${article.slug}`}
               className="inline-flex items-center justify-center rounded-full bg-slate-900 px-5 py-3 text-sm font-semibold text-white transition hover:bg-slate-800"
             >
-              อ่านเพิ่มเติม
+              {componentsCopy.readFull}
             </Link>
             <a
               href="#all-news"
               className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-700 transition hover:border-slate-300 hover:bg-slate-50"
             >
-              ข่าวสารอื่น ๆ
+              {componentsCopy.otherNews}
             </a>
           </div>
         </div>
@@ -293,14 +304,9 @@ export function FeaturedArticle({ article }) {
   );
 }
 
-export function GalleryTile({
-  title,
-  ratio = "wide",
-  category = "Conference",
-  image,
-  alt,
-  onOpen,
-}) {
+export function GalleryTile({ title, ratio = "wide", category = "Conference", image, alt, onOpen }) {
+  const { messages } = useLocale();
+  const componentsCopy = messages.news?.components ?? {};
   const theme = getCategoryTheme(category);
   const height =
     ratio === "portrait" ? "min-h-[240px] md:min-h-[300px]" : "min-h-[220px] md:min-h-[260px]";
@@ -329,7 +335,7 @@ export function GalleryTile({
             "group relative block w-full overflow-hidden rounded-[24px] border border-slate-200 bg-slate-100 text-left",
             height,
           ].join(" ")}
-          aria-label={`ดูรูปภาพ: ${alt || title}`}
+          aria-label={`${componentsCopy.viewImage}: ${alt || title}`}
         >
           {content}
         </button>
@@ -342,7 +348,7 @@ export function GalleryTile({
         target="_blank"
         rel="noopener noreferrer"
         className={["group relative block overflow-hidden rounded-[24px] border border-slate-200 bg-slate-100", height].join(" ")}
-        aria-label={`ดูรูปภาพ: ${alt || title}`}
+        aria-label={`${componentsCopy.viewImage}: ${alt || title}`}
       >
         {content}
       </a>

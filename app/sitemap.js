@@ -31,6 +31,12 @@ export default function sitemap() {
       priority: 0.7,
     },
     {
+      url: `${SITE_URL}/service/gavalon`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
       url: `${SITE_URL}/customers`,
       lastModified: new Date(),
       changeFrequency: "monthly",

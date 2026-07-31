@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { useLocale } from "../i18n/LocaleProvider";
 const member1  = "/img/profile/member1.png";
 const member2  = "/img/profile/member2.png";
 const member3  = "/img/profile/member3.png";
@@ -41,13 +42,6 @@ const TEAM = [
 ];
 
 const DEPT_CHIP = { sales: "Sales & Marketing", tech: "Technical Development", support: "Project & Support" };
-
-const TABS = [
-  { key: "all",     label: "ทั้งหมด",               chip: null },
-  { key: "sales",   label: "Sales & Marketing",     chip: "Sales & Marketing" },
-  { key: "tech",    label: "Technical & Developer", chip: "Technical Development" },
-  { key: "support", label: "Project & Support",     chip: "Project & Support" },
-];
 
 const CARD_W = 178;
 
@@ -95,10 +89,10 @@ function Card({ member, delay, inView, onHoverStart, onHoverEnd }) {
 }
 
 /* ── Mobile Dropdown ── */
-function MobileDropdown({ tab, onChange }) {
+function MobileDropdown({ tab, onChange, tabs }) {
   const [open, setOpen] = useState(false);
   const ref = useRef(null);
-  const current = TABS.find(t => t.key === tab);
+  const current = tabs.find(t => t.key === tab);
 
   useEffect(() => {
     if (!open) return;
@@ -118,7 +112,7 @@ function MobileDropdown({ tab, onChange }) {
           <span className={`t9-dropdown-arr ${open ? "op" : ""}`}>▾</span>
         </button>
         <div className={`t9-dropdown-list ${open ? "op" : ""}`}>
-          {TABS.map(t => {
+          {tabs.map(t => {
             const count = t.key === "all" ? TEAM.length : TEAM.filter(m => m.dept === t.key).length;
             return (
               <div key={t.key} className={`t9-dropdown-item ${t.key === tab ? "act" : ""}`}
@@ -137,6 +131,14 @@ function MobileDropdown({ tab, onChange }) {
 }
 
 export default function SectionTeam() {
+  const { messages } = useLocale();
+  const teamCopy = messages.home?.team ?? {};
+  const TABS = (teamCopy.tabs ?? []).map((tab) => ({
+    key: tab.key,
+    label: tab.label,
+    chip: teamCopy.departments?.[tab.key] ?? null,
+  }));
+
   const [secRef, inView] = useInView(0.08);
   const [tab, setTab]    = useState("all");
   const trackRef   = useRef(null);
@@ -215,10 +217,10 @@ export default function SectionTeam() {
       {/* header */}
       <div style={{ position:"relative", zIndex:1, textAlign:"center", padding:"0 24px" }}>
         <span className={`t9-pill t9-rv ${inView ? "on" : ""}`} style={{ animationDelay:"0ms" }}>
-          <span className="t9-hdot" /> OUR TEAM
+          <span className="t9-hdot" /> {teamCopy.eyebrow}
         </span>
         <h2 className={`t9-h2 t9-rv ${inView ? "on" : ""}`} style={{ animationDelay:"80ms" }}>
-          ทีมงานของเรา — <span className="t9-grad">ผู้ขับเคลื่อนทุกโซลูชั่น</span>
+          {teamCopy.title} <span className="t9-grad">{teamCopy.titleHighlight}</span>
         </h2>
       </div>
 
@@ -242,7 +244,7 @@ export default function SectionTeam() {
 
       {/* ── Mobile dropdown ── */}
       <div className={`t9-rv ${inView ? "on" : ""}`} style={{ animationDelay:"160ms", position:"relative", zIndex:10 }}>
-        <MobileDropdown tab={tab} onChange={switchTab} />
+        <MobileDropdown tab={tab} onChange={switchTab} tabs={TABS} />
       </div>
 
       {/* ── ALL TAB: CSS marquee, pause only on card hover ── */}
@@ -294,7 +296,7 @@ export default function SectionTeam() {
           </div>
 
           <div className="t9-bottom-nav">
-            <button className="t9-btn" disabled={!canL} onClick={() => scroll(-1)} aria-label="Previous">
+            <button className="t9-btn" disabled={!canL} onClick={() => scroll(-1)} aria-label={teamCopy.prev}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
             </button>
             <div className="t9-dots">
@@ -302,7 +304,7 @@ export default function SectionTeam() {
                 <span key={i} className={`t9-dot-item ${i === activeDot ? "on" : ""}`} />
               ))}
             </div>
-            <button className="t9-btn" disabled={!canR} onClick={() => scroll(1)} aria-label="Next">
+            <button className="t9-btn" disabled={!canR} onClick={() => scroll(1)} aria-label={teamCopy.next}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             </button>
           </div>

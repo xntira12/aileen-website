@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { QMS_PLATFORM_MODULES } from "@/content/qmsModules";
+import { useLocale } from "../i18n/LocaleProvider";
+import { getServiceContent } from "../i18n/messages";
 
 function BulletList({ items, variant }) {
   const isPain = variant === "pain";
@@ -43,11 +44,16 @@ function NavArrow({ direction }) {
 }
 
 export default function QmsModulesSection() {
+  const { locale } = useLocale();
+  const modulesContent = getServiceContent(locale, "qms").modules ?? {};
+  const labels = modulesContent.labels ?? {};
+  const QMS_PLATFORM_MODULES = modulesContent.items ?? [];
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [detailTab, setDetailTab] = useState("pain");
   const [isAnimating, setIsAnimating] = useState(false);
   const detailRef = useRef(null);
-  const active = QMS_PLATFORM_MODULES[activeIndex];
+  const active = QMS_PLATFORM_MODULES[activeIndex] ?? QMS_PLATFORM_MODULES[0] ?? {};
   const total = QMS_PLATFORM_MODULES.length;
 
   const selectModule = useCallback((index) => {
@@ -87,27 +93,27 @@ export default function QmsModulesSection() {
           <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
             <div className="max-w-2xl">
               <p className="text-[11px] font-semibold uppercase tracking-[0.22em] text-cyan-700">
-                Platform Modules
+                {labels.eyebrow}
               </p>
               <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-900 md:text-4xl">
-                <span className="block">ครบทุกโมดูล</span>
+                <span className="block">{labels.titleLine1}</span>
                 <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
-                  สำหรับการบริหารคุณภาพ
+                  {labels.titleHighlight}
                 </span>
               </h2>
               <p className="mt-3 text-base leading-8 text-slate-500">
-                เลือกโมดูลเพื่อดู Painpoint และ Benefits ออกแบบให้ทีมเข้าใจปัญหาและคุณค่าของแต่ละระบบได้ชัดเจน
+                {labels.description}
               </p>
             </div>
 
             <div className="flex shrink-0 items-center gap-4 rounded-2xl border border-slate-200/80 bg-white px-5 py-4 shadow-sm">
               <div className="text-center">
                 <p className="text-3xl font-extrabold tabular-nums tracking-tight text-slate-900">{total}</p>
-                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">โมดูล</p>
+                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-slate-400">{labels.modulesLabel}</p>
               </div>
               <div className="h-10 w-px bg-slate-200" />
               <div className="min-w-[120px]">
-                <p className="text-xs font-medium text-slate-500">กำลังดู</p>
+                <p className="text-xs font-medium text-slate-500">{labels.viewingLabel}</p>
                 <p className="mt-0.5 text-sm font-semibold text-cyan-800">
                   Module {active.id}
                 </p>
@@ -160,10 +166,10 @@ export default function QmsModulesSection() {
           {/* Desktop sidebar nav */}
           <nav
             className="hidden border-r border-slate-100 bg-slate-50/40 p-4 lg:block lg:p-5"
-            aria-label="เลือกโมดูล"
+            aria-label={labels.selectModuleAria}
           >
             <p className="mb-3 px-2 text-[10px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-              โมดูลทั้งหมด
+              {labels.allModules}
             </p>
             <ul className="space-y-1">
               {QMS_PLATFORM_MODULES.map((mod, index) => {
@@ -249,8 +255,8 @@ export default function QmsModulesSection() {
               {/* Mobile tab switcher */}
               <div className="flex gap-2 border-b border-slate-100 px-4 py-3 lg:hidden">
                 {[
-                  { id: "pain", label: "Painpoint", count: active.painpoints.length },
-                  { id: "benefit", label: "Benefits", count: active.benefits.length },
+                  { id: "pain", label: labels.painpoint, count: active.painpoints?.length ?? 0 },
+                  { id: "benefit", label: labels.benefits, count: active.benefits?.length ?? 0 },
                 ].map((tab) => (
                   <button
                     key={tab.id}
@@ -283,8 +289,8 @@ export default function QmsModulesSection() {
                 >
                   <div className="mb-6">
                     <div>
-                      <h4 className="text-sm font-bold text-amber-900">Painpoint</h4>
-                      <p className="text-xs text-amber-700/70">ปัญหาที่พบบ่อยในการทำงาน</p>
+                      <h4 className="text-sm font-bold text-amber-900">{labels.painpoint}</h4>
+                      <p className="text-xs text-amber-700/70">{labels.painpointDesc}</p>
                     </div>
                   </div>
                   <div className="rounded-[20px] bg-gradient-to-b from-amber-50/80 to-orange-50/30 p-1 ring-1 ring-amber-100/80">
@@ -300,8 +306,8 @@ export default function QmsModulesSection() {
                 >
                   <div className="mb-6">
                     <div>
-                      <h4 className="text-sm font-bold text-emerald-900">Benefits</h4>
-                      <p className="text-xs text-emerald-700/70">คุณค่าที่ได้จากระบบ</p>
+                      <h4 className="text-sm font-bold text-emerald-900">{labels.benefits}</h4>
+                      <p className="text-xs text-emerald-700/70">{labels.benefitsDesc}</p>
                     </div>
                   </div>
                   <div className="rounded-[20px] bg-gradient-to-b from-emerald-50/80 to-teal-50/30 p-1 ring-1 ring-emerald-100/80">
@@ -341,7 +347,7 @@ export default function QmsModulesSection() {
                         className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 disabled:opacity-40"
                       >
                         <NavArrow direction="prev" />
-                        ก่อนหน้า
+                        {labels.prev}
                       </button>
                       <button
                         type="button"
@@ -349,7 +355,7 @@ export default function QmsModulesSection() {
                         disabled={activeIndex === total - 1}
                         className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-full border border-slate-200 bg-white px-4 py-2 text-xs font-semibold text-slate-700 shadow-sm transition hover:border-slate-300 disabled:opacity-40"
                       >
-                        ถัดไป
+                        {labels.next}
                         <NavArrow direction="next" />
                       </button>
                     </div>
