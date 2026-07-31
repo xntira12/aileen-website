@@ -53,11 +53,13 @@ export default function RpaBenefitsCards({
             </span>
             <h2 className="mt-6 text-3xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-5xl">
               {title}
-              <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
-                {subtitle}
-              </span>
+              {subtitle ? (
+                <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
+                  {subtitle}
+                </span>
+              ) : null}
             </h2>
-            <p className="mt-5 text-base leading-8 text-slate-600">{description}</p>
+            {description ? <p className="mt-5 text-base leading-8 text-slate-600">{description}</p> : null}
           </div>
 
           <div className="relative mx-auto mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3 mb-20">

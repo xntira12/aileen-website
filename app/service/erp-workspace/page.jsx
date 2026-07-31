@@ -7,10 +7,5 @@ export const metadata = {
 };
 
 export default function ERPWorkspacePage() {
-  return (
-    <ServicePlaceholder
-      title="ERP Workspace"
-      summary="Unify ERP applications, operational data, and collaboration in one workspace."
-    />
-  );
+  return <ServicePlaceholder serviceKey="erp" />;
 }

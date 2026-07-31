@@ -105,11 +105,6 @@ export default function GavalonHeroSection() {
             ลดความซ้ำซ้อนในการทำงาน และบริหารความเสี่ยงด้านการปฏิบัติตามกฎหมายได้อย่างมีประสิทธิภาพ
           </p>
 
-          <p className="mt-4 max-w-3xl text-sm leading-7 text-slate-300/75">
-            พัฒนาขึ้นจากความร่วมมือระหว่าง Aileen Solutions ผู้เชี่ยวชาญด้าน Enterprise Software, Digital Process
-            และ AI กับ NPC S&amp;E ผู้เชี่ยวชาญด้านความปลอดภัย อาชีวอนามัย สิ่งแวดล้อม และระบบมาตรฐานสำหรับภาคอุตสาหกรรม
-          </p>
-
           <div className="mt-9 flex flex-wrap gap-4">
             <a
               href="/contact"

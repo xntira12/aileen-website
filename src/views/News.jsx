@@ -1,36 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import Navbar from "../components/Navbar";
 import SectionContactFooter from "../components/SectionContactFooter";
-import { NEWS_ARTICLES } from "../content/news";
-import {
-  ArticleCard,
-  FeaturedArticle,
-  SectionHeading,
-} from "../components/news/NewsComponents";
-
-const featuredArticle = NEWS_ARTICLES[0];
-const remainingArticles = NEWS_ARTICLES.slice(1);
-
-const latestPublishedAt = NEWS_ARTICLES.reduce(
-  (latest, article) => (article.publishedAt > latest ? article.publishedAt : latest),
-  NEWS_ARTICLES[0]?.publishedAt ?? "",
-);
-
-const latestUpdateLabel = latestPublishedAt
-  ? new Intl.DateTimeFormat("th-TH", { month: "long", year: "numeric" }).format(
-      new Date(`${latestPublishedAt}T00:00:00`),
-    )
-  : "-";
-
-const pageStats = [
-  { value: String(NEWS_ARTICLES.length), label: "ข่าวสารและกิจกรรม", accent: "from-sky-500/20 to-cyan-400/10" },
-  { value: String(NEWS_ARTICLES.length), label: "ข่าวล่าสุด", accent: "from-emerald-500/20 to-teal-400/10" },
-  { value: latestUpdateLabel, label: "อัปเดตล่าสุด", accent: "from-amber-500/20 to-orange-400/10" },
-];
-
-const topicTags = ["AI & Automation", "Safety", "Digital Transformation", "Sustainability"];
+import { getNewsArticles } from "../i18n/messages";
+import { useLocale } from "../i18n/LocaleProvider";
+import { ArticleCard, FeaturedArticle, SectionHeading } from "../components/news/NewsComponents";
 
 function useInView(threshold = 0.12) {
   const ref = useRef(null);
@@ -58,7 +33,61 @@ function useInView(threshold = 0.12) {
 }
 
 export default function News() {
+  const { locale, messages } = useLocale();
+  const page = messages.news?.page ?? {};
+  const articles = getNewsArticles(locale);
+
+  const featuredArticle = articles[0];
+  const remainingArticles = articles.slice(1);
+
+  const latestPublishedAt = articles.reduce(
+    (latest, article) => (article.publishedAt > latest ? article.publishedAt : latest),
+    articles[0]?.publishedAt ?? "",
+  );
+
+  const dateLocale = locale === "en" ? "en-US" : "th-TH";
+  const latestUpdateLabel = latestPublishedAt
+    ? new Intl.DateTimeFormat(dateLocale, { month: "long", year: "numeric" }).format(
+        new Date(`${latestPublishedAt}T00:00:00`),
+      )
+    : "-";
+
+  const pageStats = useMemo(
+    () => [
+      {
+        value: String(articles.length),
+        label: page.stats?.total,
+        accent: "from-sky-500/20 to-cyan-400/10",
+      },
+      {
+        value: String(articles.length),
+        label: page.stats?.latest,
+        accent: "from-emerald-500/20 to-teal-400/10",
+      },
+      {
+        value: latestUpdateLabel,
+        label: page.stats?.updated,
+        accent: "from-amber-500/20 to-orange-400/10",
+      },
+    ],
+    [articles.length, latestUpdateLabel, page.stats],
+  );
+
+  const topicTags = page.topicTags ?? [];
   const [heroRef, heroInView] = useInView(0.1);
+
+  if (!featuredArticle) {
+    return (
+      <div className="min-h-screen bg-[#f5f8fb] text-slate-900">
+        <Navbar />
+        <main className="mx-auto max-w-7xl px-6 py-32 text-center">
+          <p className="text-lg font-medium">{page.emptyTitle}</p>
+          <p className="mt-2 text-sm text-slate-500">{page.emptyDescription}</p>
+        </main>
+        <SectionContactFooter />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#f5f8fb] text-slate-900">
@@ -85,20 +114,18 @@ export default function News() {
               >
                 <span className="inline-flex items-center gap-2 rounded-full border border-sky-200 bg-white/90 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.26em] text-sky-700 backdrop-blur">
                   <span className="h-2 w-2 rounded-full bg-sky-500" />
-                  News & Events
+                  {page.eyebrow}
                 </span>
 
                 <h1 className="mt-6 max-w-4xl text-[2.8rem] font-semibold leading-[0.95] tracking-[-0.06em] text-slate-950 md:text-[4.75rem]">
-                  ข่าวสารและกิจกรรม
+                  {page.title}
                   <span className="mt-2 block bg-[linear-gradient(90deg,#0f172a_0%,#0f6aa8_46%,#0ea5e9_100%)] bg-clip-text text-transparent">
-                    จาก Aileen Solutions
+                    {page.titleHighlight}
                   </span>
                 </h1>
 
                 <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 md:text-[1.05rem]">
-                  รวมข่าวสาร กิจกรรม และมุมมองจากงานสัมมนา งานเทคโนโลยี และการแลกเปลี่ยนความรู้
-                  ที่สะท้อนแนวทางการประยุกต์ใช้ Process, Automation และ AI
-                  ในองค์กรให้เกิดผลลัพธ์ที่ชัดเจน ใช้งานได้จริง และต่อยอดสู่การเติบโตอย่างยั่งยืน
+                  {page.description}
                 </p>
 
                 <div className="mt-7 flex flex-wrap gap-2.5">
@@ -117,13 +144,13 @@ export default function News() {
                     href={`#featured-${featuredArticle.slug}`}
                     className="inline-flex items-center justify-center rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:bg-slate-800"
                   >
-                    ดูข่าวเด่นล่าสุด
+                    {page.viewFeatured}
                   </a>
                   <a
                     href="#all-news"
                     className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white/85 px-5 py-3 text-sm font-semibold text-slate-700 transition hover:-translate-y-0.5 hover:border-slate-300 hover:bg-white"
                   >
-                    ดูข่าวทั้งหมด
+                    {page.viewAll}
                   </a>
                 </div>
               </div>
@@ -144,7 +171,7 @@ export default function News() {
                   <div className="absolute -right-10 -top-10 h-24 w-24 rounded-full bg-sky-100/60 blur-2xl transition duration-300 group-hover:scale-110" />
                   <div className="relative">
                     <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-slate-400">
-                      Snapshot
+                      {page.snapshot}
                     </p>
                     <div className="mt-4 text-3xl font-semibold tracking-[-0.05em] text-slate-950 md:text-[2.35rem]">
                       {item.value}
@@ -161,12 +188,12 @@ export default function News() {
           id={`featured-${featuredArticle.slug}`}
           className="mx-auto max-w-7xl px-6 py-14 md:px-8 md:py-16"
         >
-          <SectionHeading eyebrow="Featured Story" title="ข่าวไฮไลต์ล่าสุด" />
+          <SectionHeading eyebrow={page.featuredEyebrow} title={page.featuredTitle} />
           <FeaturedArticle article={featuredArticle} />
         </section>
 
         <section id="all-news" className="mx-auto mt-12 max-w-7xl px-6 pb-16 md:px-8 md:pb-20">
-          <SectionHeading eyebrow="All Stories" title="ข่าวสารและกิจกรรมทั้งหมด" compact />
+          <SectionHeading eyebrow={page.allEyebrow} title={page.allTitle} compact />
 
           {remainingArticles.length > 0 ? (
             <div className="mt-6 grid gap-4 md:mt-8 md:grid-cols-2 xl:grid-cols-3">
@@ -176,10 +203,8 @@ export default function News() {
             </div>
           ) : (
             <div className="rounded-[28px] border border-dashed border-slate-300 bg-white px-6 py-14 text-center">
-              <p className="text-lg font-medium text-slate-900">ยังไม่มีข่าวในขณะนี้</p>
-              <p className="mt-2 text-sm text-slate-500">
-                สามารถกลับมาเช็กอัปเดตใหม่ได้ในภายหลัง
-              </p>
+              <p className="text-lg font-medium text-slate-900">{page.emptyTitle}</p>
+              <p className="mt-2 text-sm text-slate-500">{page.emptyDescription}</p>
             </div>
           )}
         </section>

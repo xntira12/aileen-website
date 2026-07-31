@@ -12,8 +12,11 @@ const nextConfig = {
   },
   webpack: (config, { dev }) => {
     if (dev) {
-      // Avoid stale filesystem cache/chunk issues during local development on Windows.
-      config.cache = { type: "memory" };
+      config.cache = false;
+      config.watchOptions = {
+        ...config.watchOptions,
+        aggregateTimeout: 300,
+      };
     }
 
     return config;

@@ -22,7 +22,7 @@ function ChevronIcon({ open }) {
   );
 }
 
-export default function LcbpFeaturesAccordion({ features }) {
+export default function LcbpFeaturesAccordion({ features = [], accordion = {} }) {
   const [openIndex, setOpenIndex] = useState(0);
 
   const toggle = (index) => {
@@ -37,17 +37,16 @@ export default function LcbpFeaturesAccordion({ features }) {
           <div>
             <span className="lv8-pill">
               <span className="lv8-hdot" />
-              Key Features
+              {accordion.eyebrow}
             </span>
             <h2 className="mt-5 text-3xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-5xl">
-              ความสามารถสำคัญ
+              {accordion.title}
               <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
-                ของ Low-Code Platform
+                {accordion.titleHighlight}
               </span>
             </h2>
             <p className="mt-4 text-base leading-8 text-slate-500">
-              สร้าง Application และ Workflow ได้อย่างรวดเร็วด้วย Visual Tools
-              ที่เชื่อมต่อกับระบบองค์กรที่มีอยู่ได้โดยไม่ต้องเขียนโค้ดซับซ้อน
+              {accordion.description}
             </p>
           </div>
 

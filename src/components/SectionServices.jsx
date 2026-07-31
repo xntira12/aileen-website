@@ -1,12 +1,14 @@
 "use client";
-import React, { useEffect, useRef, useState, useCallback } from "react";
+import React, { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
+import { useLocale } from "../i18n/LocaleProvider";
+import gvlLogo from "@/assets/img/gavalon/GVL-logo-w.png";
 const PMT = "/img/home/productsSolutions/PMT.svg";
 const RPA = "/img/home/productsSolutions/RPA.svg";
 const AI = "/img/home/productsSolutions/AI.svg";
 const LPM = "/img/home/productsSolutions/LPM.svg";
 const QMS = "/img/home/productsSolutions/QMS.svg";
-const GVL = "/img/home/productsSolutions/GVL.svg";
+const GVL = gvlLogo.src;
 const SPC = "/img/home/productsSolutions/SPC.svg";
 const ERP = "/img/home/productsSolutions/ERP.svg";
 
@@ -37,44 +39,34 @@ function useScrollReveal(threshold = 0.12) {
 /* ══════════════════════════════════════════
    Data
 ══════════════════════════════════════════ */
-const SVC = [
-  { id:"pmp", n:"", t:"Process Management Platform", ic:PMT, tags:["BPM","Process"], group:"auto",
-    summary:'จัดการ "กระบวนการทำงาน" จากรูปแบบเอกสาร กระดาษหรือ Visio ให้สามารถบริหาร จัดเก็บ และปรับปรุงกระบวนการได้ผ่านระบบเดียว',
-    detail:"เพื่อให้ทุกคนในองค์กรเห็นภาพการทำงานเดียวกันและสามารถพัฒนา Process ได้อย่างต่อเนื่องในอนาคต",
-    features:["เปลี่ยนความซับซ้อนของแผนผังกระบวนการ ข้อมูลที่กระจัดกระจาย (Silos) เอกสาร หรือไฟล์ Visio ที่ดูยาก ให้กลายเป็นกระบวนการทำงานที่เป็นระบบ สามารถจัดการและเข้าถึงได้ง่ายขึ้น","ค้นหา เจาะลึก และควบคุมกระบวนการทำงานของคุณให้เป็นมาตรฐาน ถูกต้องตามข้อกำหนด (Compliance) ทำงานร่วมกันได้ราบรื่น พร้อมสำหรับการปรับปรุงและรองรับทุกการเปลี่ยนแปลง","รักษาประสิทธิภาพการทำงาน ลดความเสี่ยง Knowledge Loss เมื่อพนักงานลาออกหรือหยุดงานยาว","ติดตามสถานะได้แบบเรียลไทม์ ตรวจสอบได้ทันทีว่ารายการใดเผยแพร่แล้ว รอดำเนินการ หรือรอการตรวจสอบ","ใช้เป็นฐานข้อมูลสำหรับต่อยอดในการนำระบบ Automation หรือ RPA มาปรับใช้ในองค์กร"] },
-  { id:"rpa", n:"", t:"Robotic Process Automation", ic:RPA, tags:["Automation","RPA"], group:"auto",
-    summary:"หุ่นยนต์ซอฟต์แวร์ (Bot) ที่ช่วยทำงานซ้ำๆ บนคอมพิวเตอร์ ทำหน้าที่เป็น ผู้ช่วยส่วนตัวอัตโนมัติของเราตลอด 24 ชั่วโมง",
-    detail:"สามารถทำงานตามการ คลิ๊กเมาส์ หรือ กดคีย์บอร์ด ของเราได้ ในงานที่มีรูปแบบซ้ำๆเดิมๆหรือว่างาน Routine ที่เราต้องทำประจำทุกวัน , สัปดาห์ หรือเดือน Bot สามารถช่วยเราทำได้ทุกขั้นตอนอย่างแม่นยำ และรวดเร็ว",
-    features:["ดำเนินการขั้นตอน ตามเงื่อนไขเวลา และเหตุการณ์ที่กำหนดใว้ ","ดำเนินการขั้นตอนซ้ำๆ ใช้เวลานาน ให้ทำเสร็จเร็วขึ้น ","อ่านข้อมูลจากระบบต้นทาง และบันทึกข้อมูลเข้าสู่ระบบอื่นๆ","เชื่อมโยง และแลกเปลี่ยนฟิลด์ข้อมูลระหว่างหลายๆ ระบบได้ ","ช่วยแนะนำขั้นตอนการใช้งาน Application ที่ถูกต้อง (Guide Me Mode)"] },
-  { id:"dsai", n:"", t:"Domain-Specific Generative AI", ic:AI, tags:["AI","Generative"], group:"auto",
-    summary:"AI ที่ถูกออกแบบให้เข้าใจ บริบทเฉพาะขององค์กร โดยทำงานบนฐานข้อมูลและโครงสร้างความรู้เฉพาะทางภายในองค์กร",
-    detail:"ช่วยให้องค์กรสามารถใช้ Generative AI เพื่อ วิเคราะห์ข้อมูล สรุปความรู้ และสนับสนุนการตัดสินใจ ได้อย่างมีประสิทธิภาพ และสอดคล้องกับกระบวนการทำงานจริง ",
-    features:["สร้าง AI Knowledge Assistant สำหรับองค์กร ","วิเคราะห์และสรุปข้อมูลจากเอกสารจำนวนมากได้อัตโนมัติ ","ค้นหาข้อมูลจาก Knowledge Base ขององค์กรได้อย่างแม่นยำ ","ทำงานร่วมกับ Document Control และ Process Framework ","รองรับการเชื่อมต่อกับระบบองค์กร เช่น ERP, Workflow และ Database ","สร้าง AI Chat Interface สำหรับการค้นหาความรู้ภายในองค์กร "] },
-  { id:"lcbo", n:"", t:"Low-Code Business Orchestrator", ic:LPM, tags:["Low-Code","Workflow"], group:"auto",
-    summary:"แพลตฟอร์มสำหรับพัฒนา Application และ Workflow ภายในองค์กรได้อย่างรวดเร็ว โดยใช้การออกแบบแบบ Visual Model ",
-    detail:"แทนการเขียนโค้ดจำนวนมาก ช่วยให้องค์กรสามารถสร้างระบบดิจิทัลที่สอดคล้องกับกระบวนการทำงานจริง โดยไม่ต้องพัฒนาซอฟต์แวร์แบบ Traditional ที่ใช้เวลานานและมีความซับซ้อนสูง",
-    features:["ออกแบบ Workflow และ Application ด้วย Visual Process Model","สร้างฟอร์ม ระบบอนุมัติ และ Workflow Automation ได้อย่างรวดเร็ว","จัดการเอกสารและข้อมูลภายในระบบอย่างเป็นโครงสร้าง","ติดตามสถานะงาน และวิเคราะห์ข้อมูลผ่าน Dashboard","รองรับการพัฒนา Application สำหรับหน่วยงานเฉพาะทาง เช่น Quality, Safety, Risk, Audit, Maintenance เป็นต้น"] },
-  { id:"qmp", n:"", t:"Quality Management Platform", ic:QMS, tags:["Quality","Compliance"], group:"ops",
-    summary:"แพลตฟอร์มที่ช่วยองค์กรบริหารจัดการคุณภาพ ควบคุม และยกระดับมาตรฐานการทำงานแบบครบวงจร",
-    detail:"เพื่อให้มั่นใจว่าทุกกระบวนการสอดคล้องกับมาตรฐานสากล (เช่น ISO) และข้อกำหนดทางกฎหมายอย่างถูกต้อง โดยเปลี่ยนการทำงานที่กระจัดกระจายให้เป็นระบบอัตโนมัติที่สามารถตรวจสอบได้จริง",
-    features:["Version Control & History Tracking: ระบบสามารถจัดการเวอร์ชันเอกสารให้อัตโนมัติและเก็บประวัติว่าใครแก้ แก้เมื่อไหร่ เพื่อป้องกันความสับสนจากการใช้เอกสารผิดเวอร์ชั่น ","ช่่วยให้ตรวจสอบได้ว่าเอกสารหรือข้อมูลต่าง ๆ ใครเป็นผู้แก้ไขและแก้ไขเมื่อใด เพื่อป้องกันความสับสนและตรวจสอบความถูกต้องของข้อมูลได้ตลอดเวลา","Executive Dashboard & Analytics: หน้าจอสรุปผลแบบกราฟิกเรียลไทม์ เพื่อให้ผู้บริหารเห็นภาพรวมของการดำเนินงานได้ทันทีโดยไม่ต้องรอรายงานสรุปแบบเดิม ","Email & In-App Notifications: ระบบแจ้งเตือนที่รวดเร็ว เพื่อลดปัญหาคอขวดในการรอคอยงาน","Enterprise Security & SSO (Single Sign-On): รองรับการล็อกอินด้วยบัญชีเดิมของบริษัท (เช่น Microsoft 365 หรือ Active Directory) และมีการกำหนดสิทธิ์การเข้าถึงข้อมูล (Role-Based Access Control) อย่างรัดกุม "] },
-  { id:"gvl", n:"", t:"GAVALON", st:"Enterprise Legal & Regulatory Management Platform", ic:GVL, tags:["Legal","Compliance"], group:"ops", href:"/service/gavalon",
-    summary:"เปลี่ยนเรื่องกฎหมายที่ซับซ้อน ให้เป็นข้อมูลที่ค้นหา เข้าใจ และนำไปปฏิบัติได้อย่างเป็นระบบ",
-    detail:"GAVALON แพลตฟอร์มบริหารจัดการกฎหมายและข้อกำหนดสำหรับองค์กร ช่วยรวบรวมข้อมูลกฎหมาย ติดตามข้อกำหนดที่เกี่ยวข้อง และสนับสนุนการปฏิบัติตามกฎหมายผ่านระบบดิจิทัล เพื่อให้องค์กรเข้าถึงข้อมูลที่ถูกต้อง ลดความซ้ำซ้อนในการทำงาน และบริหารความเสี่ยงด้านการปฏิบัติตามกฎหมายได้อย่างมีประสิทธิภาพ พัฒนาร่วมกับ NPC S&E",
-    features:["ศูนย์กลางข้อมูลกฎหมายและข้อกำหนดขององค์กร","การค้นหาและจัดหมวดหมู่ข้อมูลกฎหมาย","การประเมินความเกี่ยวข้องของกฎหมายต่อองค์กร","การกำหนดหน่วยงานและผู้รับผิดชอบ","การติดตามสถานะการปฏิบัติตามข้อกำหนด","การแจ้งเตือนข้อมูลหรือรายการที่ต้องดำเนินการ","Dashboard และรายงานภาพรวม","การกำหนดสิทธิ์การเข้าถึงตามบทบาท"] },
-  { id:"scr", n:"", t:"Supply Chain Resilience", ic:SPC, tags:["Supply Chain","Digital"], group:"ops",
-    summary:"แนวทางในการออกแบบและบริหาร ห่วงโซ่อุปทานให้สามารถรับมือกับความไม่แน่นอนและความเสี่ยงได้อย่างมีประสิทธิภาพ",
-    detail:"ช่วยให้องค์กรสามารถติดตามสถานะของวัตถุดิบ สินค้า และกระบวนการจัดซื้อจัดจ้างได้แบบ Real-Time",
-    features:["ติดตามสถานะคำสั่งซื้อและการจัดส่งสินค้าแบบ Real-Time","บริหารจัดการ Supplier และ Vendor Performance","วิเคราะห์ความเสี่ยงใน Supply Chain","Dashboard สำหรับติดตาม Inventory และ Logistics","เชื่อมโยงข้อมูลกับระบบ ERP และระบบจัดซื้อ","แจ้งเตือนความผิดปกติในกระบวนการ Supply Chain"] },
-  { id:"erp", n:"", t:"ERP Workspace", ic:ERP, tags:["ERP","Workspace"], group:"ops",
-    summary:"แพลตฟอร์มสำหรับ รวมการทำงานของระบบ ERP และ Application ต่างๆ ขององค์กรไว้ในพื้นที่เดียว",
-    detail:"ช่วยให้ผู้ใช้งานสามารถเข้าถึงข้อมูล กระบวนการทำงาน และระบบต่างๆ ได้จาก Interface เดียว ลดความซับซ้อนของการใช้งานหลายระบบ",
-    features:["Dashboard สำหรับติดตามข้อมูลธุรกิจจากหลายระบบ","เชื่อมต่อข้อมูลจาก ERP และระบบอื่นๆ ขององค์กร","ระบบค้นหาข้อมูลและเอกสารจากหลายระบบ","กำหนดสิทธิ์การเข้าถึงข้อมูลตามบทบาทของผู้ใช้งาน","รองรับการใช้งานผ่าน Web และ Mobile"] },
-];
+const ICON_MAP = {
+  pmp: PMT,
+  rpa: RPA,
+  dsai: AI,
+  lcbo: LPM,
+  qmp: QMS,
+  gvl: GVL,
+  scr: SPC,
+  erp: ERP,
+};
+const AUTO_IDS = ["pmp", "rpa", "dsai", "lcbo"];
 const DETAIL_HIDDEN_SERVICE_IDS = new Set(["scr", "erp"]);
-const DETAIL_SVC = SVC.filter(s => !DETAIL_HIDDEN_SERVICE_IDS.has(s.id));
-const AUTO_GROUP = SVC.filter(s => s.group === "auto");
-const OPS_GROUP  = SVC.filter(s => s.group === "ops");
+
+function buildSvcItems(items = []) {
+  return items.map((item) => ({
+    id: item.id,
+    n: item.n ?? "",
+    t: item.title,
+    st: item.subtitle,
+    ic: ICON_MAP[item.id],
+    tags: item.tags ?? [],
+    group: AUTO_IDS.includes(item.id) ? "auto" : "ops",
+    href: item.href,
+    summary: item.summary,
+    detail: item.detail,
+    features: item.features ?? [],
+  }));
+}
 
 /* ══════════════════════════════════════════
    Sub-components
@@ -108,7 +100,7 @@ function useCardSide(colIndex, cols = 4) {
   return side;
 }
 
-function GCard({ item, colIndex, onClick, interactive = true, cols = 4, revealed = false, delayMs = 0 }) {
+function GCard({ item, colIndex, onClick, interactive = true, cols = 4, revealed = false, delayMs = 0, viewDetailsLabel = "View details" }) {
   const innerRef = useRef(null);
   const side = useCardSide(colIndex, cols);
   const animClass = side === "left" ? "svs-card-in-l" : side === "right" ? "svs-card-in-r" : "svs-card-in-u";
@@ -146,7 +138,7 @@ function GCard({ item, colIndex, onClick, interactive = true, cols = 4, revealed
       <p style={{ marginTop:11, fontSize:".9rem", lineHeight:1.7, color:"rgba(255,255,255,.65)" }}>{item.summary}</p>
       {interactive ? (
         <div style={{ marginTop:14, fontSize:".8rem", fontWeight:700, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", display:"flex", alignItems:"center", gap:4 }}>
-        ดูรายละเอียด <span style={{ WebkitTextFillColor:"#38e0d0" }}>›</span>
+        {viewDetailsLabel} <span style={{ WebkitTextFillColor:"#38e0d0" }}>›</span>
         </div>
       ) : null}
       </div>
@@ -189,8 +181,13 @@ function MobDD({ items, activeId, onSelect }) {
 ══════════════════════════════════════════ */
 export default function SectionServiceAndSolutions() {
   const router = useRouter();
+  const { messages } = useLocale();
+  const svcLabels = messages.home?.services ?? {};
 
-  /* ── service state ── */
+  const SVC = useMemo(() => buildSvcItems(svcLabels.items), [svcLabels.items]);
+  const DETAIL_SVC = useMemo(() => SVC.filter((s) => !DETAIL_HIDDEN_SERVICE_IDS.has(s.id)), [SVC]);
+  const AUTO_GROUP = useMemo(() => SVC.filter((s) => s.group === "auto"), [SVC]);
+  const OPS_GROUP = useMemo(() => SVC.filter((s) => s.group === "ops"), [SVC]);
   const [view, setView]   = useState("grid");
   const [vk,   setVk]     = useState(0);
   const go = useCallback(v => { setView(v); setVk(k => k+1); }, []);
@@ -221,20 +218,20 @@ export default function SectionServiceAndSolutions() {
       </div>
 
       {/* ════════════ SERVICES ════════════ */}
-      <div ref={svcRef} style={{ position:"relative", zIndex:10, maxWidth:1180, margin:"0 auto", padding:"96px 24px 100px" }}>
+      <div ref={svcRef} style={{ position:"relative", zIndex:10, maxWidth:1180, margin:"0 auto", padding:"220px 24px 100px" }}>
 
         {/* Header */}
         <div ref={hdrRef} className={`svs-hdr${hdrOn ? " on" : ""}`} style={{ textAlign:"center" }}>
           <span style={{ display:"inline-flex", alignItems:"center", gap:8, padding:"7px 16px", borderRadius:9999, border:"1px solid rgba(255,255,255,.18)", background:"rgba(255,255,255,.07)", backdropFilter:"blur(6px)", fontSize:".72rem", fontWeight:400, letterSpacing:".12em", color:"rgba(255,255,255,.85)" }}>
             <span style={{ width:8, height:8, borderRadius:"50%", background:"#6ee7b7", flexShrink:0 }} />
-            SERVICES &amp; SOLUTIONS
+            {svcLabels.eyebrow}
           </span>
           <h2 style={{ marginTop:20, fontSize:"clamp(1.6rem,4vw,2.5rem)", fontWeight:800, letterSpacing:"-.02em", color:"white", lineHeight:1.15 }}>
-            โซลูชั่นครบวงจรเพื่อ{" "}
-            <span style={{ background:"linear-gradient(to right,#7dd3fc,#6ee7b7)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>ธุรกิจยุคใหม่</span>
+            {svcLabels.title}{" "}
+            <span style={{ background:"linear-gradient(to right,#7dd3fc,#6ee7b7)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>{svcLabels.titleHighlight}</span>
           </h2>
           <p style={{ marginTop:16, maxWidth:580, marginLeft:"auto", marginRight:"auto", fontSize:"clamp(.88rem,1vw,1rem)", lineHeight:1.75, color:"rgba(255,255,255,.78)" }}>
-            โซลูชั่นที่ออกแบบมาเพื่อเปลี่ยนกระบวนการทำงานให้ชาญฉลาดยิ่งขึ้น ด้วย AI และ Automation ที่ตอบโจทย์ทุกความต้องการทางธุรกิจ
+            {svcLabels.description}
           </p>
         </div>
 
@@ -242,7 +239,7 @@ export default function SectionServiceAndSolutions() {
         <div style={{ marginTop:52, position:"relative" }}>
           {/* GRID */}
           <div className={`svs-stage ${view === "grid" ? "show" : "hide"}`}>
-            <GrpHead label="TRANSFORMING PROCESSES INTO INTELLIGENT AI" />
+            <GrpHead label={svcLabels.autoGroupLabel} />
             <div className="svs-flow" ref={autoFlowRef}>
               <div className={`svs-vline ${flowOn ? "on" : ""}`} />
               <div className={`svs-flow-top ${flowOn ? "on" : ""}`}>
@@ -265,7 +262,7 @@ export default function SectionServiceAndSolutions() {
                 {AUTO_GROUP.map((it, i) => (
                   <React.Fragment key={it.id}>
                     {i > 0 && <div className="svs-connector"><div className="svs-connector-dot" /><div className="svs-connector-line" /></div>}
-                    <GCard item={it} colIndex={i} onClick={() => go(it.id)} revealed={autoGridOn} delayMs={i * 90} />
+                    <GCard item={it} colIndex={i} onClick={() => go(it.id)} revealed={autoGridOn} delayMs={i * 90} viewDetailsLabel={svcLabels.viewDetails} />
                   </React.Fragment>
                 ))}
               </div>
@@ -273,7 +270,7 @@ export default function SectionServiceAndSolutions() {
             <div className={`svs-divider svs-rv${opsGridOn ? " on" : ""}`}>
               <div className="svs-divider-line" /><div className="svs-divider-dot" /><div className="svs-divider-line" />
             </div>
-            <GrpHead label="ENTERPRISE OPERATIONS & PLATFORMS" />
+            <GrpHead label={svcLabels.opsGroupLabel} />
             <div className="svs-grid4" ref={opsGridRef}>
               {OPS_GROUP.map((it, i) => (
                 <GCard
@@ -285,6 +282,7 @@ export default function SectionServiceAndSolutions() {
                   delayMs={i * 90}
                   cols={4}
                   interactive={!DETAIL_HIDDEN_SERVICE_IDS.has(it.id)}
+                  viewDetailsLabel={svcLabels.viewDetails}
                 />
               ))}
             </div>
@@ -306,7 +304,7 @@ export default function SectionServiceAndSolutions() {
                     </div>
                   ))}
                   <div style={{ marginTop:12 }}>
-                    <button className="svs-np" onClick={() => go("grid")} type="button"><span className="ar ab">‹</span> ย้อนกลับ</button>
+                    <button className="svs-np" onClick={() => go("grid")} type="button"><span className="ar ab">‹</span> {svcLabels.back}</button>
                   </div>
                 </div>
                 <div className="svs-dr svs-dtl">
@@ -315,7 +313,7 @@ export default function SectionServiceAndSolutions() {
                       <Ico src={ai.ic} size={32} />
                     </div>
                     <div>
-                      <div style={{ fontSize:".68rem", fontWeight:700, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", letterSpacing:".07em", textTransform:"uppercase" }}>Service {ai.n}</div>
+                      <div style={{ fontSize:".68rem", fontWeight:700, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", letterSpacing:".07em", textTransform:"uppercase" }}>{svcLabels.serviceLabel} {ai.n}</div>
                       <h3 style={{ fontSize:"clamp(1.05rem,2.5vw,1.28rem)", fontWeight:800, color:"#ffffff", lineHeight:1.3, marginTop:3 }}>{ai.t}</h3>
                     </div>
                   </div>
@@ -324,7 +322,7 @@ export default function SectionServiceAndSolutions() {
                   </div>
                   <p style={{ marginTop:16, fontSize:"clamp(.9rem,.95vw,.96rem)", fontWeight:400, lineHeight:1.85, color:"#ffffffa1" }}>{ai.summary} {ai.detail}</p>
                   <div style={{ height:1, background:"linear-gradient(90deg,transparent,rgba(56,224,208,.18),rgba(14,165,233,.12),transparent)", margin:"20px 0" }} />
-                  <div style={{ fontSize:".72rem", fontWeight:700, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", letterSpacing:".06em", textTransform:"uppercase", marginBottom:10 }}>Key Features</div>
+                  <div style={{ fontSize:".72rem", fontWeight:700, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", letterSpacing:".06em", textTransform:"uppercase", marginBottom:10 }}>{svcLabels.keyFeatures}</div>
                   <div>
                     {ai.features.map((f, i) => (
                       <div key={i} className="svs-feat">
@@ -338,7 +336,7 @@ export default function SectionServiceAndSolutions() {
                       href={ai.href}
                       className="btn-fancy group relative mt-6 inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-6 py-2.5 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5"
                     >
-                      <span className="relative z-10">ดูหน้า Product</span>
+                      <span className="relative z-10">{svcLabels.viewProductPage}</span>
                       <span style={{ color:"#38e0d0" }}>›</span>
                     </a>
                   ) : null}
@@ -351,15 +349,15 @@ export default function SectionServiceAndSolutions() {
         {/* Stats */}
         {view === "grid" && (
           <div ref={statRef} className="svs-stats-row" style={{ display:"flex", justifyContent:"center", alignItems:"center", gap:0, marginTop:68, flexWrap:"wrap" }}>
-            {[{ v:String(SVC.length), l:"Solutions", side:"left" }, { v:"10+", l:"Enterprise Clients", side:"up" }, { v:"50+", l:"Enterprise Projects", side:"right" }].map((st, i) => (
-              <React.Fragment key={st.l}>
+            {(svcLabels.stats ?? []).map((st, i) => (
+              <React.Fragment key={st.label}>
                 {i > 0 && <div className="svs-stat-sep" />}
                 <div
                   className={`svs-st${statOn ? " on" : ""}`}
                   style={{ textAlign:"center", padding:"0 48px", animationDelay: statOn ? `${i * 100}ms` : undefined }}
                 >
-                  <div style={{ fontSize:"clamp(1.5rem,3vw,2rem)", fontWeight:800, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>{st.v}</div>
-                  <div style={{ fontSize:".82rem", color:"rgba(255,255,255,.6)", marginTop:4, fontWeight:500, letterSpacing:".04em" }}>{st.l}</div>
+                  <div style={{ fontSize:"clamp(1.5rem,3vw,2rem)", fontWeight:800, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent" }}>{st.value}</div>
+                  <div style={{ fontSize:".82rem", color:"rgba(255,255,255,.6)", marginTop:4, fontWeight:500, letterSpacing:".04em" }}>{st.label}</div>
                 </div>
               </React.Fragment>
             ))}

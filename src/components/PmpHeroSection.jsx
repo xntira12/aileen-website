@@ -2,8 +2,12 @@
 
 import { useCallback, useEffect, useRef } from "react";
 import AnimatedBg from "./AnimatedBgFlux";
+import { useLocale } from "../i18n/LocaleProvider";
+import { getServiceContent } from "../i18n/messages";
 
 export default function PmpHeroSection() {
+  const { locale } = useLocale();
+  const hero = getServiceContent(locale, "pmp").hero ?? {};
   const sectionRef = useRef(null);
   const targetRef = useRef({ x: 50, y: 50 });
   const currentRef = useRef({ x: 50, y: 50 });
@@ -89,25 +93,22 @@ export default function PmpHeroSection() {
         <div className="pmp-hero__copy max-w-3xl">
           <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-100">
             <span className="h-2 w-2 rounded-full bg-emerald-300" />
-            Enterprise Process Platform
+            {hero.badge}
           </span>
 
           <h1 className="mt-6 text-4xl font-black leading-[0.96] tracking-tight md:text-6xl">
-            Process Management
+            {hero.titleLine1}
             <span className="mt-2 block bg-gradient-to-r from-sky-300 via-cyan-200 to-emerald-300 bg-clip-text text-transparent">
-              Platform
+              {hero.titleLine2}
             </span>
           </h1>
 
           <p className="mt-6 max-w-3xl text-base leading-8 text-slate-100/80 md:text-base">
-            Process Management Platform ช่วยให้องค์กรจัดการกระบวนการทำงานได้อย่างเป็นระบบ
-            ทุกคนเห็นภาพการดำเนินงานเดียวกัน ทุกการเปลี่ยนแปลงถูกบันทึก
-            สนับสนุนการทำงานร่วมกัน ปรับปรุงกระบวนการได้อย่างต่อเนื่อง
-            และทุกกระบวนการพร้อมนำไปใช้ต่อยอดในอนาคต
+            {hero.description}
           </p>
 
           <p className="mt-3 text-sm font-medium italic text-emerald-300/80">
-            เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน
+            {hero.tagline}
           </p>
 
           <div className="mt-9 flex flex-wrap gap-4">
@@ -116,7 +117,7 @@ export default function PmpHeroSection() {
               download="Aileen_Process_Manager.pdf"
               className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-emerald-300/45 bg-emerald-400/10 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/20"
             >
-              <span className="relative z-10">โหลด Aileen_Process_Manager.pdf</span>
+              <span className="relative z-10">{hero.downloadPdf}</span>
               <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M7 1v7m0 0 3-3m-3 3L4 5M2 10.5h10" />
               </svg>
@@ -125,7 +126,7 @@ export default function PmpHeroSection() {
               href="/contact"
               className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15"
             >
-              <span className="relative z-10">Contact Us</span>
+              <span className="relative z-10">{hero.contactUs}</span>
               <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                 <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
               </svg>

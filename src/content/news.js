@@ -10,20 +10,91 @@ import sistamGalleryBackdrop from "../assets/img/News/sistam/20250925_163913.jpg
 import tncheHero from "../assets/img/News/TNChE/720563591_122224379744509617_8918146535867206756_n (1).jpg";
 import tncheGalleryBooth from "../assets/img/News/TNChE/719161022_122224379762509617_4484651737298028412_n.jpg";
 import tncheGalleryDemo from "../assets/img/News/TNChE/720065152_122224379750509617_4797097085255949318_n.jpg";
-import epvPromoteHero from "../assets/img/News/enterprise-process-visibility/epv-promote.png";
+import epvHero from "../assets/img/EPV/20260709_142338.jpg";
+import epvAlbum from "../assets/img/EPV/LINE_ALBUM_Event aileen nintex 2026_260710_21.jpg";
+import epvGallery2 from "../assets/img/EPV/20260709_055337766_iOS.jpg";
+import epvGallery3 from "../assets/img/EPV/20260709_050828107_iOS.jpg";
+import epvGallery4 from "../assets/img/EPV/20260709_035630385_iOS.jpg";
+import gavalonNpcHero from "../assets/img/gavalon/GAVALON-2 (1).png";
 
 export const NEWS_ARTICLES = [
   {
+    slug: "npc-aileen-solutions-gavalon-partnership",
+    title: "NPC จับมือ Aileen Solutions ร่วมพัฒนา GAVALON ระบบบริหารจัดการกฎหมายเพื่ออนาคตที่ยั่งยืน",
+    category: "Partnership",
+    date: "31 กรกฎาคม 2026",
+    publishedAt: "2026-07-31",
+    location: "ประเทศไทย",
+    summary:
+      "บริษัท NPC Safety and Environmental Service จำกัด ร่วมกับ Aileen Solutions พัฒนา GAVALON ระบบบริหารจัดการกฎหมายและข้อกำหนดที่เกี่ยวข้อง เพื่อช่วยให้องค์กรติดตาม ตรวจสอบ และบริหารการปฏิบัติตามกฎหมายได้อย่างเป็นระบบ",
+    excerpt:
+      "ความร่วมมือครั้งนี้ผสานความเชี่ยวชาญของ NPC ในด้านความปลอดภัย อาชีวอนามัย และสิ่งแวดล้อม เข้ากับศักยภาพด้านเทคโนโลยีของ Aileen Solutions เพื่อยกระดับการบริหารจัดการกฎหมายและข้อกำหนดอย่างมีประสิทธิภาพ",
+    tags: [
+      "GAVALON",
+      "NPC",
+      "Legal Compliance",
+      "Sustainability",
+      "Partnership",
+      "Governance",
+    ],
+    highlights: [
+      "NPC และ Aileen Solutions ร่วมพัฒนา GAVALON ระบบบริหารจัดการกฎหมาย",
+      "ผสานความเชี่ยวชาญด้าน HSE กับเทคโนโลยีและการพัฒนาระบบ",
+      "สนับสนุนการกำกับดูแลกิจการและการดำเนินธุรกิจอย่างยั่งยืน",
+    ],
+    sections: [
+      {
+        heading: "ความร่วมมือเพื่อยกระดับการบริหารจัดการกฎหมาย",
+        paragraphs: [
+          "บริษัท NPC Safety and Environmental Service จำกัด ร่วมกับบริษัท Aileen Solutions เดินหน้าพัฒนา GAVALON ระบบบริหารจัดการกฎหมายและข้อกำหนดที่เกี่ยวข้อง เพื่อช่วยให้องค์กรสามารถติดตาม ตรวจสอบ และบริหารการปฏิบัติตามกฎหมายได้อย่างเป็นระบบ",
+          "ความร่วมมือครั้งนี้ผสานความเชี่ยวชาญของ NPC ในด้านความปลอดภัย อาชีวอนามัย และสิ่งแวดล้อม เข้ากับศักยภาพด้านเทคโนโลยีและการพัฒนาระบบของ Aileen Solutions เพื่อยกระดับกระบวนการทำงาน ลดความซับซ้อนในการจัดการข้อมูล และสนับสนุนให้องค์กรเตรียมพร้อมต่อการเปลี่ยนแปลงของข้อกฎหมายได้อย่างมีประสิทธิภาพ",
+        ],
+      },
+      {
+        heading: "GAVALON — มากกว่าเครื่องมือจัดเก็บข้อมูล",
+        paragraphs: [
+          "GAVALON ไม่ได้เป็นเพียงเครื่องมือสำหรับจัดเก็บข้อมูลด้านกฎหมาย แต่ยังเป็นส่วนสำคัญในการส่งเสริมการกำกับดูแลกิจการที่ดี ลดความเสี่ยงจากการไม่ปฏิบัติตามข้อกำหนด และสนับสนุนการดำเนินธุรกิจอย่างรับผิดชอบและยั่งยืน",
+        ],
+      },
+      {
+        heading: "มุ่งสู่อนาคตที่มีมาตรฐานและยั่งยืน",
+        paragraphs: [
+          "ความร่วมมือระหว่าง NPC และ Aileen Solutions สะท้อนถึงความมุ่งมั่นในการนำความรู้ ความเชี่ยวชาญ และเทคโนโลยีมาพัฒนาโซลูชันที่ตอบโจทย์องค์กรยุคใหม่ พร้อมขับเคลื่อนภาคธุรกิจไปสู่อนาคตที่มีมาตรฐาน ปลอดภัย และยั่งยืนมากยิ่งขึ้น",
+        ],
+      },
+    ],
+    websiteUrl: "https://npc-gavalon.com",
+    website: {
+      title: "เว็บไซต์ GAVALON",
+      description:
+        "ไม่พลาดทุกกฎหมายสำคัญ ตรวจทานโดยทีมผู้เชี่ยวชาญด้านกฎหมาย — เรียนรู้เพิ่มเติมเกี่ยวกับแพลตฟอร์มบริหารจัดการกฎหมายและข้อกำหนด",
+      button: "เยี่ยมชม npc-gavalon.com",
+    },
+    media: {
+      heroImage: gavalonNpcHero.src,
+      heroAlt: "NPC และ Aileen Solutions ร่วมพัฒนา GAVALON ระบบบริหารจัดการกฎหมาย",
+      gallery: [
+        {
+          title: "GAVALON — ระบบบริหารจัดการกฎหมายและข้อกำหนด",
+          ratio: "wide",
+          image: gavalonNpcHero.src,
+          alt: "ภาพประกอบความร่วมมือ NPC และ Aileen Solutions ในการพัฒนา GAVALON",
+        },
+      ],
+    },
+  },
+  {
     slug: "enterprise-process-visibility-sustainable-operations-2026",
-    title: "Enterprise Process Visibility: เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน",
+    title:
+      "Aileen Solutions ร่วมกับ Nintex Thailand จัดสัมมนา Enterprise Process Visibility ยกระดับกระบวนการองค์กรสู่ความยั่งยืน",
     category: "Seminar",
     date: "9 กรกฎาคม 2026",
-    publishedAt: "2026-06-17",
-    location: "Hotel Nikko Amata City, Chonburi • ห้อง Trusu 2",
+    publishedAt: "2026-07-10",
+    location: "Hotel Nikko Amata City, จังหวัดชลบุรี",
     summary:
-      "Aileen Solutions ร่วมกับ Nintex Thailand ขอเชิญผู้บริหารเข้าร่วมงานสัมมนา Exclusive เพื่อเจาะลึกแนวทางมองเห็นกระบวนการทั้งองค์กร ปรับปรุงด้วย ECRS และ Kaizen และต่อยอดสู่ Automation, AI และ Net Zero อย่างเป็นรูปธรรม",
+      "Aileen Solutions ร่วมกับ Nintex Thailand จัดงานสัมมนา Enterprise Process Visibility เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน โดยมีผู้บริหารและตัวแทนจากองค์กรชั้นนำเข้าร่วมแลกเปลี่ยนมุมมองด้านการพัฒนากระบวนการ การประยุกต์ใช้ AI และ Automation",
     excerpt:
-      "ในยุคที่ AI และ Automation กำลังเปลี่ยนรูปแบบการดำเนินธุรกิจอย่างรวดเร็ว ความสำเร็จของ Digital Transformation ไม่ได้เริ่มต้นจากเทคโนโลยีเพียงอย่างเดียว แต่เริ่มต้นจากการมองเห็นและเข้าใจกระบวนการทำงานขององค์กรอย่างชัดเจน",
+      "งานสัมมนาครั้งนี้จัดขึ้นภายใต้แนวคิดว่า ความสำเร็จของ Digital Transformation ไม่ได้เริ่มต้นจากเทคโนโลยีเพียงอย่างเดียว แต่ต้องเริ่มจากการมองเห็นและเข้าใจกระบวนการทำงานขององค์กรอย่างชัดเจน",
     tags: [
       "Enterprise Process Visibility",
       "Nintex Thailand",
@@ -32,82 +103,86 @@ export const NEWS_ARTICLES = [
       "Automation",
       "Kaizen",
       "Net Zero",
+      "Sustainability",
     ],
     highlights: [
-      "เจาะลึก 3 ขั้นตอนสู่ความยั่งยืน SEE > IMPROVE > SUSTAIN ด้วยเครื่องมือระดับโลก",
-      "เรียนรู้แนวคิดการปรับรื้อกระบวนการด้วย ECRS และพัฒนาหน้างานด้วย Kaizen",
-      "รับฟังกรณีศึกษาจริงจาก Global Green Chemicals Public Company Limited",
+      "ผู้บริหารและตัวแทนองค์กรชั้นนำร่วมแลกเปลี่ยน Process, AI และ Automation",
+      "กรอบ SEE – IMPROVE – SUSTAIN สู่การดำเนินงานยั่งยืน",
+      "บรรยายจาก Aileen Solutions, Nintex Thailand และกรณีศึกษาจาก Global Green Chemicals",
     ],
     sections: [
       {
-        heading: "ทำไม Process Visibility จึงสำคัญกว่าที่เคย",
+        heading: "งานสัมมนา Enterprise Process Visibility",
         paragraphs: [
-          "ในยุคที่ AI และ Automation กำลังเข้ามาเปลี่ยนรูปแบบการดำเนินธุรกิจอย่างรวดเร็ว องค์กรจำนวนมากเร่งลงทุนในเทคโนโลยีเพื่อเพิ่มประสิทธิภาพ ลดต้นทุน และรักษาความสามารถในการแข่งขัน",
-          "อย่างไรก็ตาม ความสำเร็จของ Digital Transformation ไม่ได้เริ่มต้นจากเทคโนโลยีเพียงอย่างเดียว แต่เริ่มต้นจากการมองเห็นและเข้าใจกระบวนการทำงานขององค์กรอย่างชัดเจน หากกระบวนการยังมีความซ้ำซ้อนหรือขาดมาตรฐาน การลงทุนด้าน Automation และ AI อาจไม่สามารถสร้างผลลัพธ์ได้อย่างเต็มศักยภาพ",
+          "Aileen Solutions ร่วมกับ Nintex Thailand จัดงานสัมมนา Enterprise Process Visibility เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน เมื่อวันที่ 9 กรกฎาคม 2026 ณ Hotel Nikko Amata City จังหวัดชลบุรี โดยมีผู้บริหารและตัวแทนจากองค์กรชั้นนำเข้าร่วมแลกเปลี่ยนมุมมองด้านการพัฒนากระบวนการ การประยุกต์ใช้ AI และ Automation ตลอดจนแนวทางขับเคลื่อนองค์กรสู่เป้าหมายด้านความยั่งยืน",
+          "งานสัมมนาครั้งนี้จัดขึ้นภายใต้แนวคิดว่า ความสำเร็จของ Digital Transformation ไม่ได้เริ่มต้นจากเทคโนโลยีเพียงอย่างเดียว แต่ต้องเริ่มจากการมองเห็นและเข้าใจกระบวนการทำงานขององค์กรอย่างชัดเจน หรือ Enterprise Process Visibility เพื่อให้องค์กรสามารถตรวจสอบความซ้ำซ้อน ลดขั้นตอนที่ไม่สร้างคุณค่า และวางมาตรฐานการทำงานที่พร้อมต่อยอดด้วยเทคโนโลยีได้อย่างมีประสิทธิภาพ",
         ],
       },
       {
-        heading: "สิ่งที่จะได้จากงานสัมมนา",
+        heading: "Process Clarity to Sustainable Operations: SEE – IMPROVE – SUSTAIN",
         paragraphs: [
-          "Aileen Solutions ร่วมกับ Nintex Thailand ขอเรียนเชิญท่านเข้าร่วมงานสัมมนาสุด Exclusive ภายใต้หัวข้อ Enterprise Process Visibility เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน เพื่อร่วมเจาะลึกแนวคิดการปรับรื้อกระบวนการด้วย ECRS พัฒนาหน้างานด้วย Kaizen และรักษามาตรฐานเพื่อมุ่งสู่เป้าหมาย Net Zero อย่างเป็นรูปธรรม",
-          "ภายในงาน ท่านจะได้เรียนรู้หัวข้อ Process Clarity to Sustainable Operations ซึ่งจะพาไปเจาะลึก 3 ขั้นตอนสู่ความยั่งยืน SEE > IMPROVE > SUSTAIN ด้วยเครื่องมือระดับโลก พร้อมรับฟังประสบการณ์จริงจากคุณพร้อมพร อิศรางกูร ณ อยุธยา Vice President - Operations จาก Global Green Chemicals Public Company Limited ถึงแนวทางการขับเคลื่อนกระบวนการในอุตสาหกรรมชั้นนำ",
-          "สำหรับสื่อประชาสัมพันธ์ของงาน มีวิดีโอแนะนำกิจกรรมให้รับชมเพิ่มเติมด้านล่าง",
+          "ภายในงาน ผู้เข้าร่วมได้เรียนรู้แนวคิด Process Clarity to Sustainable Operations ผ่านกรอบการดำเนินงาน 3 ขั้นตอน ได้แก่ SEE – IMPROVE – SUSTAIN ตั้งแต่การมองเห็นกระบวนการในภาพรวม การปรับปรุงกระบวนการด้วยแนวคิด ECRS และ Kaizen ไปจนถึงการรักษามาตรฐานการดำเนินงาน เพื่อสนับสนุนเป้าหมาย Net Zero และการเติบโตอย่างยั่งยืนในระยะยาว",
         ],
       },
       {
-        heading: "กำหนดการสัมมนา",
-        paragraphs: [],
-        venue: "9 กรกฎาคม 2026 (Thursday)  •  Hotel Nikko Amata City, Chonburi  •  ห้อง Trusu 2",
-        agenda: [
-          {
-            time: "10.30–11.00",
-            title: "Registration",
-            note: "เวลา 12.00 น. มีบริการอาหารกลางวัน",
-          },
-          {
-            time: "11.00–11.50",
-            title: "Digitizing the DNA of Sustainability: Process First, Automation Next, Sustainability Always",
-            speaker: "K. Pramote Trinaksit",
-            company: "Aileen Solutions",
-          },
-          {
-            time: "11.50–13.20",
-            title: "Ultimate Power + Ultimate Control: Redefining Operations in the Age of AI",
-            speaker: "K. Ake Ngarmcroh และ K. Puttapong Chiewvech",
-            company: "Nintex Thailand",
-          },
-          {
-            time: "13.20–13.40",
-            title: "Success Story: From Experience to Excellence",
-            speaker: "K. Phromphron Isarankura Na Ayutthaya",
-            company: "Global Green Chemicals",
-          },
-          {
-            time: "13.40–14.00",
-            title: "Games & Lucky Draw",
-          },
+        heading: "Digitizing the DNA of Sustainability: Process First, Automation Next, Sustainability Always",
+        paragraphs: [
+          "คุณปราโมทย์ ตรีนาคสิทธิ์ จาก Aileen Solutions ถ่ายทอดแนวคิดในหัวข้อ Digitizing the DNA of Sustainability: Process First, Automation Next, Sustainability Always โดยเน้นย้ำถึงความสำคัญของการวางรากฐานกระบวนการให้ชัดเจน ก่อนนำ Automation และเทคโนโลยีดิจิทัลเข้ามาสนับสนุนการดำเนินงาน",
         ],
       },
       {
-        heading: "รูปแบบการเข้าร่วมและการสำรองที่นั่ง",
+        heading: "Ultimate Power + Ultimate Control: Redefining Operations in the Age of AI",
         paragraphs: [
-          "งานนี้เป็นรูปแบบ Exclusive Seat สำหรับกลุ่มผู้บริหาร และจำกัดจำนวนผู้เข้าร่วมบริษัทละ 2 ท่าน เพื่อให้เกิดการแลกเปลี่ยนวิสัยทัศน์ได้อย่างทั่วถึง",
-          "ท่านสามารถสำรองที่นั่งล่วงหน้าได้ฟรีโดยไม่มีค่าใช้จ่าย ผ่านแบบฟอร์มออนไลน์ด้านล่างนี้",
-          "Aileen Solutions หวังเป็นอย่างยิ่งว่าจะได้รับเกียรติจากท่านเข้าร่วมงานในครั้งนี้ เพื่อร่วมยกระดับกระบวนการองค์กรสู่การเติบโตอย่างยั่งยืน",
+          "ด้านทีมงานจาก Nintex Thailand นำโดยคุณเอก งามเจริญ และคุณพุทธพงศ์ เชี่ยวเวช ร่วมบรรยายในหัวข้อ Ultimate Power + Ultimate Control: Redefining Operations in the Age of AI พร้อมนำเสนอแนวทางการใช้เครื่องมือด้าน Process Management และ Automation เพื่อเพิ่มประสิทธิภาพ สร้างความโปร่งใส และช่วยให้องค์กรสามารถบริหารจัดการกระบวนการได้อย่างเป็นระบบในยุค AI",
+        ],
+      },
+      {
+        heading: "Success Story: From Experience to Excellence",
+        paragraphs: [
+          "อีกหนึ่งช่วงสำคัญของงานคือการแบ่งปันประสบการณ์จริงในหัวข้อ Success Story: From Experience to Excellence โดยคุณพร้อมพร อิศรางกูร ณ อยุธยา Vice President – Operations จาก Global Green Chemicals Public Company Limited ซึ่งถ่ายทอดแนวทางการพัฒนากระบวนการจากประสบการณ์หน้างาน และการยกระดับการดำเนินงานให้เกิดผลลัพธ์ที่สามารถนำไปใช้ได้จริงในภาคอุตสาหกรรม",
+        ],
+      },
+      {
+        heading: "ขับเคลื่อนสู่การดำเนินงานที่ยั่งยืน",
+        paragraphs: [
+          "งานสัมมนาครั้งนี้สะท้อนให้เห็นว่า การสร้างความยั่งยืนในองค์กรต้องเริ่มจากกระบวนการที่ชัดเจน มีมาตรฐาน และสามารถวัดผลได้ เมื่อองค์กรเข้าใจกระบวนการของตนเองอย่างรอบด้าน การนำ AI, Automation และเทคโนโลยีดิจิทัลเข้ามาประยุกต์ใช้จึงสามารถสร้างคุณค่า ลดต้นทุน และสนับสนุนการเติบโตได้อย่างเต็มศักยภาพ",
+          "Aileen Solutions และ Nintex Thailand ขอขอบคุณผู้บริหาร วิทยากร และผู้เข้าร่วมงานทุกท่านที่ร่วมแลกเปลี่ยนความรู้และประสบการณ์ พร้อมเป็นส่วนหนึ่งของการยกระดับกระบวนการองค์กรจาก Process Visibility ไปสู่การดำเนินงานที่มีประสิทธิภาพและยั่งยืนอย่างเป็นรูปธรรม",
         ],
       },
     ],
-    registrationUrl: "https://forms.monday.com/forms/46e2da988e2aec0a37a2f541aa927d31?r=apse2",
     media: {
-      heroImage: epvPromoteHero.src,
-      heroAlt: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
-      videoUrl: "https://www.youtube.com/embed/qXYR-0eztjE?cc_load_policy=1&cc_lang_pref=en",
+      heroImage: epvHero.src,
+      heroAlt: "งานสัมมนา Enterprise Process Visibility โดย Aileen Solutions และ Nintex Thailand",
       gallery: [
         {
-          title: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
+          title: "การบรรยายและแลกเปลี่ยนความรู้ภายในงาน",
           ratio: "wide",
-          image: epvPromoteHero.src,
-          alt: "โปสเตอร์ประชาสัมพันธ์งานสัมมนา Enterprise Process Visibility",
+          image: epvHero.src,
+          alt: "วิทยากรและผู้เข้าร่วมงานในงานสัมมนา Enterprise Process Visibility",
+        },
+        {
+          title: "การนำเสนอแนวทาง Process Management และ Automation",
+          ratio: "wide",
+          image: epvGallery2.src,
+          alt: "การบรรยายจากทีมงานในงานสัมมนา Enterprise Process Visibility",
+        },
+        {
+          title: "ผู้เข้าร่วมงานจากองค์กรชั้นนำ",
+          ratio: "wide",
+          image: epvGallery3.src,
+          alt: "ผู้บริหารและตัวแทนองค์กรเข้าร่วมงานสัมมนา",
+        },
+        {
+          title: "บรรยากาศการแลกเปลี่ยนมุมมองด้านความยั่งยืน",
+          ratio: "wide",
+          image: epvGallery4.src,
+          alt: "บรรยากาศการแลกเปลี่ยนความรู้ในงานสัมมนา",
+        },
+        {
+          title: "ภาพรวมงานสัมมนา Enterprise Process Visibility",
+          ratio: "wide",
+          image: epvAlbum.src,
+          alt: "ภาพรวมงานสัมมนา Enterprise Process Visibility ณ Hotel Nikko Amata City",
         },
       ],
     },

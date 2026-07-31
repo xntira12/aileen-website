@@ -22,7 +22,7 @@ function ChevronIcon({ open }) {
   );
 }
 
-export default function QmsFeaturesAccordion({ features }) {
+export default function QmsFeaturesAccordion({ features = [], accordion = {} }) {
   const [openIndex, setOpenIndex] = useState(0);
 
   const toggle = (index) => {
@@ -38,17 +38,16 @@ export default function QmsFeaturesAccordion({ features }) {
           <div>
             <span className="lv8-pill">
               <span className="lv8-hdot" />
-              Key Features
+              {accordion.eyebrow}
             </span>
             <h2 className="mt-5 text-3xl font-extrabold leading-[1.05] tracking-tight text-slate-900 md:text-5xl">
-              ฟีเจอร์สำคัญ
+              {accordion.title}
               <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
-                สำหรับควบคุมคุณภาพ
+                {accordion.titleHighlight}
               </span>
             </h2>
             <p className="mt-4 text-base leading-8 text-slate-500">
-              ครอบคลุมตั้งแต่การควบคุมเวอร์ชัน การติดตามประวัติ
-              การสรุปผลผู้บริหาร ไปจนถึงการแจ้งเตือนและความปลอดภัยระดับองค์กร
+              {accordion.description}
             </p>
           
           </div>

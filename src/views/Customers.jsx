@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Navbar from "../components/Navbar";
 import SectionContactFooter from "../components/SectionContactFooter";
 import CustomerLogoItem from "../components/CustomerLogoItem";
+import { useLocale } from "../i18n/LocaleProvider";
 import logoPttlng from "../assets/img/home/customers/logo-pttlng.png";
 
 function useInView(threshold = 0.14) {
@@ -47,6 +48,8 @@ const CUSTOMER_PAGE_LOGOS = [
 ];
 
 export default function Customers() {
+  const { messages } = useLocale();
+  const copy = messages.customers ?? {};
   const [heroRef, heroInView] = useInView(0.12);
   const [gridRef, gridInView] = useInView(0.1);
 
@@ -79,7 +82,7 @@ export default function Customers() {
                     }`}
                   >
                     <span className="h-2 w-2 rounded-full bg-emerald-300" />
-                    Trusted Customers
+                    {copy.eyebrow}
                   </span>
 
                   <h1
@@ -88,9 +91,9 @@ export default function Customers() {
                     }`}
                     style={{ transitionDelay: "80ms" }}
                   >
-                    Trusted by
+                    {copy.title}
                     <span className="mt-2 block bg-gradient-to-r from-sky-300 via-cyan-200 to-emerald-300 bg-clip-text text-transparent">
-                      Leading Organizations
+                      {copy.titleHighlight}
                     </span>
                   </h1>
 
@@ -100,8 +103,7 @@ export default function Customers() {
                     }`}
                     style={{ transitionDelay: "160ms" }}
                   >
-                    Aileen Solutions ได้รับความไว้วางใจจากองค์กรชั้นนำในการพัฒนาโซลูชันดิจิทัล
-                    ที่เชื่อมระบบงาน ข้อมูล และ workflow ให้ทำงานร่วมกันได้จริงในระดับองค์กร
+                    {copy.description}
                   </p>
 
                   <div
@@ -114,7 +116,7 @@ export default function Customers() {
                       href="/contact"
                       className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15"
                     >
-                      <span className="relative z-10">Contact Us</span>
+                      <span className="relative z-10">{copy.contactUs}</span>
                       <svg className="w-3.5 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
                         <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M1 5h12m0 0L9 1m4 4L9 9" />
                       </svg>

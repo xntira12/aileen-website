@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
+import { useLocale } from "../i18n/LocaleProvider";
 const stBg = "/img/home/st-bg.jpg";
 const logo = "/img/logo/aileen-logo.png";
 
@@ -10,6 +11,11 @@ const GMAP_EMBED =
   "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5233680716533!2d100.5046713!3d13.6730122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2a213551fedc5%3A0x5be1f077764e696f!2z4Liq4LiE4Liy4Lij4Li14Lii4Liy4Lih4LiB4Lix4LiZIOC5gOC4o-C4suC4o-C5jA!5e0!3m2!1sth!2sth!4v1730000000000";
 
 export default function SectionContactDark() {
+  const { messages } = useLocale();
+  const footer = messages.footer ?? {};
+  const brand = footer.brand ?? {};
+  const cta = footer.cta ?? {};
+
   const secRef = useRef(null);
   const [inView, setInView] = useState(false);
 
@@ -83,7 +89,7 @@ export default function SectionContactDark() {
                     background: "#38e0d0",
                   }}
                 />
-                CONTACT US
+                {cta.eyebrow}
               </span>
 
               <h2
@@ -97,7 +103,7 @@ export default function SectionContactDark() {
                   lineHeight: 1.25,
                 }}
               >
-                Let's Start Something
+                {cta.title}
                 <br />
                 <span
                   style={{
@@ -106,7 +112,7 @@ export default function SectionContactDark() {
                     WebkitTextFillColor: "transparent",
                   }}
                 >
-                  Great Together
+                  {cta.titleHighlight}
                 </span>
               </h2>
 
@@ -123,8 +129,7 @@ export default function SectionContactDark() {
                   fontSize: ".88rem",
                 }}
               >
-                ติดต่อทีมงานของเราเพื่อรับคำปรึกษา
-                และค้นหาโซลูชั่นที่เหมาะสมกับองค์กรของคุณ
+                {cta.description}
               </p>
 
               <div {...rv(540)} style={{ ...rv(540).style, marginTop: 32 }}>
@@ -132,7 +137,7 @@ export default function SectionContactDark() {
                   href="/contact"
                   className="btn-fancy group relative inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-7 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:shadow-lg hover:shadow-emerald-500/15"
                 >
-                  <span className="relative z-10">Go to Contact Form</span>
+                  <span className="relative z-10">{cta.button}</span>
                   <svg
                     className="w-3.5 text-white relative z-10"
                     aria-hidden="true"
@@ -196,7 +201,7 @@ export default function SectionContactDark() {
                     letterSpacing: ".04em",
                   }}
                 >
-                  AILEEN SOLUTIONS
+                  {brand.name}
                 </span>
               </div>
 
@@ -207,9 +212,9 @@ export default function SectionContactDark() {
                   lineHeight: 1.65,
                 }}
               >
-                Enterprise Digital Solutions
+                {brand.tagline1}
                 <br />
-                Driving Business Innovation
+                {brand.tagline2}
               </p>
 
               {/* Social row */}
@@ -278,33 +283,28 @@ export default function SectionContactDark() {
 
             {/* Col 2: Solutions */}
             <div className="ct5-solCol">
-              <div className="ct5-colTitle">Solutions</div>
-              <a href="/service" className="ct5-link">Quality Management Platform</a>
-              <a href="/service/gavalon" className="ct5-link">GAVALON</a>
-              <a href="/service" className="ct5-link">Low-Code Business Orchestrator</a>
-              <a href="/service" className="ct5-link">Process Management Platform</a>
-              <a href="/service" className="ct5-link">Robotic Process Automation</a>
-              <a href="/service" className="ct5-link">Domain-Specific Generative AI</a>
+              <div className="ct5-colTitle">{footer.solutionsTitle}</div>
+              {(footer.solutions ?? []).map((item) => (
+                <a key={item.label} href={item.href} className="ct5-link">{item.label}</a>
+              ))}
             </div>
 
-            {/* Col 3: Contact */}
             <div className="ct5-contactCol">
-              <div className="ct5-colTitle">Contact</div>
+              <div className="ct5-colTitle">{footer.contactTitle}</div>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
-                <a href="mailto:hello@aileen.co.th" className="ct5-chip">
+                <a href={`mailto:${footer.email}`} className="ct5-chip">
                   <span style={{ color: "rgba(255,255,255,.35)" }}>✉</span>
-                  <span>info@aileensolutions.com</span>
+                  <span>{footer.email}</span>
                 </a>
-                <a href="tel:+6621234567" className="ct5-chip">
+                <a href={`tel:${footer.phone?.replace(/-/g, "")}`} className="ct5-chip">
                   <span style={{ color: "rgba(255,255,255,.35)" }}>☎</span>
-                  <span>06-4447-8955</span>
+                  <span>{footer.phone}</span>
                 </a>
               </div>
             </div>
 
-            {/* Col 4: Map */}
             <div className="ct5-mapCol">
-              <div className="ct5-colTitle">Location</div>
+              <div className="ct5-colTitle">{footer.locationTitle}</div>
               <a
                 href={GMAP_URL}
                 target="_blank"
@@ -314,13 +314,13 @@ export default function SectionContactDark() {
                 <div className="ct5-map-wrap">
                   <iframe
                     src={GMAP_EMBED}
-                    title="Aileen Solutions Location"
+                    title={footer.mapTitle}
                     loading="lazy"
                     referrerPolicy="no-referrer-when-downgrade"
                     style={{ border: 0 }}
                   />
                   <div className="ct5-map-overlay">
-                    <span className="ct5-map-btn">Open in Google Maps ↗</span>
+                    <span className="ct5-map-btn">{footer.mapButton}</span>
                   </div>
                 </div>
               </a>
@@ -332,9 +332,14 @@ export default function SectionContactDark() {
                 style={{ marginTop: 8, fontSize: ".78rem" }}
               >
                
-                <span>79 อาคารเจียมจรรย์ ชั้น 3 ห้อง 312
-ถนนสุขสวัสดิ์ แขวงราษฎร์บูรณะ เขตราษฎร์บูรณะ
-กรุงเทพมหานคร 10140</span>
+                <span>
+                  {(footer.addressLines ?? []).map((line, i) => (
+                    <span key={line}>
+                      {line}
+                      {i < footer.addressLines.length - 1 ? <br /> : null}
+                    </span>
+                  ))}
+                </span>
               </a>
             </div>
           </div>
@@ -351,7 +356,7 @@ export default function SectionContactDark() {
               color: "rgba(255,255,255,.25)",
             }}
           >
-            © {new Date().getFullYear()} Aileen Solutions. All rights reserved.
+            © {new Date().getFullYear()} {footer.copyright}
           </div>
         </footer>
       </div>

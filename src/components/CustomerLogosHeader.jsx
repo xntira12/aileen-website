@@ -1,6 +1,11 @@
 "use client";
 
+import { useLocale } from "../i18n/LocaleProvider";
+
 export default function CustomerLogosHeader({ revealed = false, className = "" }) {
+  const { messages } = useLocale();
+  const copy = messages.home?.customerLogos ?? {};
+
   return (
     <div className={`text-center ${className}`}>
       <div className="flex justify-center pb-3 sm:pb-4">
@@ -8,7 +13,7 @@ export default function CustomerLogosHeader({ revealed = false, className = "" }
           className={`cm-rv ${revealed ? "on" : ""} inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/5 px-4 py-2 text-xs tracking-widest text-slate-600 backdrop-blur`}
         >
           <span className="h-2 w-2 rounded-full bg-cyan-500 shadow-[0_0_6px_rgba(6,182,212,.6)]" />
-          OUR CUSTOMERS
+          {copy.eyebrow}
         </span>
       </div>
 
@@ -22,7 +27,7 @@ export default function CustomerLogosHeader({ revealed = false, className = "" }
           backgroundClip: "text",
         }}
       >
-        ได้รับความไว้วางใจจากองค์กรชั้นนำ
+        {copy.title}
       </h2>
 
       <span className={`cm-line ${revealed ? "on" : ""}`} />
@@ -31,7 +36,7 @@ export default function CustomerLogosHeader({ revealed = false, className = "" }
         className={`cm-rv ${revealed ? "on" : ""} mt-3 text-center text-sm font-light text-slate-500`}
         style={{ animationDelay: "160ms" }}
       >
-        บริษัทชั้นนำในอุตสาหกรรมพลังงานและปิโตรเคมีที่ไว้วางใจ Aileen Solutions
+        {copy.subtitle}
       </p>
     </div>
   );

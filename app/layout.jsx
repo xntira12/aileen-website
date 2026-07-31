@@ -1,4 +1,5 @@
 import "./globals.css";
+import Providers from "@/components/Providers";
 
 const SITE_URL = "https://www.aileensolutions.com";
 
@@ -64,6 +65,10 @@ export const metadata = {
   alternates: {
     canonical: SITE_URL,
   },
+  icons: {
+    icon: "/favicon.ico",
+    shortcut: "/favicon.ico",
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -72,9 +77,12 @@ export default function RootLayout({ children }) {
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link rel="icon" type="image/png" href="/favicon.png" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" sizes="32x32" />
+        <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
       </head>
-      <body>{children}</body>
+      <body>
+        <Providers>{children}</Providers>
+      </body>
     </html>
   );
 }

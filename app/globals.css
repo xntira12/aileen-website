@@ -709,7 +709,7 @@ a {
   }
 }
 .hero-dark {
-  background-color: #020617;
+  background-color: #ffffff;
 }
 .hero-dark .hero-bg-stack {
   bottom: -2px;
@@ -743,6 +743,11 @@ a {
   pointer-events: auto;
   overflow: visible;
 }
+
+.section-surface-gradient {
+  background: linear-gradient(180deg, #ffffff 0%, #fbfdff 48%, #f5fbf9 100%);
+}
+
 .cm-focus-track {
   will-change: transform;
   transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
@@ -858,11 +863,31 @@ a {
 }
 
 /* ── service card ── */
-.svs-c-wrap{height:100%}
+.svs-c-wrap{
+  height:100%;
+  display:flex;
+}
 .svs-c--static{cursor:default}
 .svs-c--static:hover{box-shadow:none;border-color:rgba(255,255,255,.16)}
 .svs-c--static:hover::after{left:-100%}
-.svs-c{position:relative;overflow:hidden;background:rgba(255,255,255,.09);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid rgba(255,255,255,.16);border-radius:18px;padding:26px 22px 22px;cursor:pointer;transform-style:preserve-3d;will-change:transform;transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s}
+.svs-c{
+  position:relative;
+  overflow:hidden;
+  background:rgba(255,255,255,.09);
+  backdrop-filter:blur(14px);
+  -webkit-backdrop-filter:blur(14px);
+  border:1px solid rgba(255,255,255,.16);
+  border-radius:18px;
+  padding:26px 22px 22px;
+  cursor:pointer;
+  transform-style:preserve-3d;
+  will-change:transform;
+  transition:transform .4s cubic-bezier(.22,1,.36,1),box-shadow .3s,border-color .3s;
+  height:100%;
+  width:100%;
+  display:flex;
+  flex-direction:column;
+}
 .svs-c::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(56,224,208,.07),transparent);transition:left .55s;pointer-events:none}
 .svs-c:hover{box-shadow:0 10px 36px rgba(0,0,0,.45),0 0 28px rgba(56,224,208,.18);border-color:rgba(56,224,208,.35)}
 .svs-c:hover::after{left:100%}
@@ -909,7 +934,12 @@ a {
 @keyframes svsStem{from{opacity:0;transform:scaleY(0)}to{opacity:1;transform:scaleY(1)}}
 .svs-flow-stem-rv{opacity:0;transform-origin:top}.svs-flow-stem-rv.on{animation:svsStem .35s ease forwards}
 
-.svs-grid4{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.svs-grid4{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+  align-items:stretch;
+}
 .svs-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;max-width:880px;margin:0 auto}
 .svs-vline{display:none}
 
