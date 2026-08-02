@@ -5,10 +5,10 @@ const stBg = "/img/home/st-bg.jpg";
 const logo = "/img/logo/aileen-logo.png";
 
 const GMAP_URL =
-  "https://www.google.com/maps/place/%E0%B8%AD%E0%B8%B2%E0%B8%84%E0%B8%B2%E0%B8%A3+%E0%B9%80%E0%B8%88%E0%B8%B5%E0%B8%A2%E0%B8%A1%E0%B8%88%E0%B8%A3%E0%B8%A3%E0%B8%A2%E0%B9%8C/@13.6730174,100.5023752,17z/data=!3m1!4b1!4m6!3m5!1s0x30e2a213551fedc5:0x5be1f077764e696f!8m2!3d13.6730122!4d100.5072461!16s%2Fg%2F1hm44gy3t?entry=ttu&g_ep=EgoyMDI2MDIxMS4wIKXMDSoASAFQAw%3D%3D";
+  "https://www.google.com/maps/place/%E0%B8%9A%E0%B8%A3%E0%B8%B4%E0%B8%A9%E0%B8%B1%E0%B8%97+%E0%B9%84%E0%B8%AD%E0%B8%A5%E0%B8%B5%E0%B8%99+%E0%B9%82%E0%B8%8B%E0%B8%A5%E0%B8%B9%E0%B8%8A%E0%B8%B1%E0%B9%88%E0%B8%99+%E0%B8%88%E0%B8%B3%E0%B8%81%E0%B8%B1%E0%B8%94+(%E0%B8%AA%E0%B8%B3%E0%B8%99%E0%B8%B1%E0%B8%81%E0%B8%87%E0%B8%B2%E0%B8%99%E0%B9%83%E0%B8%AB%E0%B8%8D%E0%B9%88)/@13.6729041,100.5047046,17z/data=!3m1!4b1!4m6!3m5!1s0x30e2a3ec06e79007:0xe094e844fc8ed3ed!8m2!3d13.6728989!4d100.5072795!16s%2Fg%2F11svmr065j?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D";
 
 const GMAP_EMBED =
-  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5233680716533!2d100.5046713!3d13.6730122!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2a213551fedc5%3A0x5be1f077764e696f!2z4Liq4LiE4Liy4Lij4Li14Lii4Liy4Lih4LiB4Lix4LiZIOC5gOC4o-C4suC4o-C5jA!5e0!3m2!1sth!2sth!4v1730000000000";
+  "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3876.5233680716533!2d100.5047046!3d13.6728989!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x30e2a3ec06e79007%3A0xe094e844fc8ed3ed!2z4Lia4Lij4Li04Lip4Lix4LiXIOC5hOC4reC4peC4teC4mSDguYLguIvguKXguLnguIrguLHguYjguJkg4LiI4Liz4LiB4Lix4LiUICjguKrguLPguJnguLHguIHguIfguLLguJnguYPguKvguI3guYgp!5e0!3m2!1sth!2sth!4v1730000000000";
 
 export default function SectionContactDark() {
   const { messages } = useLocale();
