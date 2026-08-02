@@ -20,15 +20,15 @@ const sloganImg = "/img/home/slogan.png";
 const stBg = "/img/home/st-bg.jpg";
 
 const LINE_STYLES = {
-  muted: "text-white/50 text-xs lg:text-xl font-normal tracking-wide",
-  bold: "text-white font-bold text-2xl lg:text-[50px]",
-  boldLarge: "text-white font-bold text-4xl lg:text-7xl",
-  boldMedium: "text-white text-xl lg:text-5xl mt-1 font-bold",
+  muted: "text-white/50 text-xs leading-snug font-normal tracking-wide sm:text-sm lg:text-lg lg:leading-[1.4]",
+  bold: "text-white font-bold text-[1.35rem] leading-[1.2] sm:text-2xl lg:text-[2.25rem] lg:leading-[1.2]",
+  boldLarge: "text-white font-bold text-[1.75rem] leading-[1.15] sm:text-4xl lg:text-[3rem] lg:leading-[1.16]",
+  boldMedium: "text-white mt-1 text-xl font-bold leading-snug sm:text-2xl lg:text-[2rem] lg:leading-[1.2]",
 };
 
 function HeroSlide({ slide }) {
   return (
-    <p className="absolute inset-0 flex items-center lg:items-start flex-col justify-center w-full max-w-[38rem] pr-2 text-center lg:text-left leading-[1.15] tracking-[-0.01em]">
+    <p className="absolute inset-0 flex w-full max-w-full flex-col items-center justify-center gap-1 pr-2 text-center tracking-[-0.01em] lg:items-start lg:justify-center lg:gap-1.5 lg:text-left">
       {slide.lines.map((line, i) => (
         <span key={i} className={LINE_STYLES[line.className] ?? LINE_STYLES.muted}>
           {line.text}
@@ -201,7 +201,7 @@ export default function Home() {
                   }}
                   onMouseEnter={() => setCarouselHovered(true)}
                   onMouseLeave={() => setCarouselHovered(false)}>
-                  <div className="relative h-[180px] w-full overflow-hidden"
+                  <div className="relative h-[165px] w-full overflow-hidden sm:h-[185px] lg:h-[252px]"
                     style={{ transform: carouselHovered ? "translateY(0)" : "translateY(14px)", transition: "transform 0.3s ease-out" }}>
                     <div key={currentSlide}
                       style={{ animation: isAnimating ? `slideOut${slideDir === "up" ? "Up" : "Down"} 0.38s ease forwards` : `slideIn${slideDir === "up" ? "Up" : "Down"} 0.38s ease forwards`, position: "absolute", inset: 0 }}>
@@ -233,7 +233,7 @@ export default function Home() {
                   className="flex lg:hidden flex-col w-full gap-4"
                   style={{ opacity: isSplit ? 1 : 0, transition: "opacity 0.45s ease 0.2s" }}
                 >
-                  <div className="relative h-[120px] w-full overflow-hidden">
+                  <div className="relative h-[155px] w-full overflow-hidden sm:h-[170px]">
                     <div key={currentSlide}
                       style={{ animation: isAnimating ? `slideOut${slideDir === "up" ? "Up" : "Down"} 0.38s ease forwards` : `slideIn${slideDir === "up" ? "Up" : "Down"} 0.38s ease forwards`, position: "absolute", inset: 0 }}>
                       {slides[currentSlide]}
