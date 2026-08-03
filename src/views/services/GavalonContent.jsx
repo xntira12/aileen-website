@@ -4,14 +4,13 @@ import Navbar from "@/components/Navbar";
 import AnimatedBgFlux from "@/components/AnimatedBgFlux";
 import SectionContactFooter from "@/components/SectionContactFooter";
 import GavalonWhySection from "@/components/GavalonWhySection";
+import GavalonOverviewSection from "@/components/GavalonOverviewSection";
 import ButtonArrow from "@/components/ButtonArrow";
 import gavalonFullLogo from "@/assets/img/gavalon/GVL-full-logo-w.png";
 import aileenLogo from "@/assets/img/logo/aileen-logo.png";
 import npcLogo from "@/assets/img/gavalon/npc.png";
 import { useLocale } from "@/i18n/LocaleProvider";
 import { getServiceContent } from "@/i18n/messages";
-
-const AI_PROCESS_VIDEO = "/video/ai-process.mp4";
 
 const PARTNER_LOGOS = {
   aileen: {
@@ -161,35 +160,7 @@ export default function GavalonContent() {
           </div>
         </section>
 
-        <section id="overview" className={`bg-white ${sectionX} py-20 md:py-28`}>
-          <div className="mx-auto max-w-5xl text-center">
-            <SectionTitle
-              title={overview.title}
-              highlight={overview.highlight}
-              center
-            />
-
-            <div className="mx-auto mt-10 flex justify-center">
-              <video
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                aria-label={overview.videoAriaLabel}
-                className="h-auto w-full max-w-3xl object-contain"
-              >
-                <source src={AI_PROCESS_VIDEO} type="video/mp4" />
-              </video>
-            </div>
-
-            <div className="mx-auto mt-12 max-w-3xl space-y-6 text-base leading-8 text-slate-600 md:text-lg">
-              {(overview.points ?? []).map((point) => (
-                <p key={point.slice(0, 40)}>{point}</p>
-              ))}
-            </div>
-          </div>
-        </section>
+        <GavalonOverviewSection sectionX={sectionX} overview={overview} />
 
         <section id="benefits" className={`bg-[#f4f8fc] ${sectionX} py-24`}>
           <div className="mx-auto max-w-6xl">

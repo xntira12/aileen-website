@@ -100,7 +100,17 @@ function useCardSide(colIndex, cols = 4) {
   return side;
 }
 
-function GCard({ item, colIndex, onClick, interactive = true, cols = 4, revealed = false, delayMs = 0, viewDetailsLabel = "View details" }) {
+function GCard({
+  item,
+  colIndex,
+  onClick,
+  interactive = true,
+  cols = 4,
+  revealed = false,
+  delayMs = 0,
+  viewDetailsLabel = "View details",
+  productPageLabel = "View product page",
+}) {
   const innerRef = useRef(null);
   const side = useCardSide(colIndex, cols);
   const animClass = side === "left" ? "svs-card-in-l" : side === "right" ? "svs-card-in-r" : "svs-card-in-u";
@@ -135,11 +145,21 @@ function GCard({ item, colIndex, onClick, interactive = true, cols = 4, revealed
       <div style={{ display:"flex", gap:5, marginTop:10, flexWrap:"wrap" }}>
         {item.tags.map(t => <span key={t} className="svs-tg">{t}</span>)}
       </div>
-      <p style={{ marginTop:11, fontSize:".9rem", lineHeight:1.7, color:"rgba(255,255,255,.65)" }}>{item.summary}</p>
+      <p style={{ marginTop:11, fontSize:".9rem", lineHeight:1.7, color:"rgba(255,255,255,.65)", flex:1 }}>{item.summary}</p>
       {interactive ? (
         <div style={{ marginTop:14, fontSize:".8rem", fontWeight:700, background:"linear-gradient(135deg,#38e0d0,#0ea5e9)", WebkitBackgroundClip:"text", WebkitTextFillColor:"transparent", display:"flex", alignItems:"center", gap:4 }}>
         {viewDetailsLabel} <span style={{ WebkitTextFillColor:"#38e0d0" }}>›</span>
         </div>
+      ) : null}
+      {item.productHref ? (
+        <a
+          href={item.productHref}
+          className="svs-card-btn"
+          onClick={(e) => e.stopPropagation()}
+        >
+          {productPageLabel}
+          <span aria-hidden="true">›</span>
+        </a>
       ) : null}
       </div>
     </div>
@@ -184,7 +204,15 @@ export default function SectionServiceAndSolutions() {
   const { messages } = useLocale();
   const svcLabels = messages.home?.services ?? {};
 
-  const SVC = useMemo(() => buildSvcItems(svcLabels.items), [svcLabels.items]);
+  const SVC = useMemo(() => {
+    const hrefById = Object.fromEntries(
+      (messages.common?.serviceItems ?? []).map((s) => [s.id, s.href]),
+    );
+    return buildSvcItems(svcLabels.items).map((item) => ({
+      ...item,
+      productHref: item.href || hrefById[item.id],
+    }));
+  }, [svcLabels.items, messages.common?.serviceItems]);
   const DETAIL_SVC = useMemo(() => SVC.filter((s) => !DETAIL_HIDDEN_SERVICE_IDS.has(s.id)), [SVC]);
   const AUTO_GROUP = useMemo(() => SVC.filter((s) => s.group === "auto"), [SVC]);
   const OPS_GROUP = useMemo(() => SVC.filter((s) => s.group === "ops"), [SVC]);
@@ -262,7 +290,15 @@ export default function SectionServiceAndSolutions() {
                 {AUTO_GROUP.map((it, i) => (
                   <React.Fragment key={it.id}>
                     {i > 0 && <div className="svs-connector"><div className="svs-connector-dot" /><div className="svs-connector-line" /></div>}
-                    <GCard item={it} colIndex={i} onClick={() => go(it.id)} revealed={autoGridOn} delayMs={i * 90} viewDetailsLabel={svcLabels.viewDetails} />
+                    <GCard
+                      item={it}
+                      colIndex={i}
+                      onClick={() => go(it.id)}
+                      revealed={autoGridOn}
+                      delayMs={i * 90}
+                      viewDetailsLabel={svcLabels.viewDetails}
+                      productPageLabel={svcLabels.viewProductPage}
+                    />
                   </React.Fragment>
                 ))}
               </div>
@@ -283,6 +319,7 @@ export default function SectionServiceAndSolutions() {
                   cols={4}
                   interactive={!DETAIL_HIDDEN_SERVICE_IDS.has(it.id)}
                   viewDetailsLabel={svcLabels.viewDetails}
+                  productPageLabel={svcLabels.viewProductPage}
                 />
               ))}
             </div>
@@ -331,9 +368,9 @@ export default function SectionServiceAndSolutions() {
                       </div>
                     ))}
                   </div>
-                  {ai.href ? (
+                  {ai.productHref ? (
                     <a
-                      href={ai.href}
+                      href={ai.productHref}
                       className="btn-fancy group relative mt-6 inline-flex items-center gap-2 rounded-full border border-white/35 bg-white/5 px-6 py-2.5 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5"
                     >
                       <span className="relative z-10">{svcLabels.viewProductPage}</span>
