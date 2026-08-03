@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import { useLocale } from "@/i18n/LocaleProvider";
 import { getServiceContent } from "@/i18n/messages";
 import ButtonArrow from "@/components/ButtonArrow";
+import { Reveal, RevealSection } from "@/components/GavalonReveal";
 
 const gavalonVisitBtn =
   "inline-flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#1a2838] via-[#1a4d72] to-[#2b9fd9] px-7 py-3.5 text-sm font-semibold text-white shadow-[0_8px_28px_rgba(43,159,217,0.28)] transition hover:-translate-y-0.5 hover:brightness-110 sm:w-auto";
@@ -68,7 +69,11 @@ export default function GavalonWhySection({
   const why = getServiceContent(locale, "gvl").why ?? {};
 
   return (
-    <section id="why-gavalon" className={`relative overflow-hidden ${sectionX} py-24 text-white`}>
+    <RevealSection
+      as="section"
+      id="why-gavalon"
+      className={`relative overflow-hidden ${sectionX} py-24 text-white`}
+    >
       <div aria-hidden className="pointer-events-none absolute inset-0 bg-[#050a12]" />
       <div
         aria-hidden
@@ -99,39 +104,51 @@ export default function GavalonWhySection({
 
       <div className="relative mx-auto max-w-5xl">
         <div className="mx-auto max-w-4xl text-center">
-          <span className="lv8-pill border-white/12 bg-white/6 text-white/70">
-            <span className="lv8-hdot" />
-            {why.eyebrow}
-          </span>
-          <h2 className="mt-5 text-3xl font-extrabold leading-[1.05] tracking-tight text-white md:text-5xl">
-            {why.title}
-          </h2>
+          <Reveal delay={0} variant="fade">
+            <span className="lv8-pill border-white/12 bg-white/6 text-white/70">
+              <span className="lv8-hdot" />
+              {why.eyebrow}
+            </span>
+          </Reveal>
+          <Reveal delay={100} variant="up">
+            <h2 className="mt-5 text-3xl font-extrabold leading-[1.05] tracking-tight text-white md:text-5xl">
+              {why.title}
+            </h2>
+          </Reveal>
         </div>
 
-        <SpotlightCard>
-          <p className="text-base font-medium leading-7 text-white/90 md:text-lg md:leading-8">
-            {why.body}
-          </p>
-          <p className="mt-4 text-sm leading-6 text-slate-400 md:text-[15px]">
-            {why.tagline}
-          </p>
+        <Reveal delay={200} variant="scale">
+          <SpotlightCard>
+            <Reveal delay={280} variant="up">
+              <p className="text-base font-medium leading-7 text-white/90 md:text-lg md:leading-8">
+                {why.body}
+              </p>
+            </Reveal>
+            <Reveal delay={380} variant="up">
+              <p className="mt-4 text-sm leading-6 text-slate-400 md:text-[15px]">
+                {why.tagline}
+              </p>
+            </Reveal>
 
-          <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-            <a
-              href="https://npc-gavalon.com"
-              target="_blank"
-              rel="noreferrer noopener"
-              className={gavalonVisitBtn}
-            >
-              {why.visitGavalon}
-              <ButtonArrow />
-            </a>
-            <a href="/contact" className={contactBtn}>
-              {why.contactUs}
-            </a>
-          </div>
-        </SpotlightCard>
+            <Reveal delay={480} variant="up">
+              <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+                <a
+                  href="https://npc-gavalon.com"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                  className={gavalonVisitBtn}
+                >
+                  {why.visitGavalon}
+                  <ButtonArrow />
+                </a>
+                <a href="/contact" className={contactBtn}>
+                  {why.contactUs}
+                </a>
+              </div>
+            </Reveal>
+          </SpotlightCard>
+        </Reveal>
       </div>
-    </section>
+    </RevealSection>
   );
 }

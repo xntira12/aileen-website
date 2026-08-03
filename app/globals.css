@@ -2180,3 +2180,65 @@ a {
     transform: rotate(360deg);
   }
 }
+
+/* ===== GAVALON scroll reveal (element-by-element) ===== */
+.gvl-rv {
+  opacity: 0;
+  transition:
+    opacity 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.75s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.75s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--gvl-delay, 0ms);
+  will-change: opacity, transform;
+}
+.gvl-rv--up {
+  transform: translateY(32px);
+}
+.gvl-rv--left {
+  transform: translateX(-36px);
+}
+.gvl-rv--right {
+  transform: translateX(36px);
+}
+.gvl-rv--scale {
+  transform: translateY(18px) scale(0.94);
+  filter: blur(4px);
+}
+.gvl-rv--fade {
+  filter: blur(2px);
+}
+.gvl-rv.on {
+  opacity: 1;
+  filter: none;
+}
+.gvl-rv--up.on,
+.gvl-rv--left.on,
+.gvl-rv--right.on,
+.gvl-rv--scale.on {
+  transform: none;
+}
+/* Keep existing transforms (mock rotates / float) when using fade */
+.gvl-ov-mock.gvl-rv--fade {
+  filter: blur(3px);
+}
+.gvl-ov-mock.gvl-rv--fade.on {
+  filter: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gvl-rv,
+  .gvl-rv--up,
+  .gvl-rv--left,
+  .gvl-rv--right,
+  .gvl-rv--scale,
+  .gvl-rv--fade {
+    opacity: 1 !important;
+    filter: none !important;
+    transition: none !important;
+  }
+  .gvl-rv--up,
+  .gvl-rv--left,
+  .gvl-rv--right,
+  .gvl-rv--scale {
+    transform: none !important;
+  }
+}
