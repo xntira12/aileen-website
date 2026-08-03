@@ -5,6 +5,7 @@ import AnimatedBgFlux from "@/components/AnimatedBgFlux";
 import SectionContactFooter from "@/components/SectionContactFooter";
 import GavalonWhySection from "@/components/GavalonWhySection";
 import GavalonOverviewSection from "@/components/GavalonOverviewSection";
+import { Reveal, RevealSection } from "@/components/GavalonReveal";
 import ButtonArrow from "@/components/ButtonArrow";
 import gavalonFullLogo from "@/assets/img/gavalon/GVL-full-logo-w.png";
 import aileenLogo from "@/assets/img/logo/aileen-logo.png";
@@ -38,6 +39,7 @@ function SectionTitle({
   description,
   center = false,
   dark = false,
+  delay = 0,
 }) {
   const textClass = dark ? "text-white" : "text-slate-900";
   const descriptionClass = dark ? "text-slate-300" : "text-slate-600";
@@ -45,23 +47,29 @@ function SectionTitle({
   return (
     <div className={center ? "mx-auto max-w-4xl text-center" : "max-w-4xl"}>
       {eyebrow ? (
-        <span className={`lv8-pill ${dark ? "border-white/12 bg-white/6 text-white/70" : ""}`}>
-          <span className="lv8-hdot" />
-          {eyebrow}
-        </span>
-      ) : null}
-      <h2 className={`${eyebrow ? "mt-5" : ""} text-3xl font-extrabold leading-[1.05] tracking-tight md:text-5xl ${textClass}`}>
-        {title}
-        {highlight ? (
-          <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
-            {highlight}
+        <Reveal delay={delay} variant="fade">
+          <span className={`lv8-pill ${dark ? "border-white/12 bg-white/6 text-white/70" : ""}`}>
+            <span className="lv8-hdot" />
+            {eyebrow}
           </span>
-        ) : null}
-      </h2>
+        </Reveal>
+      ) : null}
+      <Reveal delay={delay + (eyebrow ? 90 : 0)} variant="up">
+        <h2 className={`${eyebrow ? "mt-5" : ""} text-3xl font-extrabold leading-[1.05] tracking-tight md:text-5xl ${textClass}`}>
+          {title}
+          {highlight ? (
+            <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#62e5da)] bg-clip-text text-transparent">
+              {highlight}
+            </span>
+          ) : null}
+        </h2>
+      </Reveal>
       {description ? (
-        <p className={`mt-5 text-base leading-8 md:text-lg ${descriptionClass}`}>
-          {description}
-        </p>
+        <Reveal delay={delay + (eyebrow ? 180 : 90)} variant="up">
+          <p className={`mt-5 text-base leading-8 md:text-lg ${descriptionClass}`}>
+            {description}
+          </p>
+        </Reveal>
       ) : null}
     </div>
   );
@@ -91,7 +99,11 @@ export default function GavalonContent() {
       <Navbar />
 
       <main className="overflow-hidden">
-        <section className={`relative isolate overflow-hidden bg-[#041824] ${sectionX} pb-16 pt-28 text-white md:pb-24 md:pt-32`}>
+        <RevealSection
+          as="section"
+          immediate
+          className={`relative isolate overflow-hidden bg-[#041824] ${sectionX} pb-16 pt-28 text-white md:pb-24 md:pt-32`}
+        >
           <div className="absolute inset-0 opacity-95">
             <AnimatedBgFlux side="left" />
           </div>
@@ -100,69 +112,83 @@ export default function GavalonContent() {
 
           <div className="relative mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1.05fr_.95fr] lg:items-center">
             <div className="max-w-3xl">
-              <h1 className="mt-0 w-full">
-                <img
-                  src={gavalonFullLogo.src}
-                  alt="GAVALON"
-                  className="h-auto w-full max-w-[min(100%,440px)] object-contain object-left"
-                />
-              </h1>
+              <Reveal delay={0} variant="scale">
+                <h1 className="mt-0 w-full">
+                  <img
+                    src={gavalonFullLogo.src}
+                    alt="GAVALON"
+                    className="h-auto w-full max-w-[min(100%,440px)] object-contain object-left"
+                  />
+                </h1>
+              </Reveal>
 
-              <p className="mt-5 max-w-2xl text-left text-sm font-medium uppercase tracking-[0.14em] text-cyan-100/75 md:text-[15px]">
-                {hero.subtitle}
-              </p>
+              <Reveal delay={120} variant="up">
+                <p className="mt-5 max-w-2xl text-left text-sm font-medium uppercase tracking-[0.14em] text-cyan-100/75 md:text-[15px]">
+                  {hero.subtitle}
+                </p>
+              </Reveal>
 
-              <p className="mt-6 max-w-3xl text-2xl font-semibold leading-[1.35] text-slate-50 md:text-[2rem]">
-                {hero.headline}
-              </p>
+              <Reveal delay={220} variant="up">
+                <p className="mt-6 max-w-3xl text-2xl font-semibold leading-[1.35] text-slate-50 md:text-[2rem]">
+                  {hero.headline}
+                </p>
+              </Reveal>
 
-              <p className="mt-6 max-w-3xl text-base leading-8 text-slate-100/80 md:text-lg">
-                {hero.description}
-              </p>
+              <Reveal delay={320} variant="up">
+                <p className="mt-6 max-w-3xl text-base leading-8 text-slate-100/80 md:text-lg">
+                  {hero.description}
+                </p>
+              </Reveal>
 
-              <div className="mt-8 flex flex-wrap gap-3">
-                <a
-                  href="https://npc-gavalon.com"
-                  target="_blank"
-                  rel="noreferrer noopener"
-                  className={gavalonBtn}
-                >
-                  {hero.visitGavalon}
-                  <ButtonArrow />
-                </a>
-                <a href="/contact" className={contactBtnDark}>
-                  {hero.contactUs}
-                </a>
-              </div>
+              <Reveal delay={420} variant="up">
+                <div className="mt-8 flex flex-wrap gap-3">
+                  <a
+                    href="https://npc-gavalon.com"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    className={gavalonBtn}
+                  >
+                    {hero.visitGavalon}
+                    <ButtonArrow />
+                  </a>
+                  <a href="/contact" className={contactBtnDark}>
+                    {hero.contactUs}
+                  </a>
+                </div>
+              </Reveal>
             </div>
 
             <div className="relative">
               <div className="absolute -left-10 top-0 h-36 w-36 rounded-full bg-sky-400/18 blur-3xl" />
               <div className="absolute -right-12 bottom-2 h-40 w-40 rounded-full bg-emerald-300/12 blur-3xl" />
 
-              <div className="relative overflow-hidden rounded-[34px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_20px_60px_rgba(2,6,23,0.28)] backdrop-blur md:p-8">
+              <Reveal delay={280} variant="right" className="relative overflow-hidden rounded-[34px] border border-white/10 bg-white/[0.04] p-6 shadow-[0_20px_60px_rgba(2,6,23,0.28)] backdrop-blur md:p-8">
                 <div className="grid gap-4">
-                  {(hero.cards ?? []).map((card) => (
-                    <HeroCard key={card.title} title={card.title} body={card.body} />
+                  {(hero.cards ?? []).map((card, i) => (
+                    <Reveal key={card.title} delay={400 + i * 110} variant="up">
+                      <HeroCard title={card.title} body={card.body} />
+                    </Reveal>
                   ))}
                 </div>
 
-                <div className="mt-6 rounded-[28px] border border-cyan-200/15 bg-slate-950/20 p-5">
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-100/70">
-                    {hero.panelLabel}
-                  </p>
-                  <p className="mt-3 text-base leading-8 text-slate-100/82">
-                    {hero.panelBody}
-                  </p>
-                </div>
-              </div>
+                <Reveal delay={400 + (hero.cards?.length ?? 0) * 110} variant="up">
+                  <div className="mt-6 rounded-[28px] border border-cyan-200/15 bg-slate-950/20 p-5">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.24em] text-cyan-100/70">
+                      {hero.panelLabel}
+                    </p>
+                    <p className="mt-3 text-base leading-8 text-slate-100/82">
+                      {hero.panelBody}
+                    </p>
+                  </div>
+                </Reveal>
+              </Reveal>
             </div>
           </div>
-        </section>
+        </RevealSection>
 
         <GavalonOverviewSection sectionX={sectionX} overview={overview} />
 
-        <section id="benefits" className={`bg-[#f4f8fc] ${sectionX} py-24`}>
+        <RevealSection as="section" id="benefits" className={`bg-[#f4f8fc] ${sectionX} py-24`}>
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow={benefits.eyebrow}
@@ -173,8 +199,11 @@ export default function GavalonContent() {
 
             <div className="mt-10 grid auto-rows-fr gap-6 md:grid-cols-2 xl:grid-cols-3">
               {(benefits.items ?? []).map((benefit, index, items) => (
-                <article
+                <Reveal
                   key={benefit.title}
+                  as="article"
+                  delay={220 + index * 100}
+                  variant="scale"
                   className={`flex h-full flex-col rounded-[28px] border border-slate-200/70 bg-white p-6 shadow-[0_10px_30px_rgba(15,23,42,0.04)] md:p-7 ${
                     index === items.length - 1 ? "md:col-span-2 xl:col-span-1" : ""
                   }`}
@@ -183,13 +212,13 @@ export default function GavalonContent() {
                     {benefit.title}
                   </div>
                   <p className="mt-3 text-sm leading-7 text-slate-600 md:text-[15px]">{benefit.body}</p>
-                </article>
+                </Reveal>
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section className={`bg-white ${sectionX} py-24`}>
+        <RevealSection as="section" className={`bg-white ${sectionX} py-24`}>
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow={capabilities.eyebrow}
@@ -198,9 +227,11 @@ export default function GavalonContent() {
             />
 
             <div className="mt-10 grid gap-3 md:grid-cols-2">
-              {(capabilities.items ?? []).map((item) => (
-                <div
+              {(capabilities.items ?? []).map((item, index) => (
+                <Reveal
                   key={item}
+                  delay={220 + index * 70}
+                  variant={index % 2 === 0 ? "left" : "right"}
                   className="flex gap-4 rounded-2xl border border-slate-200/70 bg-white p-5 shadow-[0_4px_12px_rgba(15,23,42,0.02)]"
                 >
                   <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,#0b639b,#62e5da)]">
@@ -215,13 +246,13 @@ export default function GavalonContent() {
                     </svg>
                   </span>
                   <p className="text-sm font-medium leading-6 text-slate-800 md:text-[15px]">{item}</p>
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section className={`bg-[#f4f8fc] ${sectionX} py-24`}>
+        <RevealSection as="section" className={`bg-[#f4f8fc] ${sectionX} py-24`}>
           <div className="mx-auto max-w-6xl">
             <SectionTitle
               eyebrow={industries.eyebrow}
@@ -231,19 +262,21 @@ export default function GavalonContent() {
             />
 
             <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {(industries.items ?? []).map((industry) => (
-                <div
+              {(industries.items ?? []).map((industry, index) => (
+                <Reveal
                   key={industry}
+                  delay={200 + index * 80}
+                  variant="up"
                   className="rounded-2xl border border-slate-200/70 bg-white px-5 py-4 text-sm font-medium leading-6 text-slate-700 shadow-[0_4px_12px_rgba(15,23,42,0.02)]"
                 >
                   {industry}
-                </div>
+                </Reveal>
               ))}
             </div>
           </div>
-        </section>
+        </RevealSection>
 
-        <section id="partner" className={`bg-[#f4f8fc] ${sectionX} py-24`}>
+        <RevealSection as="section" id="partner" className={`bg-[#f4f8fc] ${sectionX} py-24`}>
           <div className="mx-auto max-w-7xl">
             <SectionTitle
               eyebrow={partner.eyebrow}
@@ -252,20 +285,25 @@ export default function GavalonContent() {
               center
             />
 
-            <p className="mx-auto mt-8 max-w-4xl text-center text-base leading-8 text-slate-600 md:text-lg">
-              {partner.introBefore}{" "}
-              <strong className="text-slate-900">{partner.aileenName}</strong>{" "}
-              {partner.introMiddle}{" "}
-              <strong className="text-slate-900">{partner.npcName}</strong>{" "}
-              {partner.introAfter}
-            </p>
+            <Reveal delay={200} variant="up">
+              <p className="mx-auto mt-8 max-w-4xl text-center text-base leading-8 text-slate-600 md:text-lg">
+                {partner.introBefore}{" "}
+                <strong className="text-slate-900">{partner.aileenName}</strong>{" "}
+                {partner.introMiddle}{" "}
+                <strong className="text-slate-900">{partner.npcName}</strong>{" "}
+                {partner.introAfter}
+              </p>
+            </Reveal>
 
             <div className="mt-12 grid gap-5 lg:grid-cols-2">
-              {(partner.cards ?? []).map((card) => {
+              {(partner.cards ?? []).map((card, index) => {
                 const logoMeta = PARTNER_LOGOS[card.id] ?? PARTNER_LOGOS.aileen;
                 return (
-                  <article
+                  <Reveal
                     key={card.id}
+                    as="article"
+                    delay={300 + index * 140}
+                    variant={index === 0 ? "left" : "right"}
                     className="rounded-[30px] border border-slate-200/80 bg-white p-8 shadow-[0_16px_48px_rgba(15,23,42,0.06)]"
                   >
                     <img
@@ -277,16 +315,18 @@ export default function GavalonContent() {
                       {card.title}
                     </p>
                     <p className="mt-4 text-base leading-8 text-slate-600 md:text-lg">{card.body}</p>
-                  </article>
+                  </Reveal>
                 );
               })}
             </div>
 
-            <p className="mx-auto mt-10 max-w-4xl text-center text-base leading-8 text-slate-600 md:text-lg">
-              {partner.closing}
-            </p>
+            <Reveal delay={560} variant="up">
+              <p className="mx-auto mt-10 max-w-4xl text-center text-base leading-8 text-slate-600 md:text-lg">
+                {partner.closing}
+              </p>
+            </Reveal>
           </div>
-        </section>
+        </RevealSection>
 
         <GavalonWhySection sectionX={sectionX} />
       </main>

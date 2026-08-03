@@ -2,15 +2,13 @@
 
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { Reveal, RevealSection } from "@/components/GavalonReveal";
 import mockupAi from "@/assets/img/gavalon/mockups/gvl-AI-z2YET9fL.webp";
 import mockupDashboard from "@/assets/img/gavalon/mockups/gvl-Dashbard-CCiTqFfy.webp";
 import mockupDatabase from "@/assets/img/gavalon/mockups/gvl-Database-BRrXi2AU.webp";
 import mockupEditable from "@/assets/img/gavalon/mockups/gvl-Editable-C0mrSiAw.webp";
 import mockupSearch from "@/assets/img/gavalon/mockups/gvl-Search-CvViLm15.webp";
 import mockupConsultant from "@/assets/img/gavalon/mockups/gvl-consultant-C4JtleyC.webp";
-import gvlLogo from "@/assets/img/gavalon/GVL-logo.png";
-
-const GVL_LOGO_SRC = typeof gvlLogo === "string" ? gvlLogo : gvlLogo.src;
 
 const MOCKUPS = [
   { id: "database", src: mockupDatabase, altKey: "database", className: "gvl-ov-mock gvl-ov-mock--1" },
@@ -117,18 +115,23 @@ function SpotlightCircle({ children, className = "", onActiveChange }) {
   );
 }
 
-function CirclePointItem({ label, index, top, left, floatClass }) {
+function CirclePointItem({ label, index, top, left, floatClass, delay = 0 }) {
   const [active, setActive] = useState(false);
 
   return (
-    <div className={`gvl-ov-float absolute ${floatClass}`} style={{ top, left }}>
+    <Reveal
+      delay={delay}
+      variant="fade"
+      className={`gvl-ov-float absolute ${floatClass}`}
+      style={{ top, left }}
+    >
       <div className="absolute left-0 top-0 -translate-x-1/2 -translate-y-1/2">
         <SpotlightCircle onActiveChange={setActive}>
           <PointIcon index={index} />
         </SpotlightCircle>
       </div>
       <div
-        className="absolute right-[1.65rem] top-0 flex origin-right -translate-y-1/2 items-center gap-2 transition-[transform,color] duration-200 ease-out"
+        className="absolute right-[1.65rem] top-0 flex origin-right items-center gap-2 transition-[transform,color] duration-200 ease-out"
         style={{
           transform: active ? "translateY(-50%) scale(1.12)" : "translateY(-50%) scale(1)",
         }}
@@ -145,65 +148,7 @@ function CirclePointItem({ label, index, top, left, floatClass }) {
           }`}
         />
       </div>
-    </div>
-  );
-}
-
-function CenterLogo({ src, alt = "GAVALON" }) {
-  const ref = useRef(null);
-  const [tilt, setTilt] = useState({ rx: 0, ry: 0, px: 50, py: 50, active: false });
-
-  const onMouseMove = useCallback((event) => {
-    const el = ref.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const x = (event.clientX - rect.left) / rect.width;
-    const y = (event.clientY - rect.top) / rect.height;
-    setTilt({
-      rx: (y - 0.5) * -16,
-      ry: (x - 0.5) * 16,
-      px: x * 100,
-      py: y * 100,
-      active: true,
-    });
-  }, []);
-
-  const onMouseLeave = useCallback(() => {
-    setTilt({ rx: 0, ry: 0, px: 50, py: 50, active: false });
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      onMouseMove={onMouseMove}
-      onMouseLeave={onMouseLeave}
-      className="pointer-events-auto relative cursor-pointer"
-      style={{ perspective: "700px" }}
-    >
-      <div
-        className="pointer-events-none absolute inset-[-18%] rounded-full transition-opacity duration-300"
-        style={{
-          opacity: tilt.active ? 1 : 0.45,
-          background: `radial-gradient(circle at ${tilt.px}% ${tilt.py}%, rgba(79,195,247,0.45), rgba(11,99,155,0.12) 42%, transparent 68%)`,
-        }}
-        aria-hidden="true"
-      />
-      <img
-        src={src}
-        alt={alt}
-        draggable={false}
-        className="relative h-auto w-full select-none object-contain transition-[filter] duration-300 ease-out will-change-transform"
-        style={{
-          transform: tilt.active
-            ? `rotateX(${tilt.rx}deg) rotateY(${tilt.ry}deg) scale(1.1) translateZ(12px)`
-            : "rotateX(0deg) rotateY(0deg) scale(1) translateZ(0)",
-          filter: tilt.active
-            ? "drop-shadow(0 18px 36px rgba(11,99,155,0.35)) brightness(1.06)"
-            : "drop-shadow(0 8px 24px rgba(11,99,155,0.18))",
-          transition: "transform 180ms ease-out, filter 180ms ease-out",
-        }}
-      />
-    </div>
+    </Reveal>
   );
 }
 
@@ -407,7 +352,13 @@ export default function GavalonOverviewSection({ sectionX = "", overview = {} })
   }, [cyclePaused, activeIndex, gallery.length]);
 
   return (
-    <section id="overview" className={`relative overflow-hidden bg-white ${sectionX} py-20 md:py-28`}>
+    <RevealSection
+      as="section"
+      id="overview"
+      threshold={0.35}
+      rootMargin="0px 0px -38% 0px"
+      className={`relative overflow-hidden bg-white ${sectionX} py-20 md:py-28`}
+    >
       <div
         className="pointer-events-none absolute left-6 top-10 h-40 w-40 opacity-[0.35] md:left-16"
         style={{
@@ -427,19 +378,25 @@ export default function GavalonOverviewSection({ sectionX = "", overview = {} })
 
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[0.62fr_1.38fr] lg:gap-4 xl:gap-8">
         <div className="relative z-10 max-w-sm lg:max-w-[20rem] xl:max-w-sm">
-          <h2 className="text-3xl font-extrabold leading-[1.08] tracking-tight text-slate-900 md:text-4xl xl:text-5xl">
-            {overview.title}
-            {overview.highlight ? (
-              <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#4fc3f7,#62e5da)] bg-clip-text text-transparent">
-                {overview.highlight}
-              </span>
-            ) : null}
-          </h2>
-          <div className="mt-6 h-[3px] w-14 rounded-full bg-[linear-gradient(90deg,#0b639b,#62e5da)]" />
+          <Reveal delay={0} variant="left">
+            <h2 className="text-3xl font-extrabold leading-[1.08] tracking-tight text-slate-900 md:text-4xl xl:text-5xl">
+              {overview.title}
+              {overview.highlight ? (
+                <span className="mt-1 block bg-[linear-gradient(90deg,#0b639b,#4fc3f7,#62e5da)] bg-clip-text text-transparent">
+                  {overview.highlight}
+                </span>
+              ) : null}
+            </h2>
+          </Reveal>
+          <Reveal delay={100} variant="fade">
+            <div className="mt-6 h-[3px] w-14 rounded-full bg-[linear-gradient(90deg,#0b639b,#62e5da)]" />
+          </Reveal>
           {(overview.points ?? []).length > 0 ? (
             <div className="mt-8 space-y-5 text-base leading-8 text-slate-600 md:text-[17px]">
-              {(overview.points ?? []).map((point) => (
-                <p key={point.slice(0, 40)}>{point}</p>
+              {(overview.points ?? []).map((point, i) => (
+                <Reveal key={point.slice(0, 40)} delay={180 + i * 100} variant="up" as="p">
+                  {point}
+                </Reveal>
               ))}
             </div>
           ) : null}
@@ -448,15 +405,18 @@ export default function GavalonOverviewSection({ sectionX = "", overview = {} })
         <div className="relative mx-auto w-full max-w-[720px] lg:max-w-none">
           <ul className="mb-8 space-y-3 lg:hidden">
             {points.map((label, i) => (
-              <li
+              <Reveal
                 key={arcLabelLines(label).join(" ")}
+                as="li"
+                delay={200 + i * 90}
+                variant="up"
                 className="flex items-center gap-3 rounded-2xl border border-slate-200/80 bg-white px-4 py-3 shadow-[0_8px_24px_rgba(15,23,42,0.05)]"
               >
                 <SpotlightCircle>
                   <PointIcon index={i} />
                 </SpotlightCircle>
                 <ArcLabel label={label} className="text-sm font-semibold leading-snug text-slate-800" />
-              </li>
+              </Reveal>
             ))}
           </ul>
 
@@ -466,39 +426,40 @@ export default function GavalonOverviewSection({ sectionX = "", overview = {} })
               aria-hidden="true"
             />
 
-            <svg
-              className="pointer-events-none absolute inset-0 z-[12] hidden h-full w-full lg:block"
-              viewBox="0 0 640 640"
-              fill="none"
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="gvlArcGrad" x1="80" y1="80" x2="480" y2="560" gradientUnits="userSpaceOnUse">
-                  <stop stopColor="#0b639b" />
-                  <stop offset="0.45" stopColor="#4fc3f7" />
-                  <stop offset="1" stopColor="#62e5da" />
-                </linearGradient>
-                <filter id="gvlArcGlow" x="-20%" y="-20%" width="140%" height="140%">
-                  <feGaussianBlur stdDeviation="4" result="b" />
-                  <feMerge>
-                    <feMergeNode in="b" />
-                    <feMergeNode in="SourceGraphic" />
-                  </feMerge>
-                </filter>
-              </defs>
-              <circle
-                cx={CIRCLE.cx}
-                cy={CIRCLE.cy}
-                r={CIRCLE.r}
-                stroke="url(#gvlArcGrad)"
-                strokeWidth="26"
+            <Reveal delay={160} variant="scale" className="pointer-events-none absolute inset-0 z-[12] hidden lg:block">
+              <svg
+                className="h-full w-full"
+                viewBox="0 0 640 640"
                 fill="none"
-                filter="url(#gvlArcGlow)"
-                opacity="0.92"
-              />
-            </svg>
+                aria-hidden="true"
+              >
+                <defs>
+                  <linearGradient id="gvlArcGrad" x1="80" y1="80" x2="480" y2="560" gradientUnits="userSpaceOnUse">
+                    <stop stopColor="#0b639b" />
+                    <stop offset="0.45" stopColor="#4fc3f7" />
+                    <stop offset="1" stopColor="#62e5da" />
+                  </linearGradient>
+                  <filter id="gvlArcGlow" x="-20%" y="-20%" width="140%" height="140%">
+                    <feGaussianBlur stdDeviation="4" result="b" />
+                    <feMerge>
+                      <feMergeNode in="b" />
+                      <feMergeNode in="SourceGraphic" />
+                    </feMerge>
+                  </filter>
+                </defs>
+                <circle
+                  cx={CIRCLE.cx}
+                  cy={CIRCLE.cy}
+                  r={CIRCLE.r}
+                  stroke="url(#gvlArcGrad)"
+                  strokeWidth="26"
+                  fill="none"
+                  filter="url(#gvlArcGlow)"
+                  opacity="0.92"
+                />
+              </svg>
+            </Reveal>
 
-            {/* Soft comet glow traveling the ring */}
             <div
               className="gvl-ov-comet pointer-events-none absolute z-[13] hidden -translate-x-1/2 -translate-y-1/2 lg:block"
               style={{
@@ -509,19 +470,10 @@ export default function GavalonOverviewSection({ sectionX = "", overview = {} })
               }}
               aria-hidden="true"
             >
-              <div className="gvl-ov-comet-bloom" />
-              <div className="gvl-ov-comet-band" />
-            </div>
-
-            <div
-              className="absolute z-[15] hidden -translate-x-1/2 -translate-y-1/2 lg:block"
-              style={{
-                left: `${(CIRCLE.cx / 640) * 100}%`,
-                top: `${(CIRCLE.cy / 640) * 100}%`,
-                width: `${((CIRCLE.r * 0.72) / 640) * 100}%`,
-              }}
-            >
-              <CenterLogo src={GVL_LOGO_SRC} />
+              <Reveal delay={240} variant="fade" className="absolute inset-0">
+                <div className="gvl-ov-comet-bloom" />
+                <div className="gvl-ov-comet-band" />
+              </Reveal>
             </div>
 
             <div className="pointer-events-none absolute inset-0 z-40 hidden lg:block">
@@ -536,6 +488,7 @@ export default function GavalonOverviewSection({ sectionX = "", overview = {} })
                     top={pos.top}
                     left={pos.left}
                     floatClass={`gvl-ov-float--${(i % 6) + 1}`}
+                    delay={380 + i * 90}
                   />
                 );
               })}
@@ -547,9 +500,12 @@ export default function GavalonOverviewSection({ sectionX = "", overview = {} })
               onMouseLeave={() => setCyclePaused(false)}
             >
               {gallery.map((mock, index) => (
-                <button
+                <Reveal
                   key={mock.id}
+                  as="button"
                   type="button"
+                  delay={420 + index * 100}
+                  variant="fade"
                   className={`${mock.className} group cursor-zoom-in focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#0b639b]${
                     focusIndex === index ? " is-focus" : ""
                   }`}
@@ -569,7 +525,7 @@ export default function GavalonOverviewSection({ sectionX = "", overview = {} })
                       <path d="M16 16l4 4M11 8v6M8 11h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                     </svg>
                   </span>
-                </button>
+                </Reveal>
               ))}
             </div>
           </div>
@@ -588,6 +544,6 @@ export default function GavalonOverviewSection({ sectionX = "", overview = {} })
           nextLabel={lightboxCopy.next ?? "Next"}
         />
       ) : null}
-    </section>
+    </RevealSection>
   );
 }
