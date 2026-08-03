@@ -744,6 +744,28 @@ export default {
       "title": "Simplify Legal Compliance",
       "highlight": "Across Your Organization",
       "videoAriaLabel": "GAVALON process visualization",
+      "arcPoints": [
+        ["Continuously track", "new laws"],
+        ["Match laws", "to your business"],
+        ["AI summarizes", "key legal points"],
+        ["Ask & answer legal", "questions with AI"],
+        ["Expert-verified", "information"],
+        ["Assess relevance and", "compliance risk"]
+      ],
+      "mockupAlts": {
+        "database": "GAVALON Legal Database",
+        "dashboard": "GAVALON Dashboard",
+        "search": "GAVALON Legal Search",
+        "ai": "GAVALON AI",
+        "editable": "GAVALON Editable Workspace",
+        "consultant": "GAVALON Consultant"
+      },
+      "lightbox": {
+        "viewLarge": "View larger",
+        "close": "Close",
+        "prev": "Previous",
+        "next": "Next"
+      },
       "points": [
         "Organizations face a large and constantly changing volume of laws, announcements, ministerial regulations, and requirements. Managing them through scattered documents or files makes tracking difficult, increases errors, and raises non-compliance risk.",
         "GAVALON turns legal information into organizational knowledge you can search, link to departments, and operationalize systematically—from collecting laws and assessing relevance to tracking compliance status."

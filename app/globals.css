@@ -901,6 +901,33 @@ a {
 
 .svs-n{position:absolute;top:14px;right:16px;font-size:2.8rem;font-weight:900;line-height:1;color:rgba(56,224,208,.08);pointer-events:none}
 .svs-tg{display:inline-flex;align-items:center;padding:4px 12px;border-radius:7px;font-size:.72rem;font-weight:700;letter-spacing:.02em;background:rgba(56,224,208,.14);color:rgba(200,250,246,1);border:1px solid rgba(56,224,208,.3)}
+.svs-card-btn{
+  margin-top:14px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  align-self:flex-start;
+  padding:9px 16px;
+  border-radius:9999px;
+  border:1px solid rgba(56,224,208,.35);
+  background:linear-gradient(135deg,rgba(56,224,208,.16),rgba(14,165,233,.12));
+  color:#fff;
+  font-size:.78rem;
+  font-weight:700;
+  letter-spacing:.01em;
+  text-decoration:none;
+  transition:transform .25s ease,border-color .25s ease,background .25s ease,box-shadow .25s ease;
+  position:relative;
+  z-index:2;
+}
+.svs-card-btn span{color:#38e0d0;font-size:1rem;line-height:1}
+.svs-card-btn:hover{
+  transform:translateY(-1px);
+  border-color:rgba(56,224,208,.55);
+  background:linear-gradient(135deg,rgba(56,224,208,.24),rgba(14,165,233,.18));
+  box-shadow:0 8px 22px rgba(14,165,233,.18);
+}
 
 /* mobile divider */
 .svs-divider{display:none}
@@ -1945,4 +1972,211 @@ a {
   .t9-marquee-list { gap:10px; }
   .t9-marquee-list .t9-card { flex:0 0 130px; }
   .t9-marquee-list .t9-box  { height:170px; }
+}
+
+/* ===== GAVALON overview mockups ===== */
+.gvl-ov-mocks {
+  perspective: 1400px;
+}
+.gvl-ov-mock {
+  position: absolute;
+  overflow: hidden;
+  border-radius: 12px;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  background: #fff;
+  padding: 0;
+  aspect-ratio: 16 / 9;
+  box-shadow:
+    0 16px 42px rgba(15, 23, 42, 0.14),
+    0 4px 12px rgba(11, 99, 155, 0.1);
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.55s ease, filter 0.55s ease;
+}
+.gvl-ov-mock:hover,
+.gvl-ov-mock:focus-visible {
+  z-index: 20 !important;
+  box-shadow:
+    0 22px 56px rgba(15, 23, 42, 0.22),
+    0 8px 20px rgba(11, 99, 155, 0.16);
+}
+.gvl-ov-mock.is-focus {
+  z-index: 16 !important;
+  box-shadow:
+    0 24px 58px rgba(15, 23, 42, 0.22),
+    0 10px 24px rgba(11, 99, 155, 0.2);
+  filter: brightness(1.04);
+}
+.gvl-ov-mock--1 {
+  width: 68%;
+  top: 0%;
+  left: 2%;
+  z-index: 1;
+  transform: rotate(-9deg);
+}
+.gvl-ov-mock--2 {
+  width: 70%;
+  top: 12%;
+  left: 12%;
+  z-index: 2;
+  transform: rotate(-5deg);
+}
+.gvl-ov-mock--3 {
+  width: 72%;
+  top: 26%;
+  left: 18%;
+  z-index: 3;
+  transform: rotate(-1deg);
+}
+.gvl-ov-mock--4 {
+  width: 74%;
+  top: 40%;
+  left: 22%;
+  z-index: 4;
+  transform: rotate(2deg);
+}
+.gvl-ov-mock--5 {
+  width: 72%;
+  top: 54%;
+  left: 14%;
+  z-index: 5;
+  transform: rotate(5deg);
+}
+.gvl-ov-mock--6 {
+  width: 70%;
+  top: 68%;
+  left: 6%;
+  z-index: 6;
+  transform: rotate(8deg);
+}
+.gvl-ov-mock--1.is-focus { transform: rotate(-9deg) translateY(-10px) scale(1.08); }
+.gvl-ov-mock--2.is-focus { transform: rotate(-5deg) translateY(-10px) scale(1.08); }
+.gvl-ov-mock--3.is-focus { transform: rotate(-1deg) translateY(-10px) scale(1.08); }
+.gvl-ov-mock--4.is-focus { transform: rotate(2deg) translateY(-10px) scale(1.08); }
+.gvl-ov-mock--5.is-focus { transform: rotate(5deg) translateY(-10px) scale(1.08); }
+.gvl-ov-mock--6.is-focus { transform: rotate(8deg) translateY(-10px) scale(1.08); }
+.gvl-ov-mock--1:hover { transform: rotate(-9deg) translateY(-6px) scale(1.03); }
+.gvl-ov-mock--2:hover { transform: rotate(-5deg) translateY(-6px) scale(1.03); }
+.gvl-ov-mock--3:hover { transform: rotate(-1deg) translateY(-6px) scale(1.03); }
+.gvl-ov-mock--4:hover { transform: rotate(2deg) translateY(-6px) scale(1.03); }
+.gvl-ov-mock--5:hover { transform: rotate(5deg) translateY(-6px) scale(1.03); }
+.gvl-ov-mock--6:hover { transform: rotate(8deg) translateY(-6px) scale(1.03); }
+@media (min-width: 1024px) {
+  .gvl-ov-mock--1 { width: 66%; left: 10%; top: 1%; }
+  .gvl-ov-mock--2 { width: 68%; left: 20%; top: 14%; }
+  .gvl-ov-mock--3 { width: 70%; left: 28%; top: 28%; }
+  .gvl-ov-mock--4 { width: 72%; left: 32%; top: 42%; }
+  .gvl-ov-mock--5 { width: 70%; left: 22%; top: 56%; }
+  .gvl-ov-mock--6 { width: 68%; left: 12%; top: 70%; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gvl-ov-mock,
+  .gvl-ov-mock:hover {
+    transition: none;
+  }
+  .gvl-ov-comet-bloom,
+  .gvl-ov-comet-band {
+    animation: none !important;
+    opacity: 0;
+  }
+  .gvl-ov-float {
+    animation: none !important;
+  }
+}
+
+/* Gentle float for circle list points */
+.gvl-ov-float {
+  animation: gvlPointFloat 4.8s ease-in-out infinite;
+  will-change: transform;
+}
+.gvl-ov-float--1 { animation-duration: 4.6s; animation-delay: 0s; }
+.gvl-ov-float--2 { animation-duration: 5.1s; animation-delay: -0.7s; }
+.gvl-ov-float--3 { animation-duration: 4.4s; animation-delay: -1.4s; }
+.gvl-ov-float--4 { animation-duration: 5.3s; animation-delay: -2.1s; }
+.gvl-ov-float--5 { animation-duration: 4.9s; animation-delay: -2.8s; }
+.gvl-ov-float--6 { animation-duration: 5.5s; animation-delay: -3.5s; }
+@keyframes gvlPointFloat {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  35% {
+    transform: translate(2px, -5px);
+  }
+  70% {
+    transform: translate(-2px, 3px);
+  }
+}
+
+/* Soft comet light on the GAVALON ring */
+.gvl-ov-comet {
+  border-radius: 50%;
+}
+.gvl-ov-comet-bloom,
+.gvl-ov-comet-band {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  animation: gvlCometSpin 7s linear infinite;
+  will-change: transform;
+}
+.gvl-ov-comet-bloom {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 248deg,
+    rgba(11, 99, 155, 0) 268deg,
+    rgba(79, 195, 247, 0.18) 292deg,
+    rgba(98, 229, 218, 0.42) 318deg,
+    rgba(255, 255, 255, 0.55) 338deg,
+    rgba(79, 195, 247, 0.22) 348deg,
+    transparent 360deg
+  );
+  filter: blur(10px);
+  opacity: 0.9;
+  -webkit-mask-image: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 34px),
+    #000 calc(100% - 22px),
+    #000 calc(100% - 4px),
+    transparent
+  );
+  mask-image: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 34px),
+    #000 calc(100% - 22px),
+    #000 calc(100% - 4px),
+    transparent
+  );
+}
+.gvl-ov-comet-band {
+  background: conic-gradient(
+    from 0deg,
+    transparent 0deg,
+    transparent 300deg,
+    rgba(79, 195, 247, 0.05) 312deg,
+    rgba(98, 229, 218, 0.55) 332deg,
+    rgba(255, 255, 255, 0.95) 344deg,
+    rgba(79, 195, 247, 0.35) 352deg,
+    transparent 360deg
+  );
+  filter: blur(3px);
+  opacity: 0.95;
+  -webkit-mask-image: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 28px),
+    #000 calc(100% - 20px),
+    #000 calc(100% - 8px),
+    transparent
+  );
+  mask-image: radial-gradient(
+    farthest-side,
+    transparent calc(100% - 28px),
+    #000 calc(100% - 20px),
+    #000 calc(100% - 8px),
+    transparent
+  );
+}
+@keyframes gvlCometSpin {
+  to {
+    transform: rotate(360deg);
+  }
 }
