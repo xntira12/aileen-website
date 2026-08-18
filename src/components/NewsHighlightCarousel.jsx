@@ -3,10 +3,24 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import epvWeb from "../assets/img/News/enterprise-process-visibility/epv-web.png";
+import epvRecapHero from "../assets/img/News/enterprise-process-visibility/20260709_120808.jpg";
 
 const BANNERS = [
   {
     id: 1,
+    image: epvRecapHero.src,
+    accent: "#f97316",
+    eyebrow: "Seminar Recap",
+    heading: "Enterprise Process Visibility",
+    tagline: "ยกระดับกระบวนการสู่การเติบโตอย่างยั่งยืน",
+    subtitle: "9 กรกฎาคม 2026 • Hotel Nikko Amata City, Chonburi • ห้อง Trusu 2",
+    cta: {
+      label: "อ่านสรุปงาน",
+      href: "/news/aileen-nintex-enterprise-process-visibility-seminar-2026",
+    },
+  },
+  {
+    id: 2,
     image: epvWeb.src,
     accent: "#f97316",
     eyebrow: "Seminar",
@@ -119,7 +133,16 @@ export default function NewsHighlightCarousel() {
                 <img
                   src={banner.image}
                   alt=""
-                  className="h-full w-full object-cover object-left-top"
+                  className="h-full w-full object-cover"
+                  style={{
+                    objectPosition: banner.imageObjectPosition || "left top",
+                    ...(banner.imageScale
+                      ? {
+                          transform: `scale(${banner.imageScale})`,
+                          transformOrigin: banner.imageObjectPosition || "left top",
+                        }
+                      : {}),
+                  }}
                 />
                 {/* wide gradient: image colours bleed into left text area */}
                 <div className="absolute inset-y-0 left-0 w-[55%] bg-gradient-to-r from-[#060f1d] via-[#060f1d]/60 to-transparent" />

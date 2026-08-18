@@ -157,6 +157,17 @@ export function ArticleCover({ article, tall = false, compact = false, className
           src={article.media.heroImage}
           alt={article.media.heroAlt || article.title}
           className="h-full w-full object-cover"
+          style={{
+            ...(article.media.heroObjectPosition
+              ? { objectPosition: article.media.heroObjectPosition }
+              : {}),
+            ...(article.media.heroImageScale
+              ? {
+                  transform: `scale(${article.media.heroImageScale})`,
+                  transformOrigin: article.media.heroObjectPosition || "center",
+                }
+              : {}),
+          }}
         />
       </div>
     );
