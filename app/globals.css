@@ -2106,7 +2106,24 @@ a {
   }
 }
 
-/* Soft comet light on the GAVALON ring */
+.gvl-ind-stage {
+  cursor: default;
+}
+.gvl-ind-node {
+  transition: z-index 0s;
+}
+.gvl-ind-node:focus-visible > span {
+  outline: 2px solid rgba(79, 195, 247, 0.7);
+  outline-offset: 3px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gvl-ind-stage .absolute {
+    transition: none !important;
+  }
+  .gvl-ind-node span.animate-ping {
+    animation: none !important;
+  }
+}
 .gvl-ov-comet {
   border-radius: 50%;
 }

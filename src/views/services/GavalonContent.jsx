@@ -5,6 +5,7 @@ import AnimatedBgFlux from "@/components/AnimatedBgFlux";
 import SectionContactFooter from "@/components/SectionContactFooter";
 import GavalonWhySection from "@/components/GavalonWhySection";
 import GavalonOverviewSection from "@/components/GavalonOverviewSection";
+import GavalonIndustriesSection from "@/components/GavalonIndustriesSection";
 import { Reveal, RevealSection } from "@/components/GavalonReveal";
 import ButtonArrow from "@/components/ButtonArrow";
 import gavalonFullLogo from "@/assets/img/gavalon/GVL-full-logo-w.png";
@@ -252,29 +253,7 @@ export default function GavalonContent() {
           </div>
         </RevealSection>
 
-        <RevealSection as="section" className={`bg-[#f4f8fc] ${sectionX} py-24`}>
-          <div className="mx-auto max-w-6xl">
-            <SectionTitle
-              eyebrow={industries.eyebrow}
-              title={industries.title}
-              description={industries.description}
-              center
-            />
-
-            <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {(industries.items ?? []).map((industry, index) => (
-                <Reveal
-                  key={industry}
-                  delay={200 + index * 80}
-                  variant="up"
-                  className="rounded-2xl border border-slate-200/70 bg-white px-5 py-4 text-sm font-medium leading-6 text-slate-700 shadow-[0_4px_12px_rgba(15,23,42,0.02)]"
-                >
-                  {industry}
-                </Reveal>
-              ))}
-            </div>
-          </div>
-        </RevealSection>
+        <GavalonIndustriesSection sectionX={sectionX} industries={industries} />
 
         <RevealSection as="section" id="partner" className={`bg-[#f4f8fc] ${sectionX} py-24`}>
           <div className="mx-auto max-w-7xl">
