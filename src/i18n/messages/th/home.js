@@ -353,16 +353,17 @@ export default {
     viewAll: "ดูข่าวสารทั้งหมด",
   },
   gavalonHighlight: {
-    eyebrow: "Partnership",
-    title: "NPC จับมือ Aileen Solutions ร่วมพัฒนา GAVALON",
+    eyebrow: "Workshop",
+    title: "Workshop GAVALON: ระบบบริหารจัดการกฎหมาย",
     description:
-      "ระบบบริหารจัดการกฎหมายและข้อกำหนดที่เกี่ยวข้อง เพื่อช่วยให้องค์กรติดตาม ตรวจสอบ และบริหารการปฏิบัติตามกฎหมายได้อย่างเป็นระบบ",
+      "กฎหมายใหม่เกี่ยวข้องกับธุรกิจของคุณหรือไม่? ร่วมเรียนรู้และทดลองใช้งาน Gavalon ออนไลน์ วันที่ 19 สิงหาคม 2569",
     readArticle: "อ่านเนื้อหาข่าว",
     readMore: "อ่านเพิ่มเติม",
     visitWebsite: "เข้าสู่เว็บไซต์ GAVALON",
     visitSite: "เข้าสู่เว็บไซต์",
+    registerWorkshop: "ลงทะเบียน Workshop",
     close: "ปิด",
     dismiss: "ปิดและไม่แสดงอีกในเซสชันนี้",
-    imageAlt: "NPC และ Aileen Solutions ร่วมพัฒนา GAVALON",
+    imageAlt: "Workshop GAVALON ระบบบริหารจัดการกฎหมายสำหรับองค์กร",
   },
 };

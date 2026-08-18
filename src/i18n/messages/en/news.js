@@ -1,6 +1,140 @@
 import { NEWS_ARTICLES } from "../../../content/news";
 
 const translations = {
+  "workshop-gavalon-legal-management-system-2026": {
+    title: "Workshop GAVALON: Enterprise Legal Management System",
+    date: "19 August 2026",
+    location: "Online via Microsoft Teams",
+    summary:
+      "Stay ahead of new regulations, filter laws relevant to your business, and manage organizational compliance systematically with Gavalon—join our online workshop for a live demo and Q&A with experts.",
+    excerpt:
+      "Gavalon helps organizations track, manage, and assess business-relevant laws in one system—reducing the burden of searching across multiple sources, with a free 30-day trial.",
+    highlights: [
+      "Online workshop Wednesday 19 August 2026, 13:30 – 14:30",
+      "30-minute Gavalon trial session with expert Q&A",
+      "Existing I-Law customers upgrade to Gavalon free with the same login",
+    ],
+    sections: [
+      {
+        heading: "GAVALON — Enterprise Legal Management System",
+        paragraphs: [
+          "Stay ahead of new laws, filter only business-relevant regulations, and manage organizational compliance systematically.",
+          "Gavalon helps organizations track, manage, and assess business-relevant laws in one place—reducing the burden of searching across multiple sources and ensuring referenced laws are relevant to your operations.",
+        ],
+      },
+      {
+        heading: "Why Organizations Choose Gavalon",
+        paragraphs: [
+          "Laws and regulations affecting business operations change constantly. Traditional tracking methods can cause organizations to miss critical updates or waste time reviewing irrelevant information.",
+          "Gavalon is designed to help organizations manage legal data conveniently and systematically—from tracking new laws and filtering relevant regulations to recording and auditing compliance. Accurate • Up-to-date • Trusted.",
+        ],
+      },
+      {
+        heading: "Core Gavalon Features",
+        paragraphs: [
+          "01 Weekly tracking of relevant new laws — Receive consistent updates on laws that may affect your organization.",
+          "02 Complete display of key legal information — Centralize important legal details for easier review and understanding.",
+          "03 Instant copy of legal text — Reference or use key legal content in internal assessments and documents.",
+          "04 Search and download related legal files — Find and download documents from one system instead of multiple sources.",
+          "05 Record organizational legal compliance — Track compliance status and support audits and historical review.",
+        ],
+      },
+      {
+        heading: "More Than a Legal Tracking System",
+        paragraphs: [
+          "Gavalon does more than collect legal data—it helps organizations put that information to practical use.",
+          "Filter laws relevant to your business — Focus on regulations that match your industry and operations.",
+          "Consult legal experts — Ask specialists directly when you need clarity for organizational decisions.",
+          "Store legal history and activities — Keep related records in one system with full audit trail.",
+          "Easy to use — Search, review, and manage legal data without complex workflows.",
+        ],
+      },
+      {
+        heading: "Benefits for Your Organization",
+        paragraphs: [
+          "Stay current with legal changes — Reduce the risk of missing critical updates.",
+          "Save time searching and filtering laws — Access relevant information without manual cross-source research.",
+          "Manage legal data systematically — Centralize documents, history, and compliance records.",
+          "Strengthen compliance confidence — Track and manage legal adherence continuously and efficiently.",
+          "Access experts when needed — Get guidance on legal matters from specialists.",
+        ],
+      },
+      {
+        heading: "Get Started in 3 Simple Steps",
+        paragraphs: [
+          "1. Register for a trial — Scan the QR code or visit the Gavalon website.",
+          "2. Enter organization details — Sign up and provide information to configure the system.",
+          "3. Start using immediately — Experience simpler, more systematic legal management.",
+        ],
+      },
+      {
+        heading: "Free 30-Day Gavalon Trial",
+        paragraphs: [
+          "Experience enterprise legal management and try Gavalon features free for 30 days.",
+          "Trial terms apply as defined by the company.",
+        ],
+      },
+      {
+        heading: "Special Offer for Existing I-Law Customers",
+        paragraphs: [
+          "Organizations already using I-Law can upgrade to Gavalon without creating a new account.",
+          "Log in with your existing user and password and start using Gavalon immediately—I-Law customers upgrade to Gavalon free.",
+        ],
+      },
+      {
+        heading: "Workshop Gavalon — Are New Laws Relevant to Your Business?",
+        paragraphs: [
+          "Learn how Gavalon helps organizations track and manage business-relevant laws—with a live system demo and Q&A with our expert team.",
+          "30-minute Gavalon session with Q&A — register for the workshop via the Microsoft Forms link on this page.",
+        ],
+        venue: "Wednesday 19 August 2026 • 13:30 – 14:30 • Online via Microsoft Teams",
+        agenda: [
+          {
+            time: "13:30 – 13:45",
+            title: "Gavalon system introduction by NPC experts",
+          },
+          {
+            time: "13:45 – 14:00",
+            title: "Hands-on Gavalon trial",
+          },
+          {
+            time: "14:00 – 14:30",
+            title: "Q&A and usage discussion",
+          },
+        ],
+      },
+      {
+        heading: "Make Complex Legal Tracking Simple for Your Organization",
+        paragraphs: [
+          "Whether tracking new laws, finding relevant regulations, recording compliance, or reviewing historical data—Gavalon helps manage all legal work in one system.",
+          "Start your Gavalon trial today.",
+        ],
+      },
+      {
+        heading: "Contact",
+        paragraphs: [
+          "Website: www.npc-gavalon.com",
+          "Phone: 038-977700",
+          "Email: gavalon.support@npc-se.co.th",
+        ],
+      },
+    ],
+    website: {
+      title: "Try Gavalon Free for 30 Days",
+      description:
+        "Start your enterprise legal management trial or register for the online workshop.",
+      button: "Register for free trial",
+    },
+    media: {
+      heroAlt: "Workshop GAVALON enterprise legal management system",
+      gallery: [
+        {
+          title: "Workshop GAVALON — Legal management system",
+          alt: "Workshop GAVALON poster — Are new laws relevant to your business?",
+        },
+      ],
+    },
+  },
   "npc-aileen-solutions-gavalon-partnership": {
     title: "NPC Partners with Aileen Solutions to Develop GAVALON for a Sustainable Future",
     date: "31 July 2026",

@@ -353,16 +353,17 @@ export default {
     viewAll: "View all news",
   },
   gavalonHighlight: {
-    eyebrow: "Partnership",
-    title: "NPC Partners with Aileen Solutions to Develop GAVALON",
+    eyebrow: "Workshop",
+    title: "Workshop GAVALON: Enterprise Legal Management",
     description:
-      "A legal and regulatory management platform that helps organizations track, verify, and manage compliance systematically.",
+      "Are new laws relevant to your business? Join our online Gavalon workshop on 19 August 2026.",
     readArticle: "Read the full story",
     readMore: "Read more",
     visitWebsite: "Visit GAVALON website",
     visitSite: "Visit website",
+    registerWorkshop: "Register for Workshop",
     close: "Close",
     dismiss: "Close and don't show again this session",
-    imageAlt: "NPC and Aileen Solutions develop GAVALON together",
+    imageAlt: "Workshop GAVALON enterprise legal management system",
   },
 };

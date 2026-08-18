@@ -2,10 +2,13 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
-import gavalonHighlightImg from "../assets/img/gavalon/GAVALON-2 (1).png";
+import gavalonEventImg from "../assets/img/gavalon/gavalon-event.png";
 import { useLocale } from "@/i18n/LocaleProvider";
 
-const ARTICLE_SLUG = "npc-aileen-solutions-gavalon-partnership";
+const ARTICLE_SLUG = "workshop-gavalon-legal-management-system-2026";
+const REGISTRATION_URL =
+  "https://forms.cloud.microsoft/pages/responsepage.aspx?id=4_Bt3JIWgkSqVXKeCl6DYTyOkq-KEsxBsxzIz3MjMR5URjNPVjI0MEhQTUpZMENOSDhVM0M0UDhLMS4u&origin=QRCode&qrcodeorigin=presentation&route=shorturl";
+const EVENT_IMG_SRC = typeof gavalonEventImg === "string" ? gavalonEventImg : gavalonEventImg.src;
 
 export default function GavalonWelcomeModal() {
   const { messages } = useLocale();
@@ -53,7 +56,7 @@ export default function GavalonWelcomeModal() {
       className="fixed inset-0 z-[10050] flex items-center justify-center p-4 sm:p-8"
       role="dialog"
       aria-modal="true"
-      aria-label={copy.imageAlt ?? "GAVALON"}
+      aria-label={copy.imageAlt ?? "GAVALON Workshop"}
     >
       <button
         type="button"
@@ -73,12 +76,12 @@ export default function GavalonWelcomeModal() {
         </button>
 
         <img
-          src={gavalonHighlightImg.src}
-          alt={copy.imageAlt ?? "GAVALON"}
+          src={EVENT_IMG_SRC}
+          alt={copy.imageAlt ?? "Workshop GAVALON"}
           className="mx-auto max-h-[min(68vh,620px)] w-full rounded-2xl object-contain shadow-[0_24px_80px_rgba(0,0,0,0.45)] sm:rounded-3xl"
         />
 
-        <div className="mt-5 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
+        <div className="mt-5 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center sm:gap-4">
           <a
             href={`/news/${ARTICLE_SLUG}`}
             onClick={close}
@@ -87,13 +90,22 @@ export default function GavalonWelcomeModal() {
             {copy.readMore ?? "อ่านเพิ่มเติม"}
             <span aria-hidden>→</span>
           </a>
-          <button
-            type="button"
+          <a
+            href={REGISTRATION_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             onClick={close}
             className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-teal-300 bg-gradient-to-r from-teal-600 to-cyan-600 px-6 py-3 text-sm font-semibold text-white transition hover:-translate-y-0.5 hover:opacity-95 sm:w-auto"
           >
-            {copy.visitSite ?? "เข้าสู่เว็บไซต์"}
+            {copy.registerWorkshop ?? "ลงทะเบียน Workshop"}
             <span aria-hidden>→</span>
+          </a>
+          <button
+            type="button"
+            onClick={close}
+            className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:-translate-y-0.5 hover:bg-white/15 sm:w-auto"
+          >
+            {copy.visitSite ?? "เข้าสู่เว็บไซต์"}
           </button>
         </div>
       </div>

@@ -46,7 +46,7 @@ export default function Home() {
   const hero = messages.home?.hero ?? {};
   const newsSection = messages.home?.news ?? {};
   const homeNewsArticles = getNewsArticles(locale)
-    .filter((article) => article.slug !== "npc-aileen-solutions-gavalon-partnership")
+    .filter((article) => article.slug !== "workshop-gavalon-legal-management-system-2026")
     .slice(0, 3);
   const slides = (hero.slides ?? []).map((slide, i) => <HeroSlide key={i} slide={slide} />);
   const slideCount = slides.length || 1;
