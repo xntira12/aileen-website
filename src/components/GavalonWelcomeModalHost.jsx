@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import GavalonWelcomeModal from "./GavalonWelcomeModal";
 
+const MODAL_ENABLED = false;
+
 export default function GavalonWelcomeModalHost() {
   const pathname = usePathname();
   const [ready, setReady] = useState(false);
@@ -18,7 +20,7 @@ export default function GavalonWelcomeModalHost() {
     return () => window.clearTimeout(timer);
   }, [pathname]);
 
-  if (pathname !== "/" || !ready) return null;
+  if (!MODAL_ENABLED || pathname !== "/" || !ready) return null;
 
   return <GavalonWelcomeModal />;
 }
