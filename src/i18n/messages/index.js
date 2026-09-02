@@ -55,7 +55,7 @@ export function getNamespace(locale, namespace) {
 }
 
 export function getNewsArticles(locale) {
-  return getNamespace(locale, "news").articles ?? [];
+  return (getNamespace(locale, "news").articles ?? []).filter((article) => !article.hidden);
 }
 
 export function getNewsArticle(locale, slug) {

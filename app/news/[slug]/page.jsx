@@ -1,8 +1,8 @@
 import NewsArticle from "@/views/NewsArticle";
-import { NEWS_ARTICLES, getNewsArticle } from "@/content/news";
+import { getNewsArticle, getVisibleNewsArticles } from "@/content/news";
 
 export function generateStaticParams() {
-  return NEWS_ARTICLES.map((article) => ({
+  return getVisibleNewsArticles().map((article) => ({
     slug: article.slug,
   }));
 }

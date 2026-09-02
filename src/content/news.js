@@ -237,6 +237,7 @@ export const NEWS_ARTICLES = [
   },
   {
     slug: "enterprise-process-visibility-sustainable-operations-2026",
+    hidden: true,
     title:
       "Aileen Solutions ร่วมกับ Nintex Thailand จัดสัมมนา Enterprise Process Visibility ยกระดับกระบวนการองค์กรสู่ความยั่งยืน",
     category: "Seminar",
@@ -582,6 +583,12 @@ export const NEWS_ARTICLES = [
   },
 ];
 
+export function getVisibleNewsArticles() {
+  return NEWS_ARTICLES.filter((article) => !article.hidden);
+}
+
 export function getNewsArticle(slug) {
-  return NEWS_ARTICLES.find((article) => article.slug === slug);
+  const article = NEWS_ARTICLES.find((item) => item.slug === slug);
+  if (!article || article.hidden) return undefined;
+  return article;
 }

@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
-import epvWeb from "../assets/img/News/enterprise-process-visibility/epv-web.png";
 import epvRecapHero from "../assets/img/News/enterprise-process-visibility/20260709_120808.jpg";
 
 const BANNERS = [
@@ -17,19 +16,6 @@ const BANNERS = [
     cta: {
       label: "อ่านสรุปงาน",
       href: "/news/aileen-nintex-enterprise-process-visibility-seminar-2026",
-    },
-  },
-  {
-    id: 2,
-    image: epvWeb.src,
-    accent: "#f97316",
-    eyebrow: "Seminar",
-    heading: "Enterprise Process Visibility",
-    tagline: "เพราะกระบวนการที่ดี คือรากฐานของความยั่งยืน",
-    subtitle: "9 กรกฎาคม 2026 • Hotel Nikko Amata City, Chonburi • ห้อง Trusu 2",
-    cta: {
-      label: "อ่านรายละเอียด",
-      href: "/news/enterprise-process-visibility-sustainable-operations-2026",
     },
   },
 ];
