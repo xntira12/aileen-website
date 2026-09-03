@@ -107,9 +107,9 @@ export default {
     keyFeatures: "Key Features",
     viewProductPage: "ดูหน้า Product",
     stats: [
-      { value: "20+", label: "Solutions" },
-      { value: "20+", label: "Enterprise Clients" },
-      { value: "60+", label: "Enterprise Projects" },
+      { value: "20+", label: "โซลูชั่นหลัก" },
+      { value: "20+", label: "องค์กรที่ไว้วางใจ" },
+      { value: "60+", label: "โครงการระดับองค์กร" },
     ],
     items: [
       {
@@ -336,11 +336,13 @@ export default {
       { key: "sales", label: "Sales & Marketing" },
       { key: "tech", label: "Technical & Developer" },
       { key: "support", label: "Project & Support" },
+      { key: "finance", label: "Finance & HR" },
     ],
     departments: {
       sales: "Sales & Marketing",
       tech: "Technical Development",
       support: "Project & Support",
+      finance: "Finance & HR",
     },
     prev: "Previous",
     next: "Next",

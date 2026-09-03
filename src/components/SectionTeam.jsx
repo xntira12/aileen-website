@@ -19,11 +19,17 @@ const member15 = "/img/profile/member15.png";
 const member16 = "/img/profile/member16.png";
 const member17 = "/img/profile/member17.png";
 const member18 = "/img/profile/member18.png";
+const chatuporn = "/img/profile/Chatuporn.png";
+const chalothon = "/img/profile/Chalothon.png";
+const sutthipat = "/img/profile/Sutthipat.png";
+const chawanan = "/img/profile/Chawanan.png";
+const tippawan = "/img/profile/Tippawan.png";
 
 const TEAM = [
   { photo: member5,  name: "Surinna.T",    role: "Managing Director",          dept: "sales"   },
   { photo: member12, name: "Peerapat.A",   role: "Sale Representative",        dept: "sales"   },
   { photo: member1,  name: "Kangsadan.S",  role: "Solutions Consultant",       dept: "sales"   },
+  { photo: chatuporn, name: "Chatuporn.P", role: "Sales Administrator", dept: "sales"   },
   { photo: member14, name: "Pramote.T",    role: "Professional Services Director", dept: "tech" },
   { photo: member13, name: "Sittichai.S",  role: "Technical Lead",             dept: "tech"    },
   { photo: member9,  name: "Suphakorn.D",  role: "AI Engineer",                dept: "tech"    },
@@ -34,14 +40,18 @@ const TEAM = [
   { photo: member18, name: "Pongthorn.w",  role: "Software Developer",         dept: "tech"    },
   { photo: member16, name: "Chanawee.S",   role: "System Engineer",            dept: "tech"    },
   { photo: member8,  name: "Intira.N",     role: "UX/UI Developer",            dept: "tech"    },
+  { photo: sutthipat, name: "Sutthipat.P", role: "Software Developer", dept: "tech"    },
+  { photo: chawanan, name: "Chawanan.M", role: "Software Developer", dept: "tech"    },
   { photo: member6,  name: "Rungrat.K",    role: "Enterprise Project Lead",    dept: "support" },
   { photo: member3,  name: "Prapaporn.M",  role: "Business Analysis",          dept: "support" },
   { photo: member7,  name: "Chanakan.S",   role: "Business Analysis",          dept: "support" },
   { photo: member15, name: "Suwat.M",      role: "Technical Support",          dept: "support" },
   { photo: member2,  name: "Nattida.T",    role: "Technical Support",          dept: "support" },
+  { photo: chalothon, name: "Chalothon.H", role: "Technical Support", dept: "support" },
+  { photo: tippawan, name: "Tippawan.W", role: "Finance and HR Manager", dept: "finance" },
 ];
 
-const DEPT_CHIP = { sales: "Sales & Marketing", tech: "Technical Development", support: "Project & Support" };
+const DEPT_CHIP = { sales: "Sales & Marketing", tech: "Technical Development", support: "Project & Support", finance: "Finance & HR" };
 
 const CARD_W = 178;
 
@@ -62,6 +72,7 @@ const Icons = {
   sales:   <svg viewBox="0 0 20 20" fill="currentColor" style={{ width:13,height:13 }}><path d="M2 11a1 1 0 011-1h2a1 1 0 011 1v5a1 1 0 01-1 1H3a1 1 0 01-1-1v-5zm6-4a1 1 0 011-1h2a1 1 0 011 1v9a1 1 0 01-1 1H9a1 1 0 01-1-1V7zm6-3a1 1 0 011-1h2a1 1 0 011 1v12a1 1 0 01-1 1h-2a1 1 0 01-1-1V4z"/></svg>,
   tech:    <svg viewBox="0 0 20 20" fill="currentColor" style={{ width:13,height:13 }}><path fillRule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"/></svg>,
   support: <svg viewBox="0 0 20 20" fill="currentColor" style={{ width:13,height:13 }}><path fillRule="evenodd" d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z" clipRule="evenodd"/><path d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z"/></svg>,
+  finance: <svg viewBox="0 0 20 20" fill="currentColor" style={{ width:13,height:13 }}><path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z"/><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clipRule="evenodd"/></svg>,
 };
 
 /* ── Card — pause fires ONLY when pointer is inside the photo box ── */

@@ -336,11 +336,13 @@ export default {
       { key: "sales", label: "Sales & Marketing" },
       { key: "tech", label: "Technical & Developer" },
       { key: "support", label: "Project & Support" },
+      { key: "finance", label: "Finance & HR" },
     ],
     departments: {
       sales: "Sales & Marketing",
       tech: "Technical Development",
       support: "Project & Support",
+      finance: "Finance & HR",
     },
     prev: "Previous",
     next: "Next",
