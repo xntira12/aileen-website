@@ -108,9 +108,9 @@ export default {
     keyFeatures: "Key Features",
     viewProductPage: "View product page",
     stats: [
-      { value: "10+", label: "Solutions" },
-      { value: "10+", label: "Enterprise Clients" },
-      { value: "50+", label: "Enterprise Projects" },
+      { value: "20+", label: "Solutions" },
+      { value: "20+", label: "Enterprise Clients" },
+      { value: "60+", label: "Enterprise Projects" },
     ],
     items: [
       {

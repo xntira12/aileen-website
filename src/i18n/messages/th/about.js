@@ -17,9 +17,9 @@ export default {
       "โดยเฉพาะในภาคอุตสาหกรรม พลังงาน และสายการผลิต (Manufacturing & Production Line)",
     stats: [
       { value: "2561", label: "ปีที่ก่อตั้ง" },
-      { value: "10+", label: "โซลูชั่นหลัก" },
-      { value: "10+", label: "องค์กรที่ไว้วางใจ" },
-      { value: "50+", label: "โครงการระดับองค์กร" },
+      { value: "20+", label: "โซลูชั่นหลัก" },
+      { value: "20+", label: "องค์กรที่ไว้วางใจ" },
+      { value: "60+", label: "โครงการระดับองค์กร" },
     ],
   },
   approach: {

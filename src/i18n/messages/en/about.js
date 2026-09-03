@@ -17,9 +17,9 @@ export default {
       "Especially in industry, energy, and production lines (Manufacturing & Production Line)",
     stats: [
       { value: "2018", label: "Year founded" },
-      { value: "10+", label: "Core solutions" },
-      { value: "10+", label: "Trusted organizations" },
-      { value: "50+", label: "Enterprise projects" },
+      { value: "20+", label: "Core solutions" },
+      { value: "20+", label: "Trusted organizations" },
+      { value: "60+", label: "Enterprise projects" },
     ],
   },
   approach: {
