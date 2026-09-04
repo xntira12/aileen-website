@@ -109,7 +109,7 @@ export default {
     stats: [
       { value: "20+", label: "โซลูชั่นหลัก" },
       { value: "20+", label: "องค์กรที่ไว้วางใจ" },
-      { value: "60+", label: "โครงการระดับองค์กร" },
+      { value: "80+", label: "โครงการระดับองค์กร" },
     ],
     items: [
       {

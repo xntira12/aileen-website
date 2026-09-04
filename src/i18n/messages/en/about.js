@@ -19,7 +19,7 @@ export default {
       { value: "2018", label: "Year founded" },
       { value: "20+", label: "Core solutions" },
       { value: "20+", label: "Trusted organizations" },
-      { value: "60+", label: "Enterprise projects" },
+      { value: "80+", label: "Enterprise projects" },
     ],
   },
   approach: {

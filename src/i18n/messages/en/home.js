@@ -110,7 +110,7 @@ export default {
     stats: [
       { value: "20+", label: "Solutions" },
       { value: "20+", label: "Enterprise Clients" },
-      { value: "60+", label: "Enterprise Projects" },
+      { value: "80+", label: "Enterprise Projects" },
     ],
     items: [
       {
